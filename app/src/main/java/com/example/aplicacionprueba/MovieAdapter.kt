@@ -38,10 +38,10 @@ class MovieAdapter(val context: Context, var values: List<Result>?): BaseAdapter
         var estrenoView: TextView
         var posterView: ImageView
 
-        tituloView = row!!.findViewById(R.id.list_item_pagination_text)
+        tituloView = row!!.findViewById(R.id.movie_title)
        //generoView = row.findViewById(R.id.item_movie_genre)
-        notaView = row.findViewById(R.id.item_movie_rating)
-        estrenoView = row.findViewById(R.id.item_movie_release_date)
+        notaView = row.findViewById(R.id.movie_rating)
+        estrenoView = row.findViewById(R.id.movie_release_data)
 
 
 
@@ -56,7 +56,7 @@ class MovieAdapter(val context: Context, var values: List<Result>?): BaseAdapter
         tituloView.text = titulo
         notaView.text = nota.toString()
         estrenoView.text = estreno
-        Glide.with(context).load("https://image.tmdb.org/t/p/w500${item!![position].posterPath}").thumbnail(0.2f).into(row.findViewById(R.id.item_movie_poster) as ImageView)
+        Glide.with(context).load("https://image.tmdb.org/t/p/w500${item!![position].posterPath}").thumbnail(0.2f).into(row.findViewById(R.id.movie_poster) as ImageView)
 
         return row
     }

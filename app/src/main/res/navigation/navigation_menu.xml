@@ -6,8 +6,16 @@
 
     <fragment android:id="@+id/home_fragment" android:name="com.example.aplicacionprueba.Home_Fragment"
               android:label="Home" tools:layout="@layout/fragment_home">
-        <action android:id="@+id/action_home_to_list_TopRated" app:destination="@id/list_TopRated"/>
+        <action android:id="@+id/action_home_to_list_TopRated" app:destination="@id/list_TopRated"
+                app:enterAnim="@anim/nav_default_pop_enter_anim" app:exitAnim="@anim/nav_default_pop_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
     <fragment android:id="@+id/list_TopRated" android:name="com.example.aplicacionprueba.List_TopRated"
-              android:label="Mejor Valoradas" tools:layout="@layout/fragment_list__top_rated"/>
+              android:label="Mejor Valoradas" tools:layout="@layout/fragment_list__top_rated">
+        <action android:id="@+id/action_list_TopRated_to_movieDetail" app:destination="@id/movieDetail"
+                app:enterAnim="@anim/nav_default_pop_enter_anim" app:exitAnim="@anim/nav_default_pop_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+    <fragment android:id="@+id/movieDetail" android:name="com.example.aplicacionprueba.MovieDetail"
+              android:label="fragment_movie_detail" tools:layout="@layout/fragment_movie_detail"/>
 </navigation>

@@ -9,7 +9,7 @@
             android:theme="@style/CircularProgress"
             android:layout_width="match_parent"
             android:id="@+id/progress_bar_toprated" android:padding="170dp"
-            android:layout_marginBottom="731dp" android:layout_height="720dp"/>
+            android:layout_marginBottom="731dp" android:layout_height="717dp"/>
 
 
     <ListView

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   tools:context=".MovieDetail" android:id="@+id/frameLayout">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+            android:layout_width="231dp"
+            android:layout_height="405dp" tools:srcCompat="@drawable/Gladiator_Poster"
+            android:scaleType="centerInside"
+            android:id="@+id/movie_poster"
+            android:contentDescription="todo" android:visibility="visible"
+            tools:ignore="HardcodedText" android:paddingBottom="4dp"
+            android:background="@drawable/ic_launcher_foreground"
+            android:cropToPadding="false" android:adjustViewBounds="true"
+            android:padding="4dp"
+            tools:layout_editor_absoluteY="16dp" tools:layout_editor_absoluteX="25dp"/>
+    <TextView
+            android:text="Gladiator"
+            android:layout_width="102dp"
+            android:layout_height="22dp"
+            android:id="@+id/movie_title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorAccent" android:textStyle="italic"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteY="443dp" tools:layout_editor_absoluteX="25dp"/>
+    <TextView
+            android:text="Gladiator"
+            android:layout_width="135dp"
+            android:layout_height="17dp" android:id="@+id/movie_orgininal_title"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteY="472dp" tools:layout_editor_absoluteX="25dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.7"
+            android:text="@string/_2018"
+            android:id="@+id/movie_release_data"
+            android:textStyle="bold" android:textColor="@color/colorAccent"
+            tools:layout_editor_absoluteY="440dp" tools:layout_editor_absoluteX="363dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:id="@+id/movie_genre"
+            android:text="@string/accion_comedia"
+            android:textStyle="bold" android:textColor="@color/colorAccent"
+            tools:layout_editor_absoluteY="506dp" tools:layout_editor_absoluteX="88dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/movie_rating"
+            android:text="@string/_8_0"
+            android:textStyle="bold" android:textColor="@color/colorAccent"
+            tools:layout_editor_absoluteY="470dp" tools:layout_editor_absoluteX="375dp"/>
+    <TextView
+            android:text="Fecha de Estreno:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            tools:layout_editor_absoluteY="440dp" tools:layout_editor_absoluteX="236dp"/>
+    <TextView
+            android:text="IMDb puntuación:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            tools:layout_editor_absoluteY="470dp" tools:layout_editor_absoluteX="238dp"/>
+    <TextView
+            android:text="Generos:  "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView4"
+            tools:layout_editor_absoluteY="506dp" tools:layout_editor_absoluteX="25dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
