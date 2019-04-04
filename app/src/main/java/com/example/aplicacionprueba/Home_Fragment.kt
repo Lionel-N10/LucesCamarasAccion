@@ -40,8 +40,12 @@ class Home_Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        button.setOnClickListener{
+        bTopRated.setOnClickListener{
             Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeToListTopRated())
+        }
+
+        bMovie.setOnClickListener{
+            Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeFragmentToMovieDetail())
         }
 
     }

@@ -11,7 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionListener, List_TopRated.OnFragmentInteractionListener {
+class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionListener, List_TopRated.OnFragmentInteractionListener, MovieDetail.OnFragmentInteractionListener {
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 

@@ -3,10 +3,22 @@ package com.example.aplicacionprueba
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.example.lucescamarasaccion.Movies
+import com.example.lucescamarasaccion.MoviesClient
+import com.example.lucescamarasaccion.ServiceGenerator
+import kotlinx.android.synthetic.main.fragment_movie_detail.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,6 +49,57 @@ class MovieDetail : Fragment() {
         }
     }
 
+    //private var listView: ListView? = null
+    private var progressBar_moviedetails: ProgressBar? = null
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        progressBar_moviedetails = view.findViewById(R.id.progressBar_moviedetails)
+
+        val client = ServiceGenerator.createService(MoviesClient::class.java)
+        val call = client.GetTopRatedMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
+
+
+
+        call.enqueue(object : Callback<Movies> {
+            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
+                val repos = response.body()
+
+                var tituloView: TextView
+                var originalTitleView: TextView
+                var notaView: TextView
+                var estrenoView: TextView
+                var sipnosisView: TextView
+                var posterView: ImageView
+
+                tituloView =view.findViewById(R.id.movie_title)
+                originalTitleView = view.findViewById(R.id.movie_orgininal_title)
+                notaView= view.findViewById(R.id.movie_rating)
+                estrenoView = view.findViewById(R.id.movie_release_data)
+                sipnosisView = view.findViewById(R.id.movie_sipnosis)
+                posterView = view.findViewById(R.id.movie_poster)
+
+                tituloView.text = repos!!.results!![2].title
+                originalTitleView.text = repos!!.results!![2].originalTitle
+                notaView.text = repos!!.results!![2].voteAverage.toString()
+                estrenoView.text = repos!!.results!![2].releaseDate
+                sipnosisView.text = repos!!.results!![2].overview
+                Glide.with(view).load("https://image.tmdb.org/t/p/w500${repos!!.results!![2].posterPath}").into(posterView)
+
+               Toast.makeText(context!!, "Pelicula, cargado", Toast.LENGTH_SHORT).show()
+
+                progressBar_moviedetails!!.visibility = View.GONE
+                moviedetail_layout.visibility = View.VISIBLE
+            }
+            override fun onFailure(call: Call<Movies>, t: Throwable) {
+                Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
+                t.printStackTrace()
+                progressBar_moviedetails!!.visibility = View.GONE
+            }
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,7 +110,7 @@ class MovieDetail : Fragment() {
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+        listener!!.onFragmentInteraction(uri)
     }
 
     override fun onAttach(context: Context) {
