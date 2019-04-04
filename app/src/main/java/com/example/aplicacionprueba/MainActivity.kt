@@ -1,12 +1,16 @@
 package com.example.aplicacionprueba
 
+import android.content.ClipData
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionListener, List_TopRated.OnFragmentInteractionListener {
@@ -16,9 +20,14 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
 
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        var bFav = R.id.app_bar_fav
+        var bBuscar = R.id.app_bar_search
+        var bOpciones = R.id.app_bar_settings
 
         var vari = findNavController(R.id.host_fragment)
         vari.setGraph(R.navigation.navigation_menu)
@@ -26,5 +35,16 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
         var vari2 = AppBarConfiguration(vari.graph)
 
         findViewById<Toolbar>(R.id.toolbar).setupWithNavController(vari, vari2)
+
+        bar.replaceMenu(R.menu.menu_bottombar_home)
+
+        bar.setOnMenuItemClickListener { MenuItem ->
+            when(MenuItem.itemId){
+                bFav -> Toast.makeText(this,"Boton favorito pulsado", Toast.LENGTH_SHORT).show()
+                bBuscar -> Toast.makeText(this,"Boton busqueda pulsado", Toast.LENGTH_SHORT).show()
+                bOpciones -> Toast.makeText(this,"Boton opciones pulsado", Toast.LENGTH_SHORT).show()
+            }
+             true
+        }
     }
 }

@@ -6,4 +6,8 @@
     <string name="_8_0">8.0</string>
     <string name="accion_comedia">Accion, Comedia</string>
     <string name="_2018">2018</string>
+    <string name="action_favorite"/>
+    <string name="action_search"/>
+    <string name="action_settings"/>
+    <string name="search">Search</string>
 </resources>
