@@ -2,29 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
       xmlns:app="http://schemas.android.com/apk/res-auto" >
 
-    <item android:title="Item" app:showAsAction="always" android:icon="?attr/actionModeCloseDrawable"
+    <item android:title="" app:showAsAction="always" android:icon="?attr/actionModeCloseDrawable"
           android:id="@+id/app_bar_back"/>
 
-    <item app:showAsAction="always" android:icon="@drawable/popcorns_icon" android:title="" android:checkable="false"
-          android:checked="false" android:enabled="false"/>
-    <item app:showAsAction="always" android:icon="@drawable/round_account_circle_black_18dp" android:enabled="false"
-          android:checkable="false" android:title="" android:id="@+id/app_bar_home"/>
+    <item app:showAsAction="always" android:icon="@drawable/ic_movie_roll" android:title=""
+          android:checked="true" android:checkable="true" android:enabled="true"/>
+    <item app:showAsAction="always" android:icon="@drawable/round_account_circle_black_18dp"
+          android:title="" android:id="@+id/app_bar_home" android:enabled="true" android:checkable="true"/>
     <item app:showAsAction="always" android:checkable="false" android:title="" android:enabled="false"/>
     <item app:showAsAction="always" android:checkable="false" android:title="" android:enabled="false"/>
+    <item android:title="" app:showAsAction="never|always"
+          android:icon="@drawable/ic_format_list_numbered"/>
+
     <item
             android:id="@+id/app_bar_fav"
             android:icon="@drawable/round_favorite_border_black_18dp"
             android:title="@string/action_favorite"
             app:showAsAction="always"/>
-    <item
-            android:id="@+id/app_bar_search"
-            android:icon="@drawable/round_search_black_18dp"
-            android:title="@string/search" app:actionViewClass="android.widget.SearchView"
-            app:showAsAction="always"/>
 
     <item
             android:id="@+id/app_bar_settings"
             app:showAsAction="never|always" android:icon="@drawable/round_list_black_18dp" android:title=""/>
-    <item android:enabled="false" app:showAsAction="always" android:title=""/>
+    <item android:title="" app:showAsAction="always" android:enabled="false"/>
 
 </menu>

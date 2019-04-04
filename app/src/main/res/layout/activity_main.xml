@@ -9,32 +9,32 @@
 
     <fragment
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_height="620dp"
+            android:layout_height="match_parent"
             android:id="@+id/host_fragment" android:layout_width="match_parent" android:layout_marginTop="55dp"
     />
 
     <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/design_default_color_primary"
-            android:theme="?attr/actionBarTheme"
+            android:background="@color/otrocolor"
+            android:theme="@style/Widget.MaterialComponents.Toolbar"
             android:minHeight="?attr/actionBarSize" android:id="@+id/toolbar"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:layout_anchorGravity="top|center"/>
+            app:layout_scrollFlags="enterAlwaysCollapsed"
+            app:layout_anchorGravity="top|center" android:textAlignment="center"/>
     <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottom_app_bar"
+            android:id="@+id/bar"
             android:layout_width="match_parent"
             android:layout_height="53dp"
             android:layout_gravity="bottom"
             app:fabAlignmentMode="center"
             app:hideOnScroll="true"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            app:layout_scrollFlags="scroll|enterAlways" app:backgroundTint="@color/otrocolor"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:clickable="true" app:srcCompat="@drawable/round_home_white_18dp"
+            android:clickable="true" app:srcCompat="@drawable/ic_movie_outline"
             android:id="@+id/floatingActionButton2" app:layout_anchorGravity="top|center"
-            android:focusable="true" app:layout_anchor="@+id/bottom_app_bar"/>
+            android:focusable="true" app:layout_anchor="@+id/bar" app:backgroundTint="@android:color/background_light"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,11 +1,9 @@
 package com.example.aplicacionprueba
 
-import android.content.ClipData
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -35,6 +33,8 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
         var vari2 = AppBarConfiguration(vari.graph)
 
         findViewById<Toolbar>(R.id.toolbar).setupWithNavController(vari, vari2)
+
+        toolbar.inflateMenu(R.menu.menu_toolbar)
 
         bar.replaceMenu(R.menu.menu_bottombar_home)
 

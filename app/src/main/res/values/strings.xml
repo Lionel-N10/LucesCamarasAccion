@@ -10,4 +10,5 @@
     <string name="action_search"/>
     <string name="action_settings"/>
     <string name="search">Search</string>
+    <string name="item">Item</string>
 </resources>
