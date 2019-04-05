@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.aplicacionprueba.JsonObjets.MovieDetails_Object
 import com.example.lucescamarasaccion.Movies
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
@@ -54,13 +55,17 @@ class MovieDetail : Fragment() {
         moviedetail_layout = view.findViewById(R.id.scrollView2)
         progressBar_moviedetails = view.findViewById(R.id.progressBar_moviedetails)
 
+        var id : Int
+
+        id = MovieDetailArgs.fromBundle(arguments!!).movieId
+
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
-        val call = client.GetTopRatedMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
+        val call = client.getMovieById(id, "39534c06f3f59b461ca70b61f782f06d", "es-ES")
 
 
-        call.enqueue(object : Callback<Movies> {
-            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
+        call.enqueue(object : Callback<MovieDetails_Object> {
+            override fun onResponse(call: Call<MovieDetails_Object>, response: Response<MovieDetails_Object>) {
                 val repos = response.body()
 
                 val tituloView: TextView
@@ -77,19 +82,19 @@ class MovieDetail : Fragment() {
                 sipnosisView = view.findViewById(R.id.movie_sipnosis)
                 posterView = view.findViewById(R.id.movie_poster)
 
-                tituloView.text = repos!!.results!![2].title
-                originalTitleView.text = repos.results!![2].originalTitle
-                notaView.text = repos.results!![2].voteAverage.toString()
-                estrenoView.text = repos.results!![2].releaseDate
-                sipnosisView.text = repos.results!![2].overview
-                Glide.with(view).load("https://image.tmdb.org/t/p/w500${repos.results!![2].posterPath}").into(posterView)
+                tituloView.text = repos!!.title
+                originalTitleView.text = repos.originalTitle
+                notaView.text = repos.voteAverage.toString()
+                estrenoView.text = repos.releaseDate
+                sipnosisView.text = repos.overview
+                Glide.with(view).load("https://image.tmdb.org/t/p/w500${repos.posterPath}").into(posterView)
 
                //Toast.makeText(context!!, "Pelicula, cargado", Toast.LENGTH_SHORT).show()
 
                 progressBar_moviedetails!!.visibility = View.GONE
                 moviedetail_layout!!.visibility = View.VISIBLE
             }
-            override fun onFailure(call: Call<Movies>, t: Throwable) {
+            override fun onFailure(call: Call<MovieDetails_Object>, t: Throwable) {
                 Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
                 t.printStackTrace()
                 progressBar_moviedetails!!.visibility = View.GONE

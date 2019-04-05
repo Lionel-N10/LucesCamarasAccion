@@ -1,18 +1,14 @@
 package com.example.aplicacionprueba
 
 import android.content.Context
-import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import java.lang.Thread.sleep
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -30,14 +26,23 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class Home_Fragment : Fragment() {
+
+    override fun setArguments(args: Bundle?) {
+
+    }
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+    var movie_id: Int = 0
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        //movie_id = text_movieId.text.toString().toInt()
 
 
         bTopRated.setOnClickListener{
@@ -45,7 +50,8 @@ class Home_Fragment : Fragment() {
         }
 
         bMovie.setOnClickListener{
-            Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeFragmentToMovieDetail())
+            movie_id = text_movieId.text.toString().toInt()
+            Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeFragmentToMovieDetail(movie_id))
         }
 
     }

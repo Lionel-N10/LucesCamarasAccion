@@ -9,19 +9,29 @@
 
 
     <Button
-            android:text="Mejor Valoradas"
+            android:text="@string/mejor_valoradas"
             android:id="@+id/bTopRated"
             android:textAppearance="@android:style/TextAppearance.Material.Widget.Button"
             android:elevation="0dp" android:layout_height="wrap_content" android:layout_width="wrap_content"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="200dp" app:layout_constraintEnd_toEndOf="parent"/>
     <Button
-            android:text="Pelicula"
+            android:text="@string/pelicula"
             android:id="@+id/bMovie"
             android:textAppearance="@android:style/TextAppearance.Material.Widget.Button"
             android:elevation="0dp" android:layout_height="wrap_content" android:layout_width="wrap_content"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="248dp" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"/>
+    <EditText
+            android:layout_width="90dp"
+            android:layout_height="35dp"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/text_movieId"
+            android:textStyle="bold" android:textAlignment="center" android:textColor="@color/ProgressBar"
+            android:singleLine="true" android:editable="true" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/bMovie"
+            app:layout_constraintEnd_toEndOf="parent" android:background="@color/floatingBoton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
