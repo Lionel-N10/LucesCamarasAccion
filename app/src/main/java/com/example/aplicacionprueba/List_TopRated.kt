@@ -6,19 +6,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.aplicacionprueba.R.id.progress_bar_toprated
-import com.example.lucescamarasaccion.MovieAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.lucescamarasaccion.Movies
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
-import kotlinx.android.synthetic.main.fragment_list__top_rated.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.NullPointerException
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -41,14 +40,14 @@ class List_TopRated : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    private var listView: ListView? = null
+    private var listView: RecyclerView? = null
     private var pbCargando: ProgressBar? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         pbCargando = view.findViewById(R.id.progress_bar_toprated)
-        listView = lista
+        listView = view.findViewById(R.id.lista) as RecyclerView
 
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
@@ -60,7 +59,9 @@ class List_TopRated : Fragment() {
             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
                 val repos = response.body()
 
-                listView!!.adapter = MovieAdapter(context!!, repos!!.results)
+                    listView!!.layoutManager = LinearLayoutManager(activity)
+                    listView!!.adapter = MovieAdapter(context!!, repos!!.results)
+
 
                 Toast.makeText(context!!, "MejorValoradas, cargado", Toast.LENGTH_SHORT).show()
 

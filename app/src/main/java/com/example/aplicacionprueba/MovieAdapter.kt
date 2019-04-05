@@ -1,64 +1,56 @@
-package com.example.lucescamarasaccion
-
+package com.example.aplicacionprueba
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.aplicacionprueba.R
+import com.example.lucescamarasaccion.Result
+import kotlinx.android.synthetic.main.list_item_pagination.view.*
 
-class MovieAdapter(val context: Context, var values: List<Result>?): BaseAdapter() /*ArrayAdapter<List<Result>>(context, R.layout.list_item_pagination, values!!.size)*/ {
-    override fun getItem(position: Int): Any {
-       return values!![position]
-    }
+class MovieAdapter(val context: Context, var values: List<Result>?): RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
-    override fun getItemId(position: Int): Long {
-        return values!!.size.toLong()
-    }
+    var viewHolder: ViewHolder? = null
 
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
+        Log.d("Aqui entra esto", values!!.size.toString())
         return values!!.size
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var row = convertView
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.ViewHolder {
+        val vista = LayoutInflater.from(parent.context).inflate(R.layout.list_item_pagination, parent, false)
+        viewHolder = ViewHolder(vista)
 
-        if (row == null) {
-            val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            row = inflater.inflate(R.layout.list_item_pagination, parent, false)
+        return viewHolder!!
+    }
+
+    class ViewHolder(vista: View): RecyclerView.ViewHolder(vista){
+        var tituloView: TextView? = null
+        // var generoView: TextView? = null
+        var notaView: TextView? = null
+        var estrenoView: TextView? = null
+        var posterView: ImageView? = null
+
+        init {
+            tituloView = vista.movie_title
+            //generoView = vista.movie_genre
+            notaView = vista.movie_rating
+            estrenoView = vista.movie_release_data
+            posterView = vista.movie_poster
         }
+    }
 
-        var tituloView: TextView
-        var generoView: TextView
-        var notaView: TextView
-        var estrenoView: TextView
-        var posterView: ImageView
-
-        tituloView = row!!.findViewById(R.id.movie_title)
-       //generoView = row.findViewById(R.id.item_movie_genre)
-        notaView = row.findViewById(R.id.movie_rating)
-        estrenoView = row.findViewById(R.id.movie_release_data)
-
-
-
-        val item = this.values
-
-        val titulo = item!![position].title
-        //val genero = item!![position]
-        val nota = item!![position].voteAverage
-        val estreno = item!![position].releaseDate
-
-
-        tituloView.text = titulo
-        notaView.text = nota.toString()
-        estrenoView.text = estreno
-        Glide.with(context).load("https://image.tmdb.org/t/p/original${item!![position].posterPath}").thumbnail(0.2f).into(row.findViewById(R.id.movie_poster) as ImageView)
-
-        return row
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = values?.get(position)
+        holder.tituloView?.text = item?.title
+        holder.estrenoView?.text = item?.releaseDate
+        holder.notaView?.text = item?.voteAverage.toString()
+        //holder.generoView?.text = "Accion, Comedia"
+        Glide.with(context).load("https://image.tmdb.org/t/p/w500${item!!.posterPath}").thumbnail(0.2f).into(holder.posterView!!)
     }
 }
 

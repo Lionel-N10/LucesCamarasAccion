@@ -6,4 +6,5 @@
     <color name="colorAccent">#0A0A0A</color>
     <color name="floatingBoton">#E2DEDD</color>
     <color name="nota">#000000</color>
+    <color name="ProgressBar">#F50057</color>
 </resources>
