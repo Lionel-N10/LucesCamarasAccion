@@ -56,7 +56,7 @@ class MovieAdapter(val context: Context, var values: List<Result>?): BaseAdapter
         tituloView.text = titulo
         notaView.text = nota.toString()
         estrenoView.text = estreno
-        Glide.with(context).load("https://image.tmdb.org/t/p/w500${item!![position].posterPath}").thumbnail(0.2f).into(row.findViewById(R.id.movie_poster) as ImageView)
+        Glide.with(context).load("https://image.tmdb.org/t/p/original${item!![position].posterPath}").thumbnail(0.2f).into(row.findViewById(R.id.movie_poster) as ImageView)
 
         return row
     }

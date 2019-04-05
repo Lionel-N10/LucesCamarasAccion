@@ -59,6 +59,7 @@ class MovieDetail : Fragment() {
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
         val call = client.GetTopRatedMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
+        moviedetail_layout.visibility = View.GONE
 
 
 
@@ -87,7 +88,7 @@ class MovieDetail : Fragment() {
                 sipnosisView.text = repos!!.results!![2].overview
                 Glide.with(view).load("https://image.tmdb.org/t/p/w500${repos!!.results!![2].posterPath}").into(posterView)
 
-               Toast.makeText(context!!, "Pelicula, cargado", Toast.LENGTH_SHORT).show()
+               //Toast.makeText(context!!, "Pelicula, cargado", Toast.LENGTH_SHORT).show()
 
                 progressBar_moviedetails!!.visibility = View.GONE
                 moviedetail_layout.visibility = View.VISIBLE

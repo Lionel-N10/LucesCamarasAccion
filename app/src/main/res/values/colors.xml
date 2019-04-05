@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#D1C3C7C7</color>
+    <color name="colorPrimary">#D10E5D5D</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="otrocolor">#9E9E9E</color>
+    <color name="otrocolor">#1C1C1C</color>
     <color name="colorAccent">#0A0A0A</color>
+    <color name="floatingBoton">#E2DEDD</color>
+    <color name="nota">#000000</color>
 </resources>
