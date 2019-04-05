@@ -16,6 +16,7 @@ import com.example.lucescamarasaccion.ServiceGenerator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.NullPointerException
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -81,13 +82,17 @@ class MovieDetail : Fragment() {
                 estrenoView = view.findViewById(R.id.movie_release_data)
                 sipnosisView = view.findViewById(R.id.movie_sipnosis)
                 posterView = view.findViewById(R.id.movie_poster)
+                try {
+                    tituloView.text = repos!!.title
+                    originalTitleView.text = repos.originalTitle
+                    notaView.text = repos.voteAverage.toString()
+                    estrenoView.text = repos.releaseDate
+                    sipnosisView.text = repos.overview
+                    Glide.with(view).load("https://image.tmdb.org/t/p/w500${repos.posterPath}").into(posterView)
+                }catch (npe: NullPointerException){
 
-                tituloView.text = repos!!.title
-                originalTitleView.text = repos.originalTitle
-                notaView.text = repos.voteAverage.toString()
-                estrenoView.text = repos.releaseDate
-                sipnosisView.text = repos.overview
-                Glide.with(view).load("https://image.tmdb.org/t/p/w500${repos.posterPath}").into(posterView)
+
+                }
 
                //Toast.makeText(context!!, "Pelicula, cargado", Toast.LENGTH_SHORT).show()
 

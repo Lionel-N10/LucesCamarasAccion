@@ -15,10 +15,8 @@ import kotlinx.android.synthetic.main.list_item_pagination.view.*
 class MovieAdapter(val context: Context, var values: List<Result>?): RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     var viewHolder: ViewHolder? = null
-    var onItemClick:(())
 
     override fun getItemCount(): Int {
-        Log.d("Aqui entra esto", values!!.size.toString())
         return values!!.size
     }
 
@@ -42,9 +40,6 @@ class MovieAdapter(val context: Context, var values: List<Result>?): RecyclerVie
             notaView = vista.movie_rating
             estrenoView = vista.movie_release_data
             posterView = vista.movie_poster
-            vista.setOnClickListener {
-                onItemClick
-            }
         }
     }
 

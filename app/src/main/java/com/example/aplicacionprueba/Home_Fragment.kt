@@ -27,9 +27,6 @@ private const val ARG_PARAM2 = "param2"
  */
 class Home_Fragment : Fragment() {
 
-    override fun setArguments(args: Bundle?) {
-
-    }
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -44,7 +41,6 @@ class Home_Fragment : Fragment() {
 
         //movie_id = text_movieId.text.toString().toInt()
 
-
         bTopRated.setOnClickListener{
             Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeToListTopRated())
         }
@@ -53,6 +49,7 @@ class Home_Fragment : Fragment() {
             movie_id = text_movieId.text.toString().toInt()
             Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeFragmentToMovieDetail(movie_id))
         }
+
 
     }
 

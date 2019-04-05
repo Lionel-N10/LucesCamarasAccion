@@ -2,9 +2,11 @@ package com.example.aplicacionprueba
 
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.get
 import androidx.core.widget.NestedScrollView
 import androidx.navigation.NavHost
 import androidx.navigation.findNavController
@@ -56,5 +58,6 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
             }
              true
         }
+
     }
 }
