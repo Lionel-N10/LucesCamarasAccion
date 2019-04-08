@@ -31,6 +31,13 @@ interface MoviesClient {
     ):Call<MovieDetails_Object>
 
 
+    @GET("search/movie")
+    fun getMovieByTitle(
+        @Query ("api_key") api_key: String,
+        @Query ("query") query: String
+    ):Call<Movies>
+
+
 
 
     //https://api.github.com/users/Lionel-N10/repos

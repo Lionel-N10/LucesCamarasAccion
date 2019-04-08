@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.lang.NumberFormatException
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,11 +48,11 @@ class Home_Fragment : Fragment() {
         }
 
         bMovie.setOnClickListener{
-            movie_id = text_movieId.text.toString().toInt()
-            Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeFragmentToMovieDetail(movie_id))
+            try{
+               // movie_id = .text.toString().toInt()
+                Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeFragmentToMovieDetail(65))
+            }catch(nfe: NumberFormatException){ Toast.makeText(context!!, "Introduzca un id valido", Toast.LENGTH_SHORT).show() }
         }
-
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -5,141 +5,177 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
                                                    tools:context=".MovieDetail" android:id="@+id/frameLayout"
-                                                   android:background="@color/otrocolor">
+                                                   android:background="@color/otrocolor"
+                                                   android:nestedScrollingEnabled="true">
 
     <!-- TODO: Update blank fragment layout -->
+
     <ProgressBar
-            style="?android:attr/progressBarStyle"
-            android:layout_width="85dp"
-            android:layout_height="76dp"
+            android:layout_width="407dp"
+            android:layout_height="731dp"
             android:id="@+id/progressBar_moviedetails"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="visible"/>
+            android:visibility="visible"
+            android:padding="160dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.0"/>
     <ScrollView
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/scrollView2" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="0dp" android:id="@+id/scrollView2" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:fillViewport="true" app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.0" android:visibility="gone" android:nestedScrollingEnabled="true">
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/moviedetail_layout"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-                android:background="@drawable/cinta_background">
-
-            <TextView
-                    android:text="@string/gladiator"
-                    android:layout_width="0dp"
-                    android:layout_height="19dp" android:id="@+id/movie_orgininal_title"
-                    android:textSize="12sp"
-                    app:layout_constraintEnd_toEndOf="@+id/movie_rating" app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/movie_title"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-            <TextView
-                    android:text="@string/gladiator"
-                    android:layout_width="105dp"
-                    android:layout_height="24dp"
-                    android:id="@+id/movie_title"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/colorAccent" android:textStyle="italic"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="60dp" android:layout_marginBottom="10dp"
-                    app:layout_constraintBottom_toTopOf="@+id/movie_orgininal_title"/>
-            <TextView
-                    android:layout_width="20dp"
-                    android:layout_height="21dp"
-                    android:id="@+id/movie_rating"
-                    android:text="@string/_8_0"
-                    android:textStyle="bold" android:textColor="@color/colorAccent"
-                    app:layout_constraintTop_toTopOf="@+id/movie_genre" android:layout_marginTop="27dp"
-                    android:layout_marginStart="6dp"
-                    app:layout_constraintStart_toEndOf="@+id/textView3" android:layout_marginBottom="23dp"
-                    app:layout_constraintBottom_toTopOf="@+id/movie_release_data"/>
-            <TextView
-                    android:layout_width="294dp"
-                    android:layout_height="0dp"
-                    android:id="@+id/movie_sipnosis" android:textSize="12sp"
-                    android:textColor="@color/colorAccent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginEnd="11dp" android:background="@color/floatingBoton"
-                    app:layout_constraintHorizontal_bias="0.557"
-                    android:layout_marginTop="18dp" app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5"/>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="18dp"
-                    android:id="@+id/movie_genre"
-                    android:text="@string/accion_comedia"
-                    android:textStyle="bold" android:textColor="@color/colorAccent"
-                    android:layout_marginTop="75dp" app:layout_constraintEnd_toStartOf="@+id/movie_rating"
-                    android:layout_marginBottom="73dp" app:layout_constraintTop_toTopOf="@+id/movie_title"
-                    app:layout_constraintStart_toStartOf="@+id/movie_rating"
-                    app:layout_constraintBottom_toBottomOf="@+id/movie_release_data"/>
-            <TextView
-                    android:layout_width="73dp"
-                    android:layout_height="20dp"
-                    android:alpha="0.7"
-                    android:text="@string/_2018"
-                    android:id="@+id/movie_release_data"
-                    android:textStyle="bold" android:textColor="@color/colorAccent"
-                    android:layout_marginTop="122dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView5" android:layout_marginStart="3dp"
-                    app:layout_constraintTop_toBottomOf="@+id/movie_title"
-                    app:layout_constraintStart_toEndOf="@+id/textView2" android:layout_marginBottom="122dp"/>
-            <TextView
-                    android:text="@string/generos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView4"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/movie_genre" android:layout_marginStart="60dp"/>
-            <TextView
-                    android:text="@string/fecha_de_estreno"
-                    android:layout_width="wrap_content"
-                    android:layout_height="18dp"
-                    android:id="@+id/textView2"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/movie_release_data"
-                    app:layout_constraintEnd_toStartOf="@+id/movie_rating" android:layout_marginEnd="3dp"
-            />
-            <TextView
-                    android:text="@string/sipnosis"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView5" android:textColor="@color/colorAccent"
-                    android:textAllCaps="false"
-                    android:background="@color/floatingBoton"
-                    app:layout_constraintStart_toStartOf="@+id/movie_sipnosis"
-                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="160dp"/>
-            <TextView
-                    android:text="@string/imdb_puntuaci_n"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView3"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/movie_rating"
-                    app:layout_constraintStart_toEndOf="@+id/textView4"
-                    app:layout_constraintEnd_toEndOf="@+id/textView4"/>
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.0" android:visibility="gone">
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent"
+                      android:orientation="vertical" android:background="@drawable/cinta_background">
             <ImageView
-                    android:layout_width="231dp"
-                    android:layout_height="0dp" tools:srcCompat="@drawable/gladiator_poster"
-                    android:scaleType="centerInside"
+                    android:layout_width="236dp"
+                    android:layout_height="335dp"
+                    android:scaleType="fitCenter"
                     android:id="@+id/movie_poster"
                     android:contentDescription="todo" android:visibility="visible"
-                    tools:ignore="HardcodedText" android:paddingBottom="4dp"
-                    android:background="@drawable/ic_launcher_foreground"
-                    android:cropToPadding="false" android:adjustViewBounds="true"
-                    android:padding="4dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="88dp"
-                    app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="11dp"
-                    app:layout_constraintBottom_toTopOf="@+id/movie_title"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:cropToPadding="false"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/movie_title"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_gravity="center" android:padding="32dp" android:src="@drawable/gladiator_poster"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <Space
+                        android:layout_height="match_parent" android:layout_weight="1"
+                        android:layout_width="wrap_content"/>
+                <TextView
+                        android:text="@string/gladiator"
+                        android:layout_width="95dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/movie_title"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/colorAccent" android:textStyle="italic"
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="@+id/textView3"
+                        android:gravity="center"/>
+                <TextView
+                        android:text="@string/imdb_puntuaci_n"
+                        android:layout_width="165dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/textView3"
+                        app:layout_constraintTop_toBottomOf="@+id/movie_orgininal_title"
+                        app:layout_constraintStart_toEndOf="@+id/textView4"
+                        app:layout_constraintEnd_toEndOf="@+id/textView4" android:gravity="bottom|right"
+                        android:paddingRight="8dp" android:textColor="@color/colorAccent"/>
+                <TextView
+                        android:layout_width="41dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/movie_rating"
+                        android:text="@string/_8_0"
+                        android:textStyle="bold" android:textColor="@color/colorAccent"
+                        app:layout_constraintStart_toStartOf="@+id/movie_release_data"
+                        app:layout_constraintBottom_toTopOf="@+id/movie_release_data"
+                        android:gravity="bottom"/>
+                <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" android:layout_weight="1"/>
+            </LinearLayout>
+            <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <Space
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent" android:layout_weight="1"/>
+                <TextView
+                        android:text="@string/gladiator"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent" android:id="@+id/movie_orgininal_title"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@+id/movie_title"
+                        app:layout_constraintTop_toBottomOf="@+id/movie_title" android:gravity="center|left"
+                        android:textColor="@color/colorAccent"/>
+                <TextView
+                        android:text="@string/fecha_de_estreno"
+                        android:layout_width="134dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/textView2"
+                        app:layout_constraintStart_toEndOf="@+id/textView4"
+                        app:layout_constraintEnd_toEndOf="@+id/textView4"
+                        app:layout_constraintBottom_toTopOf="@+id/textView4"
+                        android:gravity="right" android:paddingRight="8dp" android:textColor="@color/colorAccent"/>
+                <TextView
+                        android:layout_width="157dp"
+                        android:layout_height="match_parent"
+                        android:alpha="0.7"
+                        android:text="@string/_2018"
+                        android:id="@+id/movie_release_data"
+                        android:textStyle="bold" android:textColor="@color/colorAccent"
+                        app:layout_constraintEnd_toEndOf="@+id/movie_genre"
+                        app:layout_constraintBottom_toTopOf="@+id/movie_genre"/>
+                <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" android:layout_weight="1"/>
+            </LinearLayout>
+            <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="14dp"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp">
+                <Space
+                        android:layout_width="82dp"
+                        android:layout_height="match_parent" android:layout_weight="1"/>
+                <TextView
+                        android:text="@string/sipnosis"
+                        android:layout_width="84dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/textView5" android:textColor="@color/colorAccent"
+                        android:textAllCaps="false"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3" android:gravity="center"/>
+                <TextView
+                        android:text="@string/generos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" android:id="@+id/textView4"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/movie_genre"
+                        app:layout_constraintEnd_toEndOf="@+id/textView5" android:paddingRight="8dp"
+                        android:gravity="center|right" android:textColor="@color/colorAccent"/>
+                <TextView
+                        android:layout_width="235dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/movie_genre"
+                        android:text="@string/accion_comedia"
+                        android:textStyle="bold" android:textColor="@color/colorAccent"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3"
+                        app:layout_constraintStart_toEndOf="@+id/textView4"
+                        android:gravity="center|left"/>
+                <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="318dp">
+                <Space
+                        android:layout_width="90dp"
+                        android:layout_height="match_parent" android:layout_weight="1"/>
+                <TextView
+                        android:layout_width="293dp"
+                        android:layout_height="157dp"
+                        android:id="@+id/movie_sipnosis" android:textSize="12sp"
+                        android:textColor="@color/colorAccent"
+                        android:background="@color/colorPrimary"
+                        app:layout_constraintStart_toStartOf="@+id/movie_release_data"
+                        app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="105dp"/>
+                <Space
+                        android:layout_height="match_parent" android:layout_weight="1" android:layout_width="94dp"/>
+            </LinearLayout>
+        </LinearLayout>
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

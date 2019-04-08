@@ -16,5 +16,6 @@
     <fragment android:id="@+id/movieDetail" android:name="com.example.aplicacionprueba.MovieDetail"
               android:label="fragment_movie_detail" tools:layout="@layout/fragment_movie_detail">
         <argument android:name="movie_id" app:argType="integer" android:defaultValue="98"/>
+        <action android:id="@+id/action_movieDetail_to_home_fragment" app:destination="@id/home_fragment"/>
     </fragment>
 </navigation>

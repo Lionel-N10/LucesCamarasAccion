@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.lucescamarasaccion.Result
 import kotlinx.android.synthetic.main.list_item_pagination.view.*
 
@@ -53,26 +54,3 @@ class MovieAdapter(val context: Context, var values: List<Result>?): RecyclerVie
     }
 }
 
-
-
-/*class MovieAdapter(var values: Movie?, context: Context):
-    ListAdapter<>(context, R.layout.list_item_pagination, values) {
-
-    override fun getView(position: Int, convertView: View, parent: ViewGroup): View {
-        var row: View? = convertView
-
-        if (row == null) {
-            val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            row = inflater.inflate(R.layout.list_item_pagination, parent, false)
-        }
-
-        val textView = row!!.findViewById(R.id.list_item_pagination_text) as TextView
-
-        val item = values[position]
-        val message = item.name
-        textView.setText(message)
-
-        return row
-    }
-
-}*/

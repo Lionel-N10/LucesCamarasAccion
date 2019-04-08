@@ -3,11 +3,13 @@ package com.example.aplicacionprueba
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.aplicacionprueba.JsonObjets.MovieDetails_Object
 import com.example.lucescamarasaccion.Movies
@@ -50,16 +52,11 @@ class MovieDetail : Fragment() {
     private var progressBar_moviedetails: ProgressBar? = null
     private var moviedetail_layout: ScrollView? = null
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    fun showMovieDetails(view: View, id: Int){
         moviedetail_layout = view.findViewById(R.id.scrollView2)
         progressBar_moviedetails = view.findViewById(R.id.progressBar_moviedetails)
 
-        var id : Int
-
-        id = MovieDetailArgs.fromBundle(arguments!!).movieId
-
+        //id = MovieDetailArgs.fromBundle(arguments!!).movieId
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
         val call = client.getMovieById(id, "39534c06f3f59b461ca70b61f782f06d", "es-ES")
@@ -68,41 +65,72 @@ class MovieDetail : Fragment() {
         call.enqueue(object : Callback<MovieDetails_Object> {
             override fun onResponse(call: Call<MovieDetails_Object>, response: Response<MovieDetails_Object>) {
                 val repos = response.body()
+                if(repos != null) {
 
-                val tituloView: TextView
-                val originalTitleView: TextView
-                val notaView: TextView
-                val estrenoView: TextView
-                val sipnosisView: TextView
-                val posterView: ImageView
+                    val tituloView: TextView
+                    val originalTitleView: TextView
+                    val notaView: TextView
+                    val estrenoView: TextView
+                    val sipnosisView: TextView
+                    val posterView: ImageView
 
-                tituloView =view.findViewById(R.id.movie_title)
-                originalTitleView = view.findViewById(R.id.movie_orgininal_title)
-                notaView= view.findViewById(R.id.movie_rating)
-                estrenoView = view.findViewById(R.id.movie_release_data)
-                sipnosisView = view.findViewById(R.id.movie_sipnosis)
-                posterView = view.findViewById(R.id.movie_poster)
-                try {
-                    tituloView.text = repos!!.title
-                    originalTitleView.text = repos.originalTitle
-                    notaView.text = repos.voteAverage.toString()
-                    estrenoView.text = repos.releaseDate
-                    sipnosisView.text = repos.overview
-                    Glide.with(view).load("https://image.tmdb.org/t/p/w500${repos.posterPath}").into(posterView)
-                }catch (npe: NullPointerException){
+                    tituloView = view.findViewById(R.id.movie_title)
+                    originalTitleView = view.findViewById(R.id.movie_orgininal_title)
+                    notaView = view.findViewById(R.id.movie_rating)
+                    estrenoView = view.findViewById(R.id.movie_release_data)
+                    sipnosisView = view.findViewById(R.id.movie_sipnosis)
+                    posterView = view.findViewById(R.id.movie_poster)
+                    try {
+                        tituloView.text = repos.title
+                        originalTitleView.text = repos.originalTitle
+                        notaView.text = repos.voteAverage.toString()
+                        estrenoView.text = repos.releaseDate
+                        sipnosisView.text = repos.overview
+                        Glide.with(view).load("https://image.tmdb.org/t/p/w500${repos.posterPath}").into(posterView)
+                    } catch (npe: NullPointerException) {
+                    }
 
+                    //Toast.makeText(context!!, "Pelicula, cargado", Toast.LENGTH_SHORT).show()
 
+                    progressBar_moviedetails!!.visibility = View.GONE
+                    moviedetail_layout!!.visibility = View.VISIBLE
                 }
-
-               //Toast.makeText(context!!, "Pelicula, cargado", Toast.LENGTH_SHORT).show()
-
-                progressBar_moviedetails!!.visibility = View.GONE
-                moviedetail_layout!!.visibility = View.VISIBLE
+                else{
+                    progressBar_moviedetails!!.visibility = View.GONE
+                    Toast.makeText(context!!, "No se ha podido encontrar la película", Toast.LENGTH_SHORT).show()
+                    Navigation.findNavController(view).navigate(MovieDetailDirections.actionMovieDetailToHomeFragment())
+                }
             }
             override fun onFailure(call: Call<MovieDetails_Object>, t: Throwable) {
                 Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
                 t.printStackTrace()
                 progressBar_moviedetails!!.visibility = View.GONE
+
+            }
+        })
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        var id = 0
+
+        var title = "Gladiator"
+
+        val client = ServiceGenerator.createService(MoviesClient::class.java)
+        val call = client.getMovieByTitle("39534c06f3f59b461ca70b61f782f06d", title)
+
+
+        call.enqueue(object : Callback<Movies> {
+            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
+                val repos = response.body()
+                showMovieDetails(view ,repos!!.results!![0].id!!)
+                Log.d("ID= ",repos.results!![0].id.toString())
+            }
+            override fun onFailure(call: Call<Movies>, t: Throwable) {
+                Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
+                t.printStackTrace()
             }
         })
     }
