@@ -27,42 +27,37 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [List_TopRated.OnFragmentInteractionListener] interface
+ * [search_movies.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [List_TopRated.newInstance] factory method to
+ * Use the [search_movies.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class List_TopRated : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
-
-    private var listView: RecyclerView? = null
-    private var pbCargando: ProgressBar? = null
+class search_movies : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pbCargando = view.findViewById(R.id.progress_bar_toprated)
-        listView = view.findViewById(R.id.lista) as RecyclerView
+        var searchItem = R.id.app_bar_search
+
+
+
+        pbCargando = view.findViewById(R.id.progress_bar_search)
+        listView = view.findViewById(R.id.listaSearch) as RecyclerView
 
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
-        val call = client.GetTopRatedMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
-
-
+        val call = client.getMovieByTitle("39534c06f3f59b461ca70b61f782f06d", arguments!!.getString("titulo", ""))
 
         call.enqueue(object : Callback<Movies> {
             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
                 val repos = response.body()
 
                 listView!!.layoutManager = GridLayoutManager(activity, 2)
-                    listView!!.adapter = MovieAdapter(context!!, repos!!.results)
+                listView!!.adapter = MovieAdapter(context!!, repos!!.results)
 
 
-                Toast.makeText(context!!, "MejorValoradas, cargado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context!!, "Busqueda, cargada", Toast.LENGTH_SHORT).show()
 
                 pbCargando!!.visibility = View.GONE
             }
@@ -75,11 +70,16 @@ class List_TopRated : Fragment() {
 
 
         })
-
-
-
-
     }
+
+
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
+    private var listener: OnFragmentInteractionListener? = null
+
+    private var listView: RecyclerView? = null
+    private var pbCargando: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,7 +95,7 @@ class List_TopRated : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list__top_rated, container, false)
+        return inflater.inflate(R.layout.fragment_search_movies, container, false)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -140,12 +140,12 @@ class List_TopRated : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment List_TopRated.
+         * @return A new instance of fragment search_movies.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            List_TopRated().apply {
+            search_movies().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

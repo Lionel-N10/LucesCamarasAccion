@@ -9,8 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.example.lucescamarasaccion.Movies
+import com.example.lucescamarasaccion.MoviesClient
+import com.example.lucescamarasaccion.ServiceGenerator
 import kotlinx.android.synthetic.main.fragment_home.*
-import java.lang.NumberFormatException
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,6 +40,8 @@ class Home_Fragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
     var movie_id: Int = 0
+    //var images: Array<String>? = null
+    //var adapter: PagerAdapter =SliderAdapter(context!!, images)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,6 +60,29 @@ class Home_Fragment : Fragment() {
                 Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeFragmentToMovieDetail(65))
             }catch(nfe: NumberFormatException){ Toast.makeText(context!!, "Introduzca un id valido", Toast.LENGTH_SHORT).show() }
         }
+
+
+        val client = ServiceGenerator.createService(MoviesClient::class.java)
+        val call = client.GetUpcoming("39534c06f3f59b461ca70b61f782f06d", "es-ES")
+
+
+
+        call.enqueue(object : Callback<Movies> {
+            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
+                val repos = response.body()
+                viewPager.adapter = SliderAdapter(context!!, repos)
+            }
+
+            override fun onFailure(call: Call<Movies>, t: Throwable) {
+                Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
+                t.printStackTrace()
+            }
+
+
+        })
+
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -18,7 +18,6 @@ import com.example.lucescamarasaccion.ServiceGenerator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.NullPointerException
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -113,8 +112,6 @@ class MovieDetail : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        var id = 0
 
         var title = "Gladiator"
 

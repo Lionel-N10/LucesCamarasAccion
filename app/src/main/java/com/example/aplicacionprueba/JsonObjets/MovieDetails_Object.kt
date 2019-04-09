@@ -19,7 +19,7 @@ class MovieDetails_Object {
     var budget: Int? = null
     @SerializedName("genres")
     @Expose
-    var genres: List<Genre>? = null
+    var genres: List<Genres>? = null
     @SerializedName("homepage")
     @Expose
     var homepage: String? = null

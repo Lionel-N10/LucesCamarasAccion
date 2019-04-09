@@ -18,4 +18,8 @@
         <argument android:name="movie_id" app:argType="integer" android:defaultValue="98"/>
         <action android:id="@+id/action_movieDetail_to_home_fragment" app:destination="@id/home_fragment"/>
     </fragment>
+    <fragment android:id="@+id/search_movies" android:name="com.example.aplicacionprueba.search_movies"
+              android:label="fragment_search_movies" tools:layout="@layout/fragment_search_movies">
+        <argument android:name="titulo" app:argType="string"/>
+    </fragment>
 </navigation>
