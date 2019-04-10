@@ -27,52 +27,13 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [search_movies.OnFragmentInteractionListener] interface
+ * [PopularMovies.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [search_movies.newInstance] factory method to
+ * Use the [PopularMovies.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class search_movies : Fragment() {
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        var searchItem = R.id.app_bar_search
-
-
-
-        pbCargando = view.findViewById(R.id.progress_bar_search)
-        listView = view.findViewById(R.id.listaSearch) as RecyclerView
-
-
-        val client = ServiceGenerator.createService(MoviesClient::class.java)
-        val call = client.getMovieByTitle("39534c06f3f59b461ca70b61f782f06d", arguments!!.getString("titulo", ""))
-
-        call.enqueue(object : Callback<Movies> {
-            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
-                val repos = response.body()
-
-                listView!!.layoutManager = GridLayoutManager(activity, 2)
-                listView!!.adapter = MovieAdapter(context!!, repos!!.results, 2)
-
-
-                //Toast.makeText(context!!, "Busqueda, cargada", Toast.LENGTH_SHORT).show()
-
-                pbCargando!!.visibility = View.GONE
-            }
-
-            override fun onFailure(call: Call<Movies>, t: Throwable) {
-                Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
-                t.printStackTrace()
-                pbCargando!!.visibility = View.GONE
-            }
-
-
-        })
-    }
-
-
+class PopularMovies : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -87,6 +48,41 @@ class search_movies : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        pbCargando = view.findViewById(R.id.progress_bar_popular)
+        listView = view.findViewById(R.id.lista) as RecyclerView
+
+
+        val client = ServiceGenerator.createService(MoviesClient::class.java)
+        val call = client.getPopularMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
+
+
+
+        call.enqueue(object : Callback<Movies> {
+            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
+                val repos = response.body()
+
+                listView!!.layoutManager = GridLayoutManager(activity, 2)
+                listView!!.adapter = MovieAdapter(context!!, repos!!.results, 3)
+
+
+                //Toast.makeText(context!!, "MejorValoradas, cargado", Toast.LENGTH_SHORT).show()
+
+                pbCargando!!.visibility = View.GONE
+            }
+
+            override fun onFailure(call: Call<Movies>, t: Throwable) {
+                Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
+                t.printStackTrace()
+                pbCargando!!.visibility = View.GONE
+            }
+
+
+        })
 
     }
 
@@ -95,7 +91,7 @@ class search_movies : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_movies, container, false)
+        return inflater.inflate(R.layout.fragment_popular_movies, container, false)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -140,12 +136,12 @@ class search_movies : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment search_movies.
+         * @return A new instance of fragment PopularMovies.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            search_movies().apply {
+            PopularMovies().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

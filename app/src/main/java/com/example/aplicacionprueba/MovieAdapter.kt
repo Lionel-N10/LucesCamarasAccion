@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.aplicacionprueba.JsonObjets.GenresResponse
@@ -19,10 +21,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class MovieAdapter(val context: Context, var values: List<Result>?): RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragment: Int) :
+    RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     var viewHolder: ViewHolder? = null
-
     var allGenres: ArrayList<String>? = null
 
     override fun getItemCount(): Int {
@@ -36,7 +38,13 @@ class MovieAdapter(val context: Context, var values: List<Result>?): RecyclerVie
         return viewHolder!!
     }
 
+    interface ClickListener {
+        fun onClick(position: Int, view: View)
+    }
+
     class ViewHolder(vista: View): RecyclerView.ViewHolder(vista){
+
+        var card: CardView? = null
         var tituloView: TextView? = null
         var notaView: TextView? = null
         var estrenoView: TextView? = null
@@ -47,16 +55,41 @@ class MovieAdapter(val context: Context, var values: List<Result>?): RecyclerVie
             notaView = vista.movie_rating
             estrenoView = vista.movie_release_data
             posterView = vista.movie_poster
+            card = vista.cardView
         }
     }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values?.get(position)
         holder.tituloView?.text = item?.title
         holder.estrenoView?.text = item?.releaseDate
         holder.notaView?.text = item?.voteAverage.toString()
+        holder.itemView.setOnClickListener { }
         Glide.with(context).load("https://image.tmdb.org/t/p/w500${item!!.posterPath}").centerCrop().thumbnail(0.5f)
             .into(holder.posterView!!)
+        holder.card!!.setOnClickListener {
+            val movieId = item.id
+            //Toast.makeText(context, "Item $position, pulsado. Id = $movieId", Toast.LENGTH_SHORT).show()
+
+            when (id_fragment) {
+                1 -> Navigation.findNavController(it).navigate(
+                    List_TopRatedDirections.actionListTopRatedToMovieDetail(
+                        movieId!!
+                    )
+                )
+                2 -> Navigation.findNavController(it).navigate(
+                    search_moviesDirections.actionSearchMoviesToMovieDetail(
+                        movieId!!
+                    )
+                )
+                3 -> Navigation.findNavController(it).navigate(
+                    PopularMoviesDirections.actionPopularMoviesToMovieDetail(
+                        movieId!!
+                    )
+                )
+            }
+        }
     }
 
 
@@ -64,7 +97,6 @@ class MovieAdapter(val context: Context, var values: List<Result>?): RecyclerVie
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
         val call = client.getGenres("39534c06f3f59b461ca70b61f782f06d", "es-ES")
-
 
 
         call.enqueue(object : Callback<GenresResponse> {
@@ -77,9 +109,7 @@ class MovieAdapter(val context: Context, var values: List<Result>?): RecyclerVie
                     }
                 }
                 Toast.makeText(context, "MejorValoradas, cargado", Toast.LENGTH_SHORT).show()
-
             }
-
             override fun onFailure(call: Call<GenresResponse>, t: Throwable) {
                 t.printStackTrace()
             }

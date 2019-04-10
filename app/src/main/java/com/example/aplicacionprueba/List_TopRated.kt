@@ -59,10 +59,10 @@ class List_TopRated : Fragment() {
                 val repos = response.body()
 
                 listView!!.layoutManager = GridLayoutManager(activity, 2)
-                    listView!!.adapter = MovieAdapter(context!!, repos!!.results)
+                listView!!.adapter = MovieAdapter(context!!, repos!!.results, 1)
 
 
-                Toast.makeText(context!!, "MejorValoradas, cargado", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context!!, "MejorValoradas, cargado", Toast.LENGTH_SHORT).show()
 
                 pbCargando!!.visibility = View.GONE
             }

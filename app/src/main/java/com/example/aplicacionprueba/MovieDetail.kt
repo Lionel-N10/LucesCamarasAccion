@@ -3,7 +3,6 @@ package com.example.aplicacionprueba
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.aplicacionprueba.JsonObjets.MovieDetails_Object
-import com.example.lucescamarasaccion.Movies
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
 import retrofit2.Call
@@ -39,6 +37,7 @@ class MovieDetail : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+    private var adaptador: MovieAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +63,8 @@ class MovieDetail : Fragment() {
         call.enqueue(object : Callback<MovieDetails_Object> {
             override fun onResponse(call: Call<MovieDetails_Object>, response: Response<MovieDetails_Object>) {
                 val repos = response.body()
+                var generos: String = ""
+
                 if(repos != null) {
 
                     val tituloView: TextView
@@ -72,20 +73,32 @@ class MovieDetail : Fragment() {
                     val estrenoView: TextView
                     val sipnosisView: TextView
                     val posterView: ImageView
+                    val backdropView: ImageView
+                    val genreView: TextView
 
                     tituloView = view.findViewById(R.id.movie_title)
                     originalTitleView = view.findViewById(R.id.movie_orgininal_title)
                     notaView = view.findViewById(R.id.movie_rating)
                     estrenoView = view.findViewById(R.id.movie_release_data)
                     sipnosisView = view.findViewById(R.id.movie_sipnosis)
+                    genreView = view.findViewById(R.id.movie_genre)
                     posterView = view.findViewById(R.id.movie_poster)
+                    backdropView = view.findViewById(R.id.movie_backdrop)
                     try {
                         tituloView.text = repos.title
                         originalTitleView.text = repos.originalTitle
                         notaView.text = repos.voteAverage.toString()
                         estrenoView.text = repos.releaseDate
                         sipnosisView.text = repos.overview
-                        Glide.with(view).load("https://image.tmdb.org/t/p/w500${repos.posterPath}").into(posterView)
+                        for (i in 0..repos.genres!!.lastIndex) {
+                            generos += " ${repos.genres!![i].name}"
+                        }
+                        genreView.text = generos
+                        Glide.with(view).load("https://image.tmdb.org/t/p/w500${repos.posterPath}").centerCrop()
+                            .into(posterView)
+                        Glide.with(view).load("https://image.tmdb.org/t/p/w500${repos.backdropPath}").centerInside()
+                            .into(backdropView)
+
                     } catch (npe: NullPointerException) {
                     }
 
@@ -96,7 +109,7 @@ class MovieDetail : Fragment() {
                 }
                 else{
                     progressBar_moviedetails!!.visibility = View.GONE
-                    Toast.makeText(context!!, "No se ha podido encontrar la película", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(context!!, "No se ha podido encontrar la película", Toast.LENGTH_SHORT).show()
                     Navigation.findNavController(view).navigate(MovieDetailDirections.actionMovieDetailToHomeFragment())
                 }
             }
@@ -113,23 +126,43 @@ class MovieDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        moviedetail_layout = view.findViewById(R.id.scrollView2)
+        progressBar_moviedetails = view.findViewById(R.id.progressBar_moviedetails)
+
+        progressBar_moviedetails!!.visibility = View.VISIBLE
+        moviedetail_layout!!.visibility = View.GONE
+
         var title = "Gladiator"
 
-        val client = ServiceGenerator.createService(MoviesClient::class.java)
-        val call = client.getMovieByTitle("39534c06f3f59b461ca70b61f782f06d", title)
+        showMovieDetails(view, arguments!!.getInt("movie_id", 0))
+
+        /* val client = ServiceGenerator.createService(MoviesClient::class.java)
+         val call = client.getMovieByTitle("39534c06f3f59b461ca70b61f782f06d", title)*/
+
+        /*this.adaptador!!.viewHolder!!.card!!.setOnClickListener{
+            var position = adaptador!!.viewHolder!!.adapterPosition
+            var itemId = adaptador!!.values!![position].id
+
+            Log.d("Id= ", itemId.toString())
+            Log.d("position= ", position.toString())
+
+            if (itemId != null) {
+                showMovieDetails(it, itemId)
+            }
+        }*/
 
 
-        call.enqueue(object : Callback<Movies> {
-            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
-                val repos = response.body()
-                showMovieDetails(view ,repos!!.results!![0].id!!)
-                Log.d("ID= ",repos.results!![0].id.toString())
-            }
-            override fun onFailure(call: Call<Movies>, t: Throwable) {
-                Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
-                t.printStackTrace()
-            }
-        })
+        /* call.enqueue(object : Callback<Movies> {
+             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
+                 val repos = response.body()
+                 showMovieDetails(view ,repos!!.results!![0].id!!)
+                 Log.d("ID= ",repos.results!![0].id.toString())
+             }
+             override fun onFailure(call: Call<Movies>, t: Throwable) {
+                 Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
+                 t.printStackTrace()
+             }
+         })*/
     }
 
     override fun onCreateView(

@@ -10,16 +10,25 @@
                 app:enterAnim="@anim/nav_default_pop_enter_anim" app:exitAnim="@anim/nav_default_pop_exit_anim"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
         <action android:id="@+id/action_home_fragment_to_movieDetail" app:destination="@id/movieDetail"/>
+        <action android:id="@+id/action_home_fragment_to_popularMovies" app:destination="@id/popularMovies"/>
     </fragment>
     <fragment android:id="@+id/list_TopRated" android:name="com.example.aplicacionprueba.List_TopRated"
-              android:label="Mejor Valoradas" tools:layout="@layout/fragment_list__top_rated"/>
+              android:label="Mejor Valoradas" tools:layout="@layout/fragment_list__top_rated">
+        <action android:id="@+id/action_list_TopRated_to_movieDetail" app:destination="@id/movieDetail"/>
+    </fragment>
     <fragment android:id="@+id/movieDetail" android:name="com.example.aplicacionprueba.MovieDetail"
-              android:label="fragment_movie_detail" tools:layout="@layout/fragment_movie_detail">
-        <argument android:name="movie_id" app:argType="integer" android:defaultValue="98"/>
+              tools:layout="@layout/fragment_movie_detail">
+        <argument android:name="movie_id" app:argType="integer"/>
         <action android:id="@+id/action_movieDetail_to_home_fragment" app:destination="@id/home_fragment"/>
     </fragment>
-    <fragment android:id="@+id/search_movies" android:name="com.example.aplicacionprueba.search_movies"
-              android:label="fragment_search_movies" tools:layout="@layout/fragment_search_movies">
+    <fragment android:name="com.example.aplicacionprueba.search_movies"
+              tools:layout="@layout/fragment_search_movies"
+              android:id="@+id/Search_Movies">
         <argument android:name="titulo" app:argType="string"/>
+        <action android:id="@+id/action_search_movies_to_movieDetail" app:destination="@id/movieDetail"/>
+    </fragment>
+    <fragment android:id="@+id/popularMovies" android:name="com.example.aplicacionprueba.PopularMovies"
+              android:label="Más Populares" tools:layout="@layout/fragment_popular_movies">
+        <action android:id="@+id/action_popularMovies_to_movieDetail" app:destination="@id/movieDetail"/>
     </fragment>
 </navigation>

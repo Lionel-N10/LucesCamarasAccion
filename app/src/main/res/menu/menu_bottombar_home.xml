@@ -4,13 +4,14 @@
 
     <item app:showAsAction="always"
           android:id="@+id/app_bar_home" android:enabled="true"
-          android:icon="@mipmap/outline_home_white_36"/>
-    <item android:title="" app:showAsAction="always"
+          android:icon="@mipmap/outline_home_white_36" android:title="Home"/>
+    <item android:title="Popular" app:showAsAction="always"
           android:id="@+id/app_bar_popular"
           android:visible="true" android:icon="@mipmap/ic_filmstrip"/>
 
-    <item app:showAsAction="always" android:icon="@mipmap/ic_movie_roll" android:title=""
-          android:checked="true" android:checkable="true" android:enabled="true" android:id="@+id/app_bar_toprated"/>
+    <item app:showAsAction="always" android:icon="@mipmap/ic_movie_roll" android:title="Top Rated"
+          android:checked="true" android:checkable="true" android:enabled="true" android:id="@+id/app_bar_toprated"
+    />
     <item app:showAsAction="always" android:checkable="false" android:title="" android:enabled="false"/>
     <item app:showAsAction="always" android:checkable="false" android:title="" android:enabled="false"/>
     <item android:title="" app:showAsAction="never|always"

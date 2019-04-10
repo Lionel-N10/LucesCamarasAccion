@@ -19,7 +19,7 @@
             android:layout_gravity="bottom"
             app:fabAlignmentMode="center"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:backgroundTint="@color/otrocolor"/>
+            app:backgroundTint="@color/otrocolor" android:nestedScrollingEnabled="true"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="70dp"
             android:layout_height="wrap_content"

@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="otrocolor">#201F1F</color>
     <color name="colorAccent">#0A0A0A</color>
-    <color name="floatingBoton">#FFFFFF</color>
+    <color name="floatingBoton">#F4EFEF</color>
     <color name="nota">#000000</color>
     <color name="ProgressBar">#F50057</color>
 </resources>

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import com.example.lucescamarasaccion.Movies
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
@@ -50,16 +49,16 @@ class Home_Fragment : Fragment() {
 
         //movie_id = text_movieId.text.toString().toInt()
 
-        bTopRated.setOnClickListener{
+        /*bTopRated.setOnClickListener{
             Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeToListTopRated())
-        }
+        }*/
 
-        bMovie.setOnClickListener{
-            try{
-               // movie_id = .text.toString().toInt()
-                Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeFragmentToMovieDetail(65))
-            }catch(nfe: NumberFormatException){ Toast.makeText(context!!, "Introduzca un id valido", Toast.LENGTH_SHORT).show() }
-        }
+        /* bMovie.setOnClickListener{
+             try{
+                // movie_id = .text.toString().toInt()
+                 Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeFragmentToMovieDetail(65))
+             }catch(nfe: NumberFormatException){ Toast.makeText(context!!, "Introduzca un id valido", Toast.LENGTH_SHORT).show() }
+         }*/
 
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
@@ -70,19 +69,17 @@ class Home_Fragment : Fragment() {
         call.enqueue(object : Callback<Movies> {
             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
                 val repos = response.body()
-                viewPager.adapter = SliderAdapter(context!!, repos)
+                try {
+                    viewPager.adapter = SliderAdapter(context!!, repos)
+                } catch (ise: IllegalStateException) {
+                }
             }
 
             override fun onFailure(call: Call<Movies>, t: Throwable) {
                 Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
                 t.printStackTrace()
             }
-
-
         })
-
-
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

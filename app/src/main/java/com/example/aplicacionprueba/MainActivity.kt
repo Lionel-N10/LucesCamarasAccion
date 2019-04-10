@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionListener,
     List_TopRated.OnFragmentInteractionListener, MovieDetail.OnFragmentInteractionListener,
-    search_movies.OnFragmentInteractionListener {
+    search_movies.OnFragmentInteractionListener, PopularMovies.OnFragmentInteractionListener {
 
 
     override fun onFragmentInteraction(uri: Uri) {
@@ -54,13 +54,11 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
 
                     val title = query
 
-                    /* val paquete: Bundle? = Bundle()
-                    paquete!!.putString("titulo", title)*/
 
                     var pack = bundleOf("titulo" to title)
 
 
-                    NavHostFragment.findNavController(host_fragment).navigate(R.id.search_movies, pack)
+                    NavHostFragment.findNavController(host_fragment).navigate(R.id.Search_Movies, pack)
                     Log.d("cosas====", title)
                     Toast.makeText(this@MainActivity, "Busqueda realizada, $title", Toast.LENGTH_SHORT).show()
                     return true
@@ -114,7 +112,7 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
             when(MenuItem.itemId){
 
                 bHome -> NavHostFragment.findNavController(host_fragment).navigate(R.id.home_fragment)
-                bPopular -> NavHostFragment.findNavController(host_fragment).navigate(R.id.list_TopRated)
+                bPopular -> NavHostFragment.findNavController(host_fragment).navigate(R.id.popularMovies)
                 bTop_Rated -> NavHostFragment.findNavController(host_fragment).navigate(R.id.list_TopRated)
                 bUser -> {
                     //NavHostFragment.findNavController(host_fragment).navigate(Home_FragmentDirections.actionHomeToListTopRated())

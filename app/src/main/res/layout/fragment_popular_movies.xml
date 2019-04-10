@@ -6,7 +6,7 @@
     <ProgressBar
             android:theme="@style/CircularProgress"
             android:layout_width="match_parent"
-            android:id="@+id/progress_bar_toprated" android:padding="170dp"
+            android:id="@+id/progress_bar_popular" android:padding="170dp"
             android:layout_marginBottom="731dp" android:layout_height="682dp"/>
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="wrap_content"
