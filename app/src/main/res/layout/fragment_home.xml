@@ -8,36 +8,72 @@
                                                    android:id="@+id/constrainLayout">
 
 
-    <androidx.cardview.widget.CardView
-            android:layout_width="252dp"
-            android:layout_height="368dp"
-            android:id="@+id/cardView2" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent" app:cardBackgroundColor="@color/otrocolor">
+    <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp" android:id="@+id/scrollView3" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:id="@+id/linearLayout2">
-            <TextView
-                    android:text="Las peliculas mas experadas"
-                    android:layout_width="217dp"
-                    android:layout_height="19dp"
-                    android:id="@+id/textView7" android:textStyle="bold|italic"
-                    app:autoSizeTextType="uniform"
-                    app:autoSizeMaxTextSize="20dp"
-                    app:autoSizeMinTextSize="8dp"
-                    android:textAllCaps="true" android:textColor="@color/floatingBoton"
-                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="@+id/viewPager"
-                    android:layout_marginTop="4dp" android:textAlignment="center"/>
-            <androidx.viewpager.widget.ViewPager
-                    android:layout_width="0dp"
-                    android:layout_height="335dp"
-                    android:id="@+id/viewPager" android:splitMotionEvents="true" android:soundEffectsEnabled="true"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/textView7"
-                    android:layout_marginEnd="4dp" android:layout_marginStart="4dp"
-                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="4dp"/>
+                android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                    android:layout_width="252dp"
+                    android:layout_height="368dp"
+                    android:id="@+id/home_card1" app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent" app:cardBackgroundColor="@color/otrocolor">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:id="@+id/linearLayout2">
+                    <TextView
+                            android:text="Las peliculas mas experadas"
+                            android:layout_width="217dp"
+                            android:layout_height="19dp"
+                            android:id="@+id/textView7" android:textStyle="bold|italic"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMaxTextSize="20dp"
+                            app:autoSizeMinTextSize="8dp"
+                            android:textAllCaps="true" android:textColor="@color/floatingBoton"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/viewPager"
+                            android:layout_marginTop="4dp" android:textAlignment="center"/>
+                    <androidx.viewpager.widget.ViewPager
+                            android:layout_width="0dp"
+                            android:layout_height="335dp"
+                            android:id="@+id/viewPager" android:splitMotionEvents="true"
+                            android:soundEffectsEnabled="true"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView7"
+                            android:layout_marginEnd="4dp" android:layout_marginStart="4dp"
+                            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="4dp"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/home_card1" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:cardBackgroundColor="@color/otrocolor" app:cardCornerRadius="5dp" app:cardElevation="5dp"
+                    android:id="@+id/home_card_2">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:scrollbars="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="horizontal" android:id="@+id/recyclerView"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

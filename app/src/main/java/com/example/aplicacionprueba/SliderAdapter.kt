@@ -8,27 +8,25 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
-import com.example.lucescamarasaccion.Movies
+import com.example.lucescamarasaccion.Result
 
-class SliderAdapter(var context: Context, images: Movies?) : PagerAdapter() {
-    var images: Movies
+class SliderAdapter(var context: Context, images: List<Result>?) : PagerAdapter() {
+
+    private val images: List<Result>?
     lateinit var inflater: LayoutInflater
-    private val MAX_VALUE = 200
-
     init {
         this.images = images!!
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val image: ImageView
+        val item = images!!.get(position)
         inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View = inflater.inflate(R.layout.slider_image_item, container, false)
         image = view.findViewById(R.id.imageView)
-
-        Glide.with(view).load("https://image.tmdb.org/t/p/w500${images.results!![position].posterPath}").centerCrop()
+        Glide.with(view).load("https://image.tmdb.org/t/p/w500${item.posterPath}").centerCrop()
             .into(image)
         container.addView(view)
-
         return view
     }
 
@@ -40,7 +38,7 @@ class SliderAdapter(var context: Context, images: Movies?) : PagerAdapter() {
 
 
     override fun getCount(): Int {
-        return images.totalResults!! * MAX_VALUE
+        return images!!.size
     }
 
 

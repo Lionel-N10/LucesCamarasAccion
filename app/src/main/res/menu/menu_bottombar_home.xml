@@ -2,31 +2,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item app:showAsAction="always"
+    <item app:showAsAction="ifRoom"
           android:id="@+id/app_bar_home" android:enabled="true"
           android:icon="@mipmap/outline_home_white_36" android:title="Home"/>
-    <item android:title="Popular" app:showAsAction="always"
+    <item android:title="Popular" app:showAsAction="ifRoom"
           android:id="@+id/app_bar_popular"
           android:visible="true" android:icon="@mipmap/ic_filmstrip"/>
 
-    <item app:showAsAction="always" android:icon="@mipmap/ic_movie_roll" android:title="Top Rated"
+    <item app:showAsAction="ifRoom" android:icon="@mipmap/ic_movie_roll" android:title="Top Rated"
           android:checked="true" android:checkable="true" android:enabled="true" android:id="@+id/app_bar_toprated"
     />
-    <item app:showAsAction="always" android:checkable="false" android:title="" android:enabled="false"/>
-    <item app:showAsAction="always" android:checkable="false" android:title="" android:enabled="false"/>
-    <item android:title="" app:showAsAction="never|always"
+    <item app:showAsAction="ifRoom" android:checkable="false" android:title="" android:enabled="false"/>
+    <item app:showAsAction="ifRoom" android:checkable="false" android:title="" android:enabled="false"/>
+    <item android:title="" app:showAsAction="ifRoom"
           android:checkable="false" android:enabled="false"/>
 
     <item
             android:id="@+id/app_bar_user"
             android:icon="@mipmap/ic_account_circle"
             android:title="@string/action_favorite"
-            app:showAsAction="always"/>
+            app:showAsAction="ifRoom"/>
 
     <item
             android:id="@+id/app_bar_settings"
-            app:showAsAction="never|always" android:title="" android:checked="false"
+            app:showAsAction="ifRoom" android:title="" android:checked="false"
             android:icon="@mipmap/ic_format_list_numbered"/>
-    <item android:title="" app:showAsAction="always" android:enabled="false"/>
+    <item android:title="" app:showAsAction="ifRoom" android:enabled="false"/>
 
 </menu>

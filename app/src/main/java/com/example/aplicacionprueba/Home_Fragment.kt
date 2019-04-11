@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.lucescamarasaccion.Movies
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
@@ -38,7 +40,8 @@ class Home_Fragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
-    var movie_id: Int = 0
+
+    private var recyclerView: RecyclerView? = null
     //var images: Array<String>? = null
     //var adapter: PagerAdapter =SliderAdapter(context!!, images)
 
@@ -46,6 +49,7 @@ class Home_Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        recyclerView = view.findViewById(R.id.recyclerView)
 
         //movie_id = text_movieId.text.toString().toInt()
 
@@ -60,17 +64,17 @@ class Home_Fragment : Fragment() {
              }catch(nfe: NumberFormatException){ Toast.makeText(context!!, "Introduzca un id valido", Toast.LENGTH_SHORT).show() }
          }*/
 
-
         val client = ServiceGenerator.createService(MoviesClient::class.java)
         val call = client.GetUpcoming("39534c06f3f59b461ca70b61f782f06d", "es-ES")
-
-
 
         call.enqueue(object : Callback<Movies> {
             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
                 val repos = response.body()
                 try {
-                    viewPager.adapter = SliderAdapter(context!!, repos)
+                    viewPager.adapter = SliderAdapter(context!!, repos!!.results)
+                    recyclerView!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                    recyclerView!!.adapter = UpcomingRV_Adapter(context!!, repos.results, 4)
+
                 } catch (ise: IllegalStateException) {
                 }
             }

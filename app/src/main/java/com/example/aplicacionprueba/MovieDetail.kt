@@ -66,7 +66,6 @@ class MovieDetail : Fragment() {
                 var generos: String = ""
 
                 if(repos != null) {
-
                     val tituloView: TextView
                     val originalTitleView: TextView
                     val notaView: TextView
@@ -123,6 +122,11 @@ class MovieDetail : Fragment() {
     }
 
 
+    fun getReviews() {
+
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -136,33 +140,6 @@ class MovieDetail : Fragment() {
 
         showMovieDetails(view, arguments!!.getInt("movie_id", 0))
 
-        /* val client = ServiceGenerator.createService(MoviesClient::class.java)
-         val call = client.getMovieByTitle("39534c06f3f59b461ca70b61f782f06d", title)*/
-
-        /*this.adaptador!!.viewHolder!!.card!!.setOnClickListener{
-            var position = adaptador!!.viewHolder!!.adapterPosition
-            var itemId = adaptador!!.values!![position].id
-
-            Log.d("Id= ", itemId.toString())
-            Log.d("position= ", position.toString())
-
-            if (itemId != null) {
-                showMovieDetails(it, itemId)
-            }
-        }*/
-
-
-        /* call.enqueue(object : Callback<Movies> {
-             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
-                 val repos = response.body()
-                 showMovieDetails(view ,repos!!.results!![0].id!!)
-                 Log.d("ID= ",repos.results!![0].id.toString())
-             }
-             override fun onFailure(call: Call<Movies>, t: Throwable) {
-                 Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
-                 t.printStackTrace()
-             }
-         })*/
     }
 
     override fun onCreateView(
