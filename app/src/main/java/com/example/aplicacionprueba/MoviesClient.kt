@@ -31,6 +31,15 @@ interface MoviesClient {
         @Query("page") page: Int
     ): Call<Movies>
 
+    @GET("movie/now_playing")
+    fun getNowPlaying(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Call<Movies>
+
+
+
     @GET("movie/{movie_id}")
     fun getMovieById(
         @Path ( "movie_id") movie_id: Int,
@@ -43,7 +52,6 @@ interface MoviesClient {
         @Query ("api_key") api_key: String,
         @Query ("query") query: String
     ):Call<Movies>
-
 
     @GET("genre/movie/list")
     fun getGenres(

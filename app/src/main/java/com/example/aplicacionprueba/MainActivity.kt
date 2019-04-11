@@ -19,13 +19,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionListener,
     List_TopRated.OnFragmentInteractionListener, MovieDetail.OnFragmentInteractionListener,
-    search_movies.OnFragmentInteractionListener, PopularMovies.OnFragmentInteractionListener {
+    search_movies.OnFragmentInteractionListener, PopularMovies.OnFragmentInteractionListener,
+    Login.OnFragmentInteractionListener, Registro.OnFragmentInteractionListener {
 
 
     override fun onFragmentInteraction(uri: Uri) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-
-
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
@@ -45,18 +44,12 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
 
         if (searchItem != null){
             val searchView = searchItem.actionView as SearchView
-            /*val editext = searchView.findViewById<EditText>(R.id.search_src_text)
-            editext.hint = "Busca aqui..."*/
-
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    //Bundle().putString("titulo", title)
 
                     val title = query
 
-
-                    var pack = bundleOf("titulo" to title)
-
+                    val pack = bundleOf("titulo" to title)
 
                     NavHostFragment.findNavController(host_fragment).navigate(R.id.Search_Movies, pack)
                     Log.d("cosas====", title)
@@ -98,15 +91,8 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
         val bOpciones = R.id.app_bar_settings
         val bUser = R.id.app_bar_user
         val bHome = R.id.app_bar_home
-        /*var bFlotante: FloatingActionButton? = null
-        //toolbar.inflateMenu(R.menu.menu_toolbar)
-        bFlotante!!.setOnClickListener{
-            NavHostFragment.findNavController(host_fragment).navigate(R.id.home_fragment)
-        }*/
 
         bar.replaceMenu(R.menu.menu_bottombar_home)
-
-
 
         bar.setOnMenuItemClickListener { MenuItem ->
             when(MenuItem.itemId){
@@ -114,10 +100,8 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
                 bHome -> NavHostFragment.findNavController(host_fragment).navigate(R.id.home_fragment)
                 bPopular -> NavHostFragment.findNavController(host_fragment).navigate(R.id.popularMovies)
                 bTop_Rated -> NavHostFragment.findNavController(host_fragment).navigate(R.id.list_TopRated)
-                bUser -> {
-                    //NavHostFragment.findNavController(host_fragment).navigate(Home_FragmentDirections.actionHomeToListTopRated())
-                    Toast.makeText(this, "Boton perfil pulsado", Toast.LENGTH_SHORT).show()
-                }
+                bUser -> NavHostFragment.findNavController(host_fragment).navigate(R.id.login)
+
 
                 bOpciones -> {
                     //NavHostFragment.findNavController(host_fragment).navigate(Home_FragmentDirections.actionHomeToListTopRated())

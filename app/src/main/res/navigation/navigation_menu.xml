@@ -23,7 +23,7 @@
     </fragment>
     <fragment android:name="com.example.aplicacionprueba.search_movies"
               tools:layout="@layout/fragment_search_movies"
-              android:id="@+id/Search_Movies">
+              android:id="@+id/Search_Movies" android:label="Busqueda">
         <argument android:name="titulo" app:argType="string"/>
         <action android:id="@+id/action_search_movies_to_movieDetail" app:destination="@id/movieDetail"/>
     </fragment>
@@ -31,4 +31,10 @@
               android:label="Más Populares" tools:layout="@layout/fragment_popular_movies">
         <action android:id="@+id/action_popularMovies_to_movieDetail" app:destination="@id/movieDetail"/>
     </fragment>
+    <fragment android:id="@+id/login" android:name="com.example.aplicacionprueba.Login" android:label="Iniciar Sesion"
+              tools:layout="@layout/fragment_login">
+        <action android:id="@+id/action_login_to_registro" app:destination="@id/registro"/>
+    </fragment>
+    <fragment android:id="@+id/registro" android:name="com.example.aplicacionprueba.Registro"
+              android:label="Registrarse" tools:layout="@layout/fragment_registro"/>
 </navigation>

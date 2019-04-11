@@ -68,6 +68,11 @@ class UpcomingRV_Adapter(val context: Context, var values: List<Result>?, var id
                         movieId!!
                     )
                 )
+                5 -> Navigation.findNavController(it).navigate(
+                    Home_FragmentDirections.actionHomeFragmentToMovieDetail(
+                        movieId!!
+                    )
+                )
             }
         }
     }

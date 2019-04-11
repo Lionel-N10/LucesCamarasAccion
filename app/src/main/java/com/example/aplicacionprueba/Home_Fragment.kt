@@ -48,32 +48,70 @@ class Home_Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showNowPlaying()
+        showUpComing(view)
+        //showPopular(view)
+    }
 
-        recyclerView = view.findViewById(R.id.recyclerView)
 
-        //movie_id = text_movieId.text.toString().toInt()
-
-        /*bTopRated.setOnClickListener{
-            Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeToListTopRated())
-        }*/
-
-        /* bMovie.setOnClickListener{
-             try{
-                // movie_id = .text.toString().toInt()
-                 Navigation.findNavController(view).navigate(Home_FragmentDirections.actionHomeFragmentToMovieDetail(65))
-             }catch(nfe: NumberFormatException){ Toast.makeText(context!!, "Introduzca un id valido", Toast.LENGTH_SHORT).show() }
-         }*/
-
+    fun showNowPlaying() {
         val client = ServiceGenerator.createService(MoviesClient::class.java)
-        val call = client.GetUpcoming("39534c06f3f59b461ca70b61f782f06d", "es-ES")
+        val call = client.getNowPlaying("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
 
         call.enqueue(object : Callback<Movies> {
             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
                 val repos = response.body()
                 try {
                     viewPager.adapter = SliderAdapter(context!!, repos!!.results)
+                    /*recyclerView!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                    recyclerView!!.adapter = UpcomingRV_Adapter(context!!, repos.results, 4)*/
+                } catch (ise: IllegalStateException) {
+                }
+            }
+
+            override fun onFailure(call: Call<Movies>, t: Throwable) {
+                Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
+                t.printStackTrace()
+            }
+        })
+    }
+
+    fun showUpComing(view: View) {
+        recyclerView = view.findViewById(R.id.recyclerView)
+
+        val client = ServiceGenerator.createService(MoviesClient::class.java)
+        val call = client.GetTopRatedMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
+
+        call.enqueue(object : Callback<Movies> {
+            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
+                val repos = response.body()
+                try {
                     recyclerView!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-                    recyclerView!!.adapter = UpcomingRV_Adapter(context!!, repos.results, 4)
+                    recyclerView!!.adapter = UpcomingRV_Adapter(context!!, repos!!.results, 4)
+                } catch (ise: IllegalStateException) {
+                }
+            }
+
+            override fun onFailure(call: Call<Movies>, t: Throwable) {
+                Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
+                t.printStackTrace()
+            }
+        })
+
+    }
+
+    fun showPopular(view: View) {
+        recyclerView = view.findViewById(R.id.recyclerView2)
+
+        val client = ServiceGenerator.createService(MoviesClient::class.java)
+        val call = client.getPopularMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
+
+        call.enqueue(object : Callback<Movies> {
+            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
+                val repos = response.body()
+                try {
+                    recyclerView!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                    recyclerView!!.adapter = UpcomingRV_Adapter(context!!, repos!!.results, 5)
 
                 } catch (ise: IllegalStateException) {
                 }
@@ -84,6 +122,7 @@ class Home_Fragment : Fragment() {
                 t.printStackTrace()
             }
         })
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
