@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionListener,
     List_TopRated.OnFragmentInteractionListener, MovieDetail.OnFragmentInteractionListener,
     search_movies.OnFragmentInteractionListener, PopularMovies.OnFragmentInteractionListener,
-    Login.OnFragmentInteractionListener, Registro.OnFragmentInteractionListener {
+    Login.OnFragmentInteractionListener, Registro.OnFragmentInteractionListener, MisListas.OnFragmentInteractionListener {
 
 
     override fun onFragmentInteraction(uri: Uri) {
@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
         Log.d("Cosas", "mas cosas")
-
-        var listView: RecyclerView? = null
 
         toolbar.inflateMenu(R.menu.menu_toolbar)
         val searchItem = menu!!.findItem(R.id.app_bar_search)
@@ -88,7 +86,7 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
 
         val bPopular = R.id.app_bar_popular
         val bTop_Rated = R.id.app_bar_toprated
-        val bOpciones = R.id.app_bar_settings
+        val bListas = R.id.app_bar_settings
         val bUser = R.id.app_bar_user
         val bHome = R.id.app_bar_home
 
@@ -101,12 +99,7 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
                 bPopular -> NavHostFragment.findNavController(host_fragment).navigate(R.id.popularMovies)
                 bTop_Rated -> NavHostFragment.findNavController(host_fragment).navigate(R.id.list_TopRated)
                 bUser -> NavHostFragment.findNavController(host_fragment).navigate(R.id.login)
-
-
-                bOpciones -> {
-                    //NavHostFragment.findNavController(host_fragment).navigate(Home_FragmentDirections.actionHomeToListTopRated())
-                    Toast.makeText(this, "Boton opciones pulsado", Toast.LENGTH_SHORT).show()
-                }
+                bListas -> NavHostFragment.findNavController(host_fragment).navigate(R.id.misListas)
             }
              true
         }

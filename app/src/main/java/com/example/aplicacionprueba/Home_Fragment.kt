@@ -41,7 +41,11 @@ class Home_Fragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    private var recyclerView: RecyclerView? = null
+
+
+
+    private var RVUpcoming: RecyclerView? = null
+    private var RVMostPopular: RecyclerView? = null
     //var images: Array<String>? = null
     //var adapter: PagerAdapter =SliderAdapter(context!!, images)
 
@@ -50,9 +54,8 @@ class Home_Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showNowPlaying()
         showUpComing(view)
-        //showPopular(view)
+        showPopular(view)
     }
-
 
     fun showNowPlaying() {
         val client = ServiceGenerator.createService(MoviesClient::class.java)
@@ -63,8 +66,6 @@ class Home_Fragment : Fragment() {
                 val repos = response.body()
                 try {
                     viewPager.adapter = SliderAdapter(context!!, repos!!.results)
-                    /*recyclerView!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-                    recyclerView!!.adapter = UpcomingRV_Adapter(context!!, repos.results, 4)*/
                 } catch (ise: IllegalStateException) {
                 }
             }
@@ -77,17 +78,17 @@ class Home_Fragment : Fragment() {
     }
 
     fun showUpComing(view: View) {
-        recyclerView = view.findViewById(R.id.recyclerView)
+        RVUpcoming = view.findViewById(R.id.recyclerView)
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
-        val call = client.GetTopRatedMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
+        val call = client.GetUpcoming("39534c06f3f59b461ca70b61f782f06d", "es-ES")
 
         call.enqueue(object : Callback<Movies> {
             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
                 val repos = response.body()
                 try {
-                    recyclerView!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-                    recyclerView!!.adapter = UpcomingRV_Adapter(context!!, repos!!.results, 4)
+                    RVUpcoming!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                    RVUpcoming!!.adapter = UpcomingRV_Adapter(context!!, repos!!.results, 4)
                 } catch (ise: IllegalStateException) {
                 }
             }
@@ -101,17 +102,17 @@ class Home_Fragment : Fragment() {
     }
 
     fun showPopular(view: View) {
-        recyclerView = view.findViewById(R.id.recyclerView2)
+        RVMostPopular = view.findViewById(R.id.recyclerView2)
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
-        val call = client.getPopularMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
+        val call = client.getPopularMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES",1)
 
         call.enqueue(object : Callback<Movies> {
             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
                 val repos = response.body()
                 try {
-                    recyclerView!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-                    recyclerView!!.adapter = UpcomingRV_Adapter(context!!, repos!!.results, 5)
+                    RVMostPopular!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                    RVMostPopular!!.adapter = MostPopularRV_Adapter(context!!, repos!!.results, 5)
 
                 } catch (ise: IllegalStateException) {
                 }

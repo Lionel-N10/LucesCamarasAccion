@@ -37,4 +37,6 @@
     </fragment>
     <fragment android:id="@+id/registro" android:name="com.example.aplicacionprueba.Registro"
               android:label="Registrarse" tools:layout="@layout/fragment_registro"/>
+    <fragment android:id="@+id/misListas" android:name="com.example.aplicacionprueba.MisListas"
+              android:label="Mis Listas" tools:layout="@layout/fragment_mis_listas"/>
 </navigation>

@@ -7,17 +7,16 @@ import androidx.room.PrimaryKey
 
 
 @Entity(
+    primaryKeys = ["ListId", "MovieId"],
     foreignKeys = [
         ForeignKey(
-            entity = Users::class,
-            parentColumns = ["UserId"],
-            childColumns = ["UserId"],
+            entity = Lista::class,
+            parentColumns = ["ListId"],
+            childColumns = ["ListId"],
             onDelete = CASCADE
         )]
 )
 data class ListMovies(
-    @PrimaryKey(autoGenerate = true) var ListId: Int,
-    var UserId: Int,
-    var MovieId: Int,
-    var ListName: String
+    var ListId: Int,
+    var MovieId: Int
 )

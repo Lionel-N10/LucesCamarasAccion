@@ -9,10 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
-import com.example.aplicacionprueba.JsonObjets.Users
-import com.example.aplicacionprueba.database.DataBase
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -57,11 +53,10 @@ class Login : Fragment() {
         Blogin = view.findViewById(R.id.bLogIn)
         Bsingup = view.findViewById(R.id.bSingUp)
 
-        Blogin.setOnClickListener {
+        /*Blogin.setOnClickListener {
             val t = Thread {
                 val User: Users? = Users(0, Busuario.text.toString(), Bcontraseña.text.toString())
                 DataBase(context!!).DaoUsers().insertUser(User!!)
-
             }
             t.start()
             t.join()
@@ -72,7 +67,7 @@ class Login : Fragment() {
 
         Bsingup.setOnClickListener {
             NavHostFragment.findNavController(host_fragment).navigate(LoginDirections.actionLoginToRegistro())
-        }
+        }*/
     }
 
 

@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.aplicacionprueba.JsonObjets.Lista
+import com.example.aplicacionprueba.JsonObjets.MisListasAdapter
+import com.example.aplicacionprueba.database.DataBase
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -19,17 +22,19 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [Registro.OnFragmentInteractionListener] interface
+ * [MisListas.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [Registro.newInstance] factory method to
+ * Use the [MisListas.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class Registro : Fragment() {
+class MisListas : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+
+    private var listView: RecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,28 +46,20 @@ class Registro : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val usuario: EditText
-        val pass: EditText
-        val bRegistrarme: Button
+        var listas : List<Lista>? = null
 
-        bRegistrarme = view.findViewById(R.id.singup_button)
-        usuario = view.findViewById(R.id.ET_Usuario)
-        pass = view.findViewById(R.id.ET_pass)
+        listView = view.findViewById(R.id.rv_mislitas)
+
+        val t = Thread{
+            //var lista = DataBase(context!!).DaoList().insertLista(Lista(1, "Lista to wapa"))
+            listas = DataBase(context!!).DaoList().getLista()
+        }
+        t.start()
+        t.join()
 
 
-       /* bRegistrarme.setOnClickListener {
-            val t = Thread {
-
-                val user: Users? = Users(0, usuario.text.toString(), pass.text.toString())
-                DataBase(context!!).DaoUsers().insertUser(user!!)
-
-                for (i in 0..DataBase(context!!).DaoUsers().getUsers().lastIndex) {
-                    println(DataBase(context!!).DaoUsers().getUsers()[i].UserName)
-                }
-            }
-            t.start()
-            t.join()
-        }*/
+        listView!!.layoutManager = LinearLayoutManager(activity)
+        listView!!.adapter = MisListasAdapter(context!!, listas, 1)
     }
 
     override fun onCreateView(
@@ -70,7 +67,7 @@ class Registro : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registro, container, false)
+        return inflater.inflate(R.layout.fragment_mis_listas, container, false)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -115,12 +112,12 @@ class Registro : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Registro.
+         * @return A new instance of fragment MisListas.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Registro().apply {
+            MisListas().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

@@ -17,4 +17,8 @@
     <string name="sipnosis">Sipnosis:</string>
     <string name="imdb_puntuaci_n">IMDb puntuación:</string>
     <string name="titulo">Titulo</string>
+    <string name="lista_1">Lista 1</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="n_de_pel_culas">Nº de Películas:</string>
 </resources>
