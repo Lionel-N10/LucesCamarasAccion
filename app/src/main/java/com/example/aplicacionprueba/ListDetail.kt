@@ -6,18 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.aplicacionprueba.Adapters.MovieAdapter
-import com.example.lucescamarasaccion.Movies
-import com.example.lucescamarasaccion.MoviesClient
-import com.example.lucescamarasaccion.ServiceGenerator
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.aplicacionprueba.Adapters.ListDetail_Adapter
+import com.example.aplicacionprueba.database.DataBase
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,20 +21,21 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [PopularMovies.OnFragmentInteractionListener] interface
+ * [ListDetail.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [PopularMovies.newInstance] factory method to
+ * Use the [ListDetail.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class PopularMovies : Fragment() {
+class ListDetail : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    private var listView: RecyclerView? = null
-    private var pbCargando: ProgressBar? = null
+    private var RV: RecyclerView? = null
+    private var IdLista: Int? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,46 +47,82 @@ class PopularMovies : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        IdLista = arguments!!.getInt("listID")
+        var peliculas: List<Int>? = null
 
-        pbCargando = view.findViewById(R.id.progress_bar_popular)
-        listView = view.findViewById(R.id.lista) as RecyclerView
+        RV = view.findViewById(R.id.listdetail_RV)
 
+        val t = Thread {
+            peliculas = DataBase(context!!).DatMovies().getMovieId(IdLista!!)
+        }
+        t.start()
+        t.join()
 
-        val client = ServiceGenerator.createService(MoviesClient::class.java)
-        val call = client.getPopularMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
+        RV!!.layoutManager = LinearLayoutManager(activity)
+        RV!!.adapter = ListDetail_Adapter(context!!, peliculas!!, 1)
 
+        /* val listaMovies : ListMovies
 
+         listaMovies = ListMovies(0, 98)
 
-        call.enqueue(object : Callback<Movies> {
-            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
-                val repos = response.body()
-
-                listView!!.layoutManager = GridLayoutManager(activity, 2)
-                listView!!.adapter = MovieAdapter(context!!, repos!!.results, 3)
-
-
-                //Toast.makeText(context!!, "MejorValoradas, cargado", Toast.LENGTH_SHORT).show()
-
-                pbCargando!!.visibility = View.GONE
-            }
-
-            override fun onFailure(call: Call<Movies>, t: Throwable) {
-                Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
-                t.printStackTrace()
-                pbCargando!!.visibility = View.GONE
-            }
-
-
-        })
-
+         val t = thread {
+             DataBase(context!!).DatMovies().insertLista(listaMovies)
+         }*/
     }
+
+
+    /* fun showListDetails(view: View, id: Int){
+
+
+
+
+             for (i in 0..peliculas!!.lastIndex){
+                 println("Id de pelicula: ${peliculas!![i]}")
+
+
+                /* val client = ServiceGenerator.createService(MoviesClient::class.java)
+                 val call = client.getMovieById(peliculas!![i], "39534c06f3f59b461ca70b61f782f06d", "es-ES")
+
+                 call.enqueue(object : Callback<MovieDetails_Object> {
+                     override fun onResponse(call: Call<MovieDetails_Object>, response: Response<MovieDetails_Object>) {
+                         val repos = response.body()
+
+                         RV!!.layoutManager = LinearLayoutManager(activity)
+                         RV!!.adapter = ListDetail_Adapter(context!!, repos, 1)
+
+
+                         //Toast.makeText(context!!, "MejorValoradas, cargado", Toast.LENGTH_SHORT).show()
+                     }
+
+                     override fun onFailure(call: Call<MovieDetails_Object>, t: Throwable) {
+                         Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
+                         t.printStackTrace()
+                     }
+
+
+                 })*/
+
+             }
+         }
+         t.start()
+         t.join()
+
+
+
+
+
+
+        /* RV!!.layoutManager = LinearLayoutManager(activity)
+         RV!!.adapter = ListDetail_Adapter(content!!, , 1)*/
+     }*/
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_popular_movies, container, false)
+        return inflater.inflate(R.layout.fragment_list_detail, container, false)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -137,12 +167,12 @@ class PopularMovies : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment PopularMovies.
+         * @return A new instance of fragment ListDetail.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            PopularMovies().apply {
+            ListDetail().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

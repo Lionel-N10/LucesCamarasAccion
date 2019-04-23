@@ -1,4 +1,4 @@
-package com.example.aplicacionprueba
+package com.example.aplicacionprueba.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,6 +10,10 @@ import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.aplicacionprueba.List_TopRatedDirections
+import com.example.aplicacionprueba.PopularMoviesDirections
+import com.example.aplicacionprueba.R
+import com.example.aplicacionprueba.search_moviesDirections
 import com.example.lucescamarasaccion.Result
 import kotlinx.android.synthetic.main.list_item_pagination.view.*
 
@@ -23,7 +27,7 @@ class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragm
         return values!!.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val vista = LayoutInflater.from(parent.context).inflate(R.layout.list_item_pagination, parent, false)
         viewHolder = ViewHolder(vista)
 
@@ -59,8 +63,6 @@ class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragm
             .into(holder.posterView!!)
         holder.card!!.setOnClickListener {
             val movieId = item.id
-            //Toast.makeText(context, "Item $position, pulsado. Id = $movieId", Toast.LENGTH_SHORT).show()
-
             when (id_fragment) {
                 1 -> Navigation.findNavController(it).navigate(
                     List_TopRatedDirections.actionListTopRatedToMovieDetail(

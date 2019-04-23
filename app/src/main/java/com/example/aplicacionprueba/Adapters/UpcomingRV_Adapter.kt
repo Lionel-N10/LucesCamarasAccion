@@ -1,4 +1,4 @@
-package com.example.aplicacionprueba
+package com.example.aplicacionprueba.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,11 +9,12 @@ import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.aplicacionprueba.*
 import com.example.lucescamarasaccion.Result
-import kotlinx.android.synthetic.main.item_mostpopular.view.*
+import kotlinx.android.synthetic.main.item_upcoming.view.*
 
-class MostPopularRV_Adapter(val context: Context, var values: List<Result>?, var id_fragment: Int) :
-    RecyclerView.Adapter<MostPopularRV_Adapter.ViewHolder>() {
+class UpcomingRV_Adapter(val context: Context, var values: List<Result>?, var id_fragment: Int) :
+    RecyclerView.Adapter<UpcomingRV_Adapter.ViewHolder>() {
 
     var viewHolder: ViewHolder? = null
 
@@ -21,20 +22,21 @@ class MostPopularRV_Adapter(val context: Context, var values: List<Result>?, var
         return values!!.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MostPopularRV_Adapter.ViewHolder {
-        val vista = LayoutInflater.from(parent.context).inflate(R.layout.item_mostpopular, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val vista = LayoutInflater.from(parent.context).inflate(R.layout.item_upcoming, parent, false)
         viewHolder = ViewHolder(vista)
 
         return viewHolder!!
     }
 
     class ViewHolder(vista: View) : RecyclerView.ViewHolder(vista) {
+
         var card: CardView? = null
         var posterView: ImageView? = null
 
         init {
-            posterView = vista.mostpopular_poster
-            card = vista.cardViewMostPopu
+            posterView = vista.upcoming_poster
+            card = vista.cardView3
         }
     }
 

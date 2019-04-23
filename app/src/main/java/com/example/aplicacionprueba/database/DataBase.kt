@@ -22,12 +22,7 @@ abstract class DataBase : RoomDatabase() {
         private var instance: DataBase? = null
         private val LOCK = Any()
 
-
-
         private fun Build(context: Context) = Room.databaseBuilder(context, DataBase::class.java, "database.db").fallbackToDestructiveMigration().build()
-
-
-
 
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
             instance ?: Build(context).also { instance = it }

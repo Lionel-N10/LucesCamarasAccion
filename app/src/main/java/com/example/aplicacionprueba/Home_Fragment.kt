@@ -10,6 +10,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.aplicacionprueba.Adapters.MostPopularRV_Adapter
+import com.example.aplicacionprueba.Adapters.SliderAdapter
+import com.example.aplicacionprueba.Adapters.UpcomingRV_Adapter
 import com.example.lucescamarasaccion.Movies
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
@@ -88,7 +91,8 @@ class Home_Fragment : Fragment() {
                 val repos = response.body()
                 try {
                     RVUpcoming!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-                    RVUpcoming!!.adapter = UpcomingRV_Adapter(context!!, repos!!.results, 4)
+                    RVUpcoming!!.adapter =
+                        UpcomingRV_Adapter(context!!, repos!!.results, 4)
                 } catch (ise: IllegalStateException) {
                 }
             }
@@ -98,7 +102,6 @@ class Home_Fragment : Fragment() {
                 t.printStackTrace()
             }
         })
-
     }
 
     fun showPopular(view: View) {
@@ -112,7 +115,8 @@ class Home_Fragment : Fragment() {
                 val repos = response.body()
                 try {
                     RVMostPopular!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-                    RVMostPopular!!.adapter = MostPopularRV_Adapter(context!!, repos!!.results, 5)
+                    RVMostPopular!!.adapter =
+                        MostPopularRV_Adapter(context!!, repos!!.results, 5)
 
                 } catch (ise: IllegalStateException) {
                 }

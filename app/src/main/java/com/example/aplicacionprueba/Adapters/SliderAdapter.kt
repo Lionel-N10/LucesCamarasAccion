@@ -1,4 +1,4 @@
-package com.example.aplicacionprueba
+package com.example.aplicacionprueba.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
+import com.example.aplicacionprueba.R
 import com.example.lucescamarasaccion.Result
 
 class SliderAdapter(var context: Context, images: List<Result>?) : PagerAdapter() {

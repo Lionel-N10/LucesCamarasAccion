@@ -37,7 +37,6 @@ class MovieDetail : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
-    private var adaptador: MovieAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +47,7 @@ class MovieDetail : Fragment() {
     }
 
     private var progressBar_moviedetails: ProgressBar? = null
+    private var spinner: Spinner? = null
     private var moviedetail_layout: ScrollView? = null
 
     fun showMovieDetails(view: View, id: Int){
@@ -56,6 +56,7 @@ class MovieDetail : Fragment() {
 
         //id = MovieDetailArgs.fromBundle(arguments!!).movieId
 
+
         val client = ServiceGenerator.createService(MoviesClient::class.java)
         val call = client.getMovieById(id, "39534c06f3f59b461ca70b61f782f06d", "es-ES")
 
@@ -63,26 +64,18 @@ class MovieDetail : Fragment() {
         call.enqueue(object : Callback<MovieDetails_Object> {
             override fun onResponse(call: Call<MovieDetails_Object>, response: Response<MovieDetails_Object>) {
                 val repos = response.body()
-                var generos: String = ""
+                var generos = ""
 
                 if(repos != null) {
-                    val tituloView: TextView
-                    val originalTitleView: TextView
-                    val notaView: TextView
-                    val estrenoView: TextView
-                    val sipnosisView: TextView
-                    val posterView: ImageView
-                    val backdropView: ImageView
-                    val genreView: TextView
+                    val tituloView: TextView = view.findViewById(R.id.movie_title)
+                    val originalTitleView: TextView = view.findViewById(R.id.movie_orgininal_title)
+                    val notaView: TextView = view.findViewById(R.id.movie_rating)
+                    val estrenoView: TextView = view.findViewById(R.id.movie_release_data)
+                    val sipnosisView: TextView = view.findViewById(R.id.movie_sipnosis)
+                    val posterView: ImageView = view.findViewById(R.id.movie_poster)
+                    val backdropView: ImageView = view.findViewById(R.id.movie_backdrop)
+                    val genreView: TextView = view.findViewById(R.id.movie_genre)
 
-                    tituloView = view.findViewById(R.id.movie_title)
-                    originalTitleView = view.findViewById(R.id.movie_orgininal_title)
-                    notaView = view.findViewById(R.id.movie_rating)
-                    estrenoView = view.findViewById(R.id.movie_release_data)
-                    sipnosisView = view.findViewById(R.id.movie_sipnosis)
-                    genreView = view.findViewById(R.id.movie_genre)
-                    posterView = view.findViewById(R.id.movie_poster)
-                    backdropView = view.findViewById(R.id.movie_backdrop)
                     try {
                         tituloView.text = repos.title
                         originalTitleView.text = repos.originalTitle
@@ -122,11 +115,6 @@ class MovieDetail : Fragment() {
     }
 
 
-    fun getReviews() {
-
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -135,8 +123,6 @@ class MovieDetail : Fragment() {
 
         progressBar_moviedetails!!.visibility = View.VISIBLE
         moviedetail_layout!!.visibility = View.GONE
-
-        var title = "Gladiator"
 
         showMovieDetails(view, arguments!!.getInt("movie_id", 0))
 

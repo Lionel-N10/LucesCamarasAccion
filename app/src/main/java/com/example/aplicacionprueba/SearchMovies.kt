@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.aplicacionprueba.Adapters.MovieAdapter
 import com.example.lucescamarasaccion.Movies
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
@@ -38,12 +39,10 @@ class search_movies : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var searchItem = R.id.app_bar_search
-
-
-
         pbCargando = view.findViewById(R.id.progress_bar_search)
         listView = view.findViewById(R.id.listaSearch) as RecyclerView
+
+        pbCargando!!.visibility = View.VISIBLE
 
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
@@ -54,10 +53,11 @@ class search_movies : Fragment() {
                 val repos = response.body()
 
                 listView!!.layoutManager = GridLayoutManager(activity, 2)
-                listView!!.adapter = MovieAdapter(context!!, repos!!.results, 2)
-
-
-                //Toast.makeText(context!!, "Busqueda, cargada", Toast.LENGTH_SHORT).show()
+                if (repos != null) {
+                    listView!!.adapter = MovieAdapter(context!!, repos.results, 2)
+                } else {
+                    Toast.makeText(context!!, "No se ha encontrado ninguna película", Toast.LENGTH_SHORT).show()
+                }
 
                 pbCargando!!.visibility = View.GONE
             }

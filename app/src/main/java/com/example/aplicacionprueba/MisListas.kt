@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.aplicacionprueba.Adapters.MisListasAdapter
 import com.example.aplicacionprueba.JsonObjets.Lista
-import com.example.aplicacionprueba.JsonObjets.MisListasAdapter
 import com.example.aplicacionprueba.database.DataBase
 
 
@@ -51,12 +51,10 @@ class MisListas : Fragment() {
         listView = view.findViewById(R.id.rv_mislitas)
 
         val t = Thread{
-            //var lista = DataBase(context!!).DaoList().insertLista(Lista(1, "Lista to wapa"))
             listas = DataBase(context!!).DaoList().getLista()
         }
         t.start()
         t.join()
-
 
         listView!!.layoutManager = LinearLayoutManager(activity)
         listView!!.adapter = MisListasAdapter(context!!, listas, 1)
