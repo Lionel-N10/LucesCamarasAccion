@@ -1,10 +1,22 @@
 package com.example.aplicacionprueba.JsonObjets
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.ForeignKey
+import androidx.room.ForeignKey.CASCADE
 
-@Entity
+@Entity(
+    primaryKeys = ["ListId"],
+    foreignKeys = [
+        ForeignKey(
+            entity = Users::class,
+            parentColumns = ["UserId"],
+            childColumns = ["UserId"],
+            onDelete = CASCADE
+        )]
+)
+
 data class Lista(
-    @PrimaryKey var ListId: Int,
+    var ListId: Int,
+    var UserId: Int,
     var NameList: String
 )

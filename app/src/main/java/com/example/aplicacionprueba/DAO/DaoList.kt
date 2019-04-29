@@ -15,6 +15,9 @@ interface DaoList {
     @Query("SELECT NameList FROM Lista")
     fun getNameList(): List<String>
 
+    @Query("SELECT * FROM Lista WHERE UserId = :userid")
+    fun getListabyUser(userid: Int): List<Lista>
+
     @Insert
     fun insertLista(lista: Lista): Long
 

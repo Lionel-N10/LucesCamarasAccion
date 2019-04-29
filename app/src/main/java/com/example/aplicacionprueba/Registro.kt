@@ -8,7 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import com.example.aplicacionprueba.JsonObjets.Users
+import com.example.aplicacionprueba.database.DataBase
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,30 +43,34 @@ class Registro : Fragment() {
         }
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val usuario: EditText
-        val pass: EditText
-        val bRegistrarme: Button
 
-        bRegistrarme = view.findViewById(R.id.singup_button)
-        usuario = view.findViewById(R.id.ET_Usuario)
-        pass = view.findViewById(R.id.ET_pass)
+        val usuario: EditText = view.findViewById(R.id.signup_name)
+        val pass: EditText = view.findViewById(R.id.signup_pass)
+        val bRegistrarme: Button = view.findViewById(R.id.signup_button)
 
+        if (usuario.text != null && pass.text != null) {
+            if (pass.text.length >= 6) {
+                bRegistrarme.setOnClickListener {
+                    val t = Thread {
+                        val user: Users? = Users(0, usuario.text.toString(), pass.text.toString())
+                        DataBase(context!!).DaoUser().insertUser(user!!)
+                    }
+                    t.start()
+                    t.join()
+                    Toast.makeText(context!!, "Usuario creado", Toast.LENGTH_SHORT).show()
 
-       /* bRegistrarme.setOnClickListener {
-            val t = Thread {
-
-                val user: Users? = Users(0, usuario.text.toString(), pass.text.toString())
-                DataBase(context!!).DaoUsers().insertUser(user!!)
-
-                for (i in 0..DataBase(context!!).DaoUsers().getUsers().lastIndex) {
-                    println(DataBase(context!!).DaoUsers().getUsers()[i].UserName)
+                    Navigation.findNavController(view).navigate(RegistroDirections.actionRegistroToLogin())
                 }
+            } else {
+                Toast.makeText(context!!, "La contraseña tiene que tener 6 caracteres mínimo", Toast.LENGTH_SHORT)
+                    .show()
             }
-            t.start()
-            t.join()
-        }*/
+        } else {
+            Toast.makeText(context!!, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onCreateView(

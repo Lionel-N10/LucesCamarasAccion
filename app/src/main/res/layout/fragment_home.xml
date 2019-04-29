@@ -16,7 +16,8 @@
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" android:padding="170dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.304"
-            app:layout_constraintVertical_bias="0.0" android:theme="@style/CircularProgress"/>
+            app:layout_constraintVertical_bias="0.0" android:theme="@style/CircularProgress"
+            android:visibility="visible"/>
     <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp" android:id="@+id/home_SV" app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +65,7 @@
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" android:layout_marginTop="32dp"
+                    android:layout_height="230dp" android:layout_marginTop="32dp"
                     app:layout_constraintTop_toBottomOf="@+id/home_card1" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
@@ -92,8 +93,8 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="230dp"
                     app:cardBackgroundColor="@color/otrocolor" app:cardCornerRadius="5dp" app:cardElevation="5dp"
                     android:id="@+id/home_card_3" android:layout_marginTop="32dp"
                     app:layout_constraintTop_toBottomOf="@+id/home_card_2" app:layout_constraintStart_toStartOf="parent"

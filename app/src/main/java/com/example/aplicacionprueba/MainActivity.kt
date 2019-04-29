@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
         toolbar.setOnMenuItemClickListener { MenuItem ->
             when (MenuItem.itemId) {
                 listasItem -> NavHostFragment.findNavController(host_fragment).navigate(R.id.misListas)
+
                 login -> NavHostFragment.findNavController(host_fragment).navigate(R.id.login)
             }
             true

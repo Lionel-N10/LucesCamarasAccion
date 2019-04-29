@@ -6,25 +6,27 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.aplicacionprueba.JsonObjets.ListMovies
 import com.example.aplicacionprueba.JsonObjets.MovieDetails_Object
 import com.example.aplicacionprueba.ListDetailDirections
 import com.example.aplicacionprueba.R
+import com.example.aplicacionprueba.database.DataBase
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
 import kotlinx.android.synthetic.main.item_listadetail.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class ListDetail_Adapter(val context: Context, var values: List<Int>, var id_fragment: Int) :
+class ListDetail_Adapter(val context: Context, var values: ArrayList<Int>, var idLista: Int, var id_fragment: Int) :
     RecyclerView.Adapter<ListDetail_Adapter.ViewHolder>() {
 
     var viewHolder: ViewHolder? = null
@@ -42,6 +44,8 @@ class ListDetail_Adapter(val context: Context, var values: List<Int>, var id_fra
     }
 
     class ViewHolder(vista: View) : RecyclerView.ViewHolder(vista) {
+        var progressBar: ProgressBar? = null
+        var deleteButton: Button? = null
         var card: CardView? = null
         var tituloView: TextView? = null
         var originalView: TextView? = null
@@ -50,6 +54,8 @@ class ListDetail_Adapter(val context: Context, var values: List<Int>, var id_fra
         var posterView: ImageView? = null
 
         init {
+            deleteButton = vista.itemdetail_delete
+            progressBar = vista.adapterList_PB
             card = vista.itemdetail_card
             tituloView = vista.itemdetail_title
             originalView = vista.itemdetail_originaltitle
@@ -70,6 +76,9 @@ class ListDetail_Adapter(val context: Context, var values: List<Int>, var id_fra
             override fun onResponse(call: Call<MovieDetails_Object>, response: Response<MovieDetails_Object>) {
                 val repos = response.body()
 
+                holder.progressBar!!.visibility = View.VISIBLE
+                holder.card!!.visibility = View.INVISIBLE
+
                 holder.tituloView?.text = repos!!.title
                 holder.rateView?.text = repos.voteAverage.toString()
                 holder.releaseView?.text = repos.releaseDate
@@ -87,8 +96,8 @@ class ListDetail_Adapter(val context: Context, var values: List<Int>, var id_fra
                         )
                     }
                 }
-
-
+                holder.progressBar!!.visibility = View.GONE
+                holder.card!!.visibility = View.VISIBLE
             }
 
             override fun onFailure(call: Call<MovieDetails_Object>, t: Throwable) {
@@ -96,5 +105,13 @@ class ListDetail_Adapter(val context: Context, var values: List<Int>, var id_fra
                 t.printStackTrace()
             }
         })
+
+        holder.deleteButton!!.setOnClickListener {
+            GlobalScope.launch {
+                DataBase(context).DaoMovies().deleteLista(ListMovies(idLista, item))
+            }
+            values.removeAt(position)
+            notifyDataSetChanged()
+        }
     }
 }

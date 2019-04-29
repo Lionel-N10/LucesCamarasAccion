@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.ScrollView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,9 +34,8 @@ class ListDetail : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private var RV: RecyclerView? = null
-    private var IdLista: Int? = null
-    private var progressBar: ProgressBar? = null
-    private var scrollView: ScrollView? = null
+    private var argument: Int? = null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,26 +48,24 @@ class ListDetail : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progressBar = view.findViewById(R.id.listdetail_PB)
-        scrollView = view.findViewById(R.id.listdetail_SV)
 
-        IdLista = arguments!!.getInt("listID")
+        argument = arguments!!.getInt("listID")
         var peliculas: List<Int>? = null
+        var arrayPeliculas: ArrayList<Int>? = null
 
 
         RV = view.findViewById(R.id.listdetail_RV)
 
         val t = Thread {
-            peliculas = DataBase(context!!).DatMovies().getMovieId(IdLista!!)
+            peliculas = DataBase(context!!).DaoMovies().getMovieId(argument!!)
         }
         t.start()
         t.join()
 
-        RV!!.layoutManager = LinearLayoutManager(activity)
-        RV!!.adapter = ListDetail_Adapter(context!!, peliculas!!, 1)
+        arrayPeliculas = peliculas as ArrayList<Int>?
 
-        progressBar!!.visibility = View.GONE
-        scrollView!!.visibility = View.VISIBLE
+        RV!!.layoutManager = LinearLayoutManager(activity)
+        RV!!.adapter = ListDetail_Adapter(context!!, arrayPeliculas!!, argument!!, 1)
     }
 
 

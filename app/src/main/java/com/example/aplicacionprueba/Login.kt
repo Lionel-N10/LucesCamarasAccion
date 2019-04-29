@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
@@ -51,32 +50,17 @@ class Login : Fragment() {
         bottomBar.visibility = View.GONE
         (activity as AppCompatActivity).supportActionBar!!.hide()
 
+        //val Textusuario: EditText = view.findViewById(R.id.login_user)
+        //val Textpass: EditText = view.findViewById(R.id.login_pass)
+        val Blogin: Button = view.findViewById(R.id.bLogIn)
+        val Bsingup: Button = view.findViewById(R.id.bSingUp)
 
-        val Busuario: EditText
-        val Bcontraseña: EditText
-        val Blogin: Button
-        val Bsingup: Button
-
-        Busuario = view.findViewById(R.id.login_user)
-        Bcontraseña = view.findViewById(R.id.login_pass)
-        Blogin = view.findViewById(R.id.bLogIn)
-        Bsingup = view.findViewById(R.id.bSingUp)
+        /*val usuario = Textusuario.text
+        val pass = Textpass.text*/
 
         Blogin.setOnClickListener {
             NavHostFragment.findNavController(host_fragment).navigate(LoginDirections.actionLoginToHomeFragment())
         }
-
-        /*Blogin.setOnClickListener {
-            val t = Thread {
-                val User: Users? = Users(0, Busuario.text.toString(), Bcontraseña.text.toString())
-                DataBase(context!!).DaoUsers().insertUser(User!!)
-            }
-            t.start()
-            t.join()
-
-            println("Usuario ${DataBase(context!!).DaoUsers().getUsers()}")
-        }*/
-
         Bsingup.setOnClickListener {
             NavHostFragment.findNavController(host_fragment).navigate(LoginDirections.actionLoginToRegistro())
         }

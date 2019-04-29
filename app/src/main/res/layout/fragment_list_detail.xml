@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              tools:context=".ListDetail">
-    <ProgressBar
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="664dp"
-            android:id="@+id/listdetail_PB" android:layout_weight="1" android:theme="@style/CircularProgress"
-            android:padding="170dp" android:visibility="visible"/>
-    <ScrollView
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".ListDetail">
+    <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:nestedScrollingEnabled="true" android:id="@+id/listdetail_SV"
-            android:visibility="gone">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical">
-            <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/listdetail_RV"/>
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+            android:layout_height="match_parent" android:id="@+id/listdetail_RV"
+    />
+</FrameLayout>

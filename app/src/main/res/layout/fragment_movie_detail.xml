@@ -30,7 +30,7 @@
                                                            android:layout_height="match_parent"
                                                            android:orientation="vertical"
                                                            android:background="@color/colorPrimary"
-                                                           android:id="@+id/constraintLayout">
+                                                           android:id="@+id/linearLayout">
             <androidx.cardview.widget.CardView
                     android:layout_width="408dp"
                     android:layout_height="255dp" app:cardBackgroundColor="@color/otrocolor"

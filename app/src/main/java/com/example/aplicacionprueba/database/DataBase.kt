@@ -6,16 +6,19 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.aplicacionprueba.DAO.DaoList
 import com.example.aplicacionprueba.DAO.DaoListMovies
+import com.example.aplicacionprueba.DAO.DaoUser
 import com.example.aplicacionprueba.JsonObjets.ListMovies
 import com.example.aplicacionprueba.JsonObjets.Lista
+import com.example.aplicacionprueba.JsonObjets.Users
 
 
-@Database(entities = [Lista::class, ListMovies::class], version = 2, exportSchema = false)
+@Database(entities = [Lista::class, Users::class, ListMovies::class], version = 6, exportSchema = false)
 
 abstract class DataBase : RoomDatabase() {
 
-    abstract fun DatMovies(): DaoListMovies
+    abstract fun DaoMovies(): DaoListMovies
     abstract fun DaoList(): DaoList
+    abstract fun DaoUser(): DaoUser
 
     companion object {
         @Volatile
