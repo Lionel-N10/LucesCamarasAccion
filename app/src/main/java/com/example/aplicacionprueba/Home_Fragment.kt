@@ -6,16 +6,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.ScrollView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aplicacionprueba.Adapters.MostPopularRV_Adapter
-import com.example.aplicacionprueba.Adapters.SliderAdapter
+import com.example.aplicacionprueba.Adapters.SliderImageAdapter
 import com.example.aplicacionprueba.Adapters.UpcomingRV_Adapter
 import com.example.lucescamarasaccion.Movies
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
+import com.google.android.material.bottomappbar.BottomAppBar
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,23 +48,39 @@ class Home_Fragment : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-
-
-
     private var RVUpcoming: RecyclerView? = null
     private var RVMostPopular: RecyclerView? = null
-    //var images: Array<String>? = null
-    //var adapter: PagerAdapter =SliderAdapter(context!!, images)
 
+    private var progresBar: ProgressBar? = null
+    private var home_layout: ScrollView? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showNowPlaying()
-        showUpComing(view)
-        showPopular(view)
+        val bottomBar: BottomAppBar = activity!!.findViewById(R.id.bar)
+        bottomBar.visibility = View.VISIBLE
+
+        progresBar = view.findViewById(R.id.home_PB)
+        home_layout = view.findViewById(R.id.home_SV)
+
+        val t = Thread {
+            showNowPlaying()
+            showUpComing(view)
+            showPopular(view)
+
+        }
+        t.start()
+        t.join()
+
+        if (showNowPlaying() && showUpComing(view) && showPopular(view)) {
+            progresBar!!.visibility = View.GONE
+            home_layout!!.visibility = View.VISIBLE
+        } else {
+            progresBar!!.visibility = View.GONE
+            Toast.makeText(context!!, "Erros al cargar", Toast.LENGTH_SHORT).show()
+        }
     }
 
-    fun showNowPlaying() {
+    fun showNowPlaying(): Boolean {
         val client = ServiceGenerator.createService(MoviesClient::class.java)
         val call = client.getNowPlaying("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
 
@@ -68,7 +88,7 @@ class Home_Fragment : Fragment() {
             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
                 val repos = response.body()
                 try {
-                    viewPager.adapter = SliderAdapter(context!!, repos!!.results)
+                    viewPager.adapter = SliderImageAdapter(context!!, repos!!.results)
                 } catch (ise: IllegalStateException) {
                 }
             }
@@ -78,9 +98,12 @@ class Home_Fragment : Fragment() {
                 t.printStackTrace()
             }
         })
+
+        return true
+
     }
 
-    fun showUpComing(view: View) {
+    fun showUpComing(view: View): Boolean {
         RVUpcoming = view.findViewById(R.id.recyclerView)
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
@@ -96,15 +119,16 @@ class Home_Fragment : Fragment() {
                 } catch (ise: IllegalStateException) {
                 }
             }
-
             override fun onFailure(call: Call<Movies>, t: Throwable) {
                 Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
                 t.printStackTrace()
             }
         })
+
+        return true
     }
 
-    fun showPopular(view: View) {
+    fun showPopular(view: View): Boolean {
         RVMostPopular = view.findViewById(R.id.recyclerView2)
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
@@ -128,10 +152,12 @@ class Home_Fragment : Fragment() {
             }
         })
 
+        return true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -154,6 +180,7 @@ class Home_Fragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        (activity as AppCompatActivity).supportActionBar!!.show()
         if (context is OnFragmentInteractionListener) {
             listener = context
         } else {

@@ -10,9 +10,13 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
+import com.example.aplicacionprueba.Adapters.SliderVideoAdapter
 import com.example.aplicacionprueba.JsonObjets.MovieDetails_Object
+import com.example.aplicacionprueba.JsonObjets.MovieVideos_Object
+import com.example.aplicacionprueba.database.DataBase
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
+import kotlinx.android.synthetic.main.fragment_movie_detail.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,14 +52,29 @@ class MovieDetail : Fragment() {
 
     private var progressBar_moviedetails: ProgressBar? = null
     private var spinner: Spinner? = null
+    private var opcion: TextView? = null
     private var moviedetail_layout: ScrollView? = null
+
+    fun showTrailers(view: View, id: Int) {
+        val client = ServiceGenerator.createService(MoviesClient::class.java)
+        val call = client.getVideos(id, "39534c06f3f59b461ca70b61f782f06d", "es-ES")
+
+
+        call.enqueue(object : Callback<MovieVideos_Object> {
+            override fun onResponse(call: Call<MovieVideos_Object>, response: Response<MovieVideos_Object>) {
+                val repos = response.body()
+                movie_viewpager.adapter = SliderVideoAdapter(context!!, repos!!.results)
+            }
+
+            override fun onFailure(call: Call<MovieVideos_Object>, t: Throwable) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        })
+    }
 
     fun showMovieDetails(view: View, id: Int){
         moviedetail_layout = view.findViewById(R.id.scrollView2)
         progressBar_moviedetails = view.findViewById(R.id.progressBar_moviedetails)
-
-        //id = MovieDetailArgs.fromBundle(arguments!!).movieId
-
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
         val call = client.getMovieById(id, "39534c06f3f59b461ca70b61f782f06d", "es-ES")
@@ -109,7 +128,6 @@ class MovieDetail : Fragment() {
                 Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
                 t.printStackTrace()
                 progressBar_moviedetails!!.visibility = View.GONE
-
             }
         })
     }
@@ -118,14 +136,38 @@ class MovieDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Toast.makeText(context!!, "MovieDetail", Toast.LENGTH_SHORT).show()
+
         moviedetail_layout = view.findViewById(R.id.scrollView2)
         progressBar_moviedetails = view.findViewById(R.id.progressBar_moviedetails)
+        spinner = view.findViewById(R.id.spinner)
+        opcion = view.findViewById(R.id.textView11)
 
         progressBar_moviedetails!!.visibility = View.VISIBLE
         moviedetail_layout!!.visibility = View.GONE
 
         showMovieDetails(view, arguments!!.getInt("movie_id", 0))
+        /*showTrailers(view, arguments!!.getInt("movie_id", 0))*/
 
+        lateinit var opciones: List<String>
+
+        val t = Thread {
+            opciones = DataBase(context!!).DaoList().getNameList()
+        }
+        t.start()
+        t.join()
+
+
+        spinner!!.adapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, opciones)
+        spinner!!.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                opcion!!.text = opciones[position]
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                opcion!!.text = "Seleccione una lista"
+            }
+        }
     }
 
     override fun onCreateView(
@@ -136,7 +178,6 @@ class MovieDetail : Fragment() {
         return inflater.inflate(R.layout.fragment_movie_detail, container, false)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         listener!!.onFragmentInteraction(uri)
     }

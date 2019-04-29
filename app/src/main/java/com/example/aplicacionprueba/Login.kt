@@ -8,7 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.bottomappbar.BottomAppBar
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -42,6 +46,11 @@ class Login : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Asignamos y ocultamos la toolbar y la bottombar para crear una pantalla de Login más limpia
+        val bottomBar: BottomAppBar = activity!!.findViewById(R.id.bar)
+        bottomBar.visibility = View.GONE
+        (activity as AppCompatActivity).supportActionBar!!.hide()
+
 
         val Busuario: EditText
         val Bcontraseña: EditText
@@ -53,6 +62,10 @@ class Login : Fragment() {
         Blogin = view.findViewById(R.id.bLogIn)
         Bsingup = view.findViewById(R.id.bSingUp)
 
+        Blogin.setOnClickListener {
+            NavHostFragment.findNavController(host_fragment).navigate(LoginDirections.actionLoginToHomeFragment())
+        }
+
         /*Blogin.setOnClickListener {
             val t = Thread {
                 val User: Users? = Users(0, Busuario.text.toString(), Bcontraseña.text.toString())
@@ -62,12 +75,11 @@ class Login : Fragment() {
             t.join()
 
             println("Usuario ${DataBase(context!!).DaoUsers().getUsers()}")
-        }
-
+        }*/
 
         Bsingup.setOnClickListener {
             NavHostFragment.findNavController(host_fragment).navigate(LoginDirections.actionLoginToRegistro())
-        }*/
+        }
     }
 
 

@@ -5,28 +5,27 @@
     <item
             android:id="@+id/app_bar_home" android:enabled="true"
             android:icon="@mipmap/outline_home_white_36" android:title="Home" app:showAsAction="always"/>
+
+    <item app:showAsAction="always" android:checkable="false" android:title="" android:enabled="false"/>
+    <item android:checkable="false" android:title="" android:enabled="false" app:showAsAction="always"/>
     <item android:title="Popular" app:showAsAction="always"
           android:id="@+id/app_bar_popular"
           android:visible="true" android:icon="@mipmap/ic_filmstrip"/>
-
     <item app:showAsAction="always" android:icon="@mipmap/ic_movie_roll" android:title="Top Rated"
           android:checked="true" android:enabled="true" android:id="@+id/app_bar_toprated"
     />
-    <item app:showAsAction="always" android:checkable="false" android:title="" android:enabled="false"/>
-    <item android:checkable="false" android:title="" android:enabled="false" app:showAsAction="always"/>
     <item android:title="" app:showAsAction="always"
           android:checkable="false" android:enabled="false"/>
 
     <item
             android:id="@+id/app_bar_user"
-            android:icon="@mipmap/ic_account_circle"
             android:title="@string/action_favorite"
-            app:showAsAction="always"/>
+            app:showAsAction="always" android:enabled="false" android:checkable="false"/>
 
     <item
             android:id="@+id/app_bar_settings"
             android:title="" android:checked="false"
-            android:icon="@mipmap/ic_format_list_numbered" app:showAsAction="always"/>
+            app:showAsAction="always" android:enabled="false"/>
     <item android:title="" app:showAsAction="always" android:enabled="false"/>
 
 </menu>

@@ -2,26 +2,24 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_menu"
-            app:startDestination="@+id/home_fragment">
+            app:startDestination="@id/login">
 
     <fragment android:id="@+id/home_fragment" android:name="com.example.aplicacionprueba.Home_Fragment"
               android:label="Home" tools:layout="@layout/fragment_home">
         <action android:id="@+id/action_home_to_list_TopRated" app:destination="@id/list_TopRated"
                 app:enterAnim="@anim/nav_default_pop_enter_anim" app:exitAnim="@anim/nav_default_pop_exit_anim"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
-        <action android:id="@+id/action_home_fragment_to_movieDetail" app:destination="@id/movieDetail"
-                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
-                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
         <action android:id="@+id/action_home_fragment_to_popularMovies" app:destination="@id/popularMovies"
                 app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action android:id="@+id/action_home_fragment_to_movieDetail" app:destination="@id/movieDetail"/>
     </fragment>
     <fragment android:id="@+id/list_TopRated" android:name="com.example.aplicacionprueba.List_TopRated"
               android:label="Mejor Valoradas" tools:layout="@layout/fragment_list__top_rated">
         <action android:id="@+id/action_list_TopRated_to_movieDetail" app:destination="@id/movieDetail"/>
     </fragment>
     <fragment android:id="@+id/movieDetail" android:name="com.example.aplicacionprueba.MovieDetail"
-              tools:layout="@layout/fragment_movie_detail">
+              tools:layout="@layout/fragment_movie_detail" android:label="Movie">
         <argument android:name="movie_id" app:argType="integer"/>
         <action android:id="@+id/action_movieDetail_to_home_fragment" app:destination="@id/home_fragment"/>
     </fragment>
@@ -29,7 +27,7 @@
               tools:layout="@layout/fragment_search_movies"
               android:id="@+id/Search_Movies" android:label="Busqueda">
         <argument android:name="titulo" app:argType="string"/>
-        <action android:id="@+id/action_search_movies_to_movieDetail" app:destination="@id/movieDetail"/>
+        <action android:id="@+id/action_Search_Movies_to_movieDetail" app:destination="@id/movieDetail"/>
     </fragment>
     <fragment android:id="@+id/popularMovies" android:name="com.example.aplicacionprueba.PopularMovies"
               android:label="Más Populares" tools:layout="@layout/fragment_popular_movies">
@@ -38,9 +36,12 @@
     <fragment android:id="@+id/login" android:name="com.example.aplicacionprueba.Login" android:label="Iniciar Sesion"
               tools:layout="@layout/fragment_login">
         <action android:id="@+id/action_login_to_registro" app:destination="@id/registro"/>
+        <action android:id="@+id/action_login_to_home_fragment" app:destination="@id/home_fragment"/>
     </fragment>
     <fragment android:id="@+id/registro" android:name="com.example.aplicacionprueba.Registro"
-              android:label="Registrarse" tools:layout="@layout/fragment_registro"/>
+              android:label="Registrarse" tools:layout="@layout/fragment_registro">
+        <action android:id="@+id/action_registro_to_login" app:destination="@id/login"/>
+    </fragment>
     <fragment android:id="@+id/misListas" android:name="com.example.aplicacionprueba.MisListas"
               android:label="Mis Listas" tools:layout="@layout/fragment_mis_listas">
         <action android:id="@+id/action_misListas_to_listDetail" app:destination="@id/listDetail"/>

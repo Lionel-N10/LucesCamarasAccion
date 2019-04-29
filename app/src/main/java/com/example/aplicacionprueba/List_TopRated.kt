@@ -49,11 +49,8 @@ class List_TopRated : Fragment() {
         pbCargando = view.findViewById(R.id.progress_bar_toprated)
         listView = view.findViewById(R.id.lista) as RecyclerView
 
-
         val client = ServiceGenerator.createService(MoviesClient::class.java)
         val call = client.GetTopRatedMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
-
-
 
         call.enqueue(object : Callback<Movies> {
             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
@@ -67,19 +64,12 @@ class List_TopRated : Fragment() {
 
                 pbCargando!!.visibility = View.GONE
             }
-
             override fun onFailure(call: Call<Movies>, t: Throwable) {
                 Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
                 t.printStackTrace()
                 pbCargando!!.visibility = View.GONE
             }
-
-
         })
-
-
-
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +78,6 @@ class List_TopRated : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
     }
 
     override fun onCreateView(

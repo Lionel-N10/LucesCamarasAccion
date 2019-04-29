@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -59,7 +58,6 @@ class MisListasAdapter(val context: Context, var values: List<Lista>?, var id_fr
         holder.posicionView!!.text = (position+1).toString()
         holder.idView!!.text = item.ListId.toString()
         holder.card!!.setOnClickListener {
-            Toast.makeText(context, "Item $position, pulsado. Id = ${item.NameList}", Toast.LENGTH_SHORT).show()
             when (id_fragment) {
                 1 -> Navigation.findNavController(it).navigate(MisListasDirections.actionMisListasToListDetail(listaId))
             }

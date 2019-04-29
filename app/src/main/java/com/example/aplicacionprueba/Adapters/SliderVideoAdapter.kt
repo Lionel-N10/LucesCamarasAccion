@@ -4,30 +4,31 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.VideoView
 import androidx.viewpager.widget.PagerAdapter
-import com.bumptech.glide.Glide
+import com.example.aplicacionprueba.JsonObjets.Video_result
 import com.example.aplicacionprueba.R
-import com.example.lucescamarasaccion.Result
 
-class SliderAdapter(var context: Context, images: List<Result>?) : PagerAdapter() {
-
-    private val images: List<Result>?
+class SliderVideoAdapter(var context: Context, videos: List<Video_result>?) : PagerAdapter() {
+    private val videos: List<Video_result>?
     lateinit var inflater: LayoutInflater
+
     init {
-        this.images = images!!
+        this.videos = videos!!
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val image: ImageView
-        val item = images!!.get(position)
+        val videoView: VideoView
+        val item = videos!!.get(position)
+
         inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view: View = inflater.inflate(R.layout.slider_image_item, container, false)
-        image = view.findViewById(R.id.imageView)
-        Glide.with(view).load("https://image.tmdb.org/t/p/w500${item.posterPath}").centerCrop()
-            .into(image)
+        val view: View = inflater.inflate(R.layout.slider_video_item, container, false)
+        videoView = view.findViewById(R.id.videoView2)
+        videoView.setVideoPath("https://www.youtube.com/watch?v=${item.id}")
+        videoView.pause()
         container.addView(view)
+
         return view
     }
 
@@ -39,8 +40,6 @@ class SliderAdapter(var context: Context, images: List<Result>?) : PagerAdapter(
 
 
     override fun getCount(): Int {
-        return images!!.size
+        return videos!!.size
     }
-
-
 }

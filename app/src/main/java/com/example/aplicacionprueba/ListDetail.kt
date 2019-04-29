@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.ScrollView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +37,8 @@ class ListDetail : Fragment() {
 
     private var RV: RecyclerView? = null
     private var IdLista: Int? = null
+    private var progressBar: ProgressBar? = null
+    private var scrollView: ScrollView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,8 +51,12 @@ class ListDetail : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progressBar = view.findViewById(R.id.listdetail_PB)
+        scrollView = view.findViewById(R.id.listdetail_SV)
+
         IdLista = arguments!!.getInt("listID")
         var peliculas: List<Int>? = null
+
 
         RV = view.findViewById(R.id.listdetail_RV)
 
@@ -61,60 +69,9 @@ class ListDetail : Fragment() {
         RV!!.layoutManager = LinearLayoutManager(activity)
         RV!!.adapter = ListDetail_Adapter(context!!, peliculas!!, 1)
 
-        /* val listaMovies : ListMovies
-
-         listaMovies = ListMovies(0, 98)
-
-         val t = thread {
-             DataBase(context!!).DatMovies().insertLista(listaMovies)
-         }*/
+        progressBar!!.visibility = View.GONE
+        scrollView!!.visibility = View.VISIBLE
     }
-
-
-    /* fun showListDetails(view: View, id: Int){
-
-
-
-
-             for (i in 0..peliculas!!.lastIndex){
-                 println("Id de pelicula: ${peliculas!![i]}")
-
-
-                /* val client = ServiceGenerator.createService(MoviesClient::class.java)
-                 val call = client.getMovieById(peliculas!![i], "39534c06f3f59b461ca70b61f782f06d", "es-ES")
-
-                 call.enqueue(object : Callback<MovieDetails_Object> {
-                     override fun onResponse(call: Call<MovieDetails_Object>, response: Response<MovieDetails_Object>) {
-                         val repos = response.body()
-
-                         RV!!.layoutManager = LinearLayoutManager(activity)
-                         RV!!.adapter = ListDetail_Adapter(context!!, repos, 1)
-
-
-                         //Toast.makeText(context!!, "MejorValoradas, cargado", Toast.LENGTH_SHORT).show()
-                     }
-
-                     override fun onFailure(call: Call<MovieDetails_Object>, t: Throwable) {
-                         Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
-                         t.printStackTrace()
-                     }
-
-
-                 })*/
-
-             }
-         }
-         t.start()
-         t.join()
-
-
-
-
-
-
-        /* RV!!.layoutManager = LinearLayoutManager(activity)
-         RV!!.adapter = ListDetail_Adapter(content!!, , 1)*/
-     }*/
 
 
     override fun onCreateView(

@@ -1,5 +1,6 @@
 package com.example.aplicacionprueba.Adapters
 
+//import com.example.aplicacionprueba.ListDetailDirections
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -86,6 +87,8 @@ class ListDetail_Adapter(val context: Context, var values: List<Int>, var id_fra
                         )
                     }
                 }
+
+
             }
 
             override fun onFailure(call: Call<MovieDetails_Object>, t: Throwable) {
