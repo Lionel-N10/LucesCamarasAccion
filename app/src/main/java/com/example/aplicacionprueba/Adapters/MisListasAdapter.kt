@@ -9,12 +9,12 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.example.aplicacionprueba.JsonObjets.Lista
+import com.example.aplicacionprueba.JsonObjets.ListFB
 import com.example.aplicacionprueba.MisListasDirections
 import com.example.aplicacionprueba.R
 import kotlinx.android.synthetic.main.item_lista.view.*
 
-class MisListasAdapter(val context: Context, var values: List<Lista>?, var id_fragment: Int) :
+class MisListasAdapter(val context: Context, var values: List<ListFB>?, var id_fragment: Int) :
     RecyclerView.Adapter<MisListasAdapter.ViewHolder>() {
 
     var viewHolder: ViewHolder? = null
@@ -51,15 +51,14 @@ class MisListasAdapter(val context: Context, var values: List<Lista>?, var id_fr
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values?.get(position)
+        val listaId = item!!.listId
 
-        val listaId = item!!.ListId
-
-        holder.tituloView!!.text = item.NameList
+        holder.tituloView!!.text = item.listName
         holder.posicionView!!.text = (position+1).toString()
-        holder.idView!!.text = item.ListId.toString()
+        holder.idView!!.text = item.listId.toString()
         holder.card!!.setOnClickListener {
             when (id_fragment) {
-                1 -> Navigation.findNavController(it).navigate(MisListasDirections.actionMisListasToListDetail(listaId))
+                1 -> Navigation.findNavController(it).navigate(MisListasDirections.actionMisListasToListDetail(listaId!!))
             }
         }
     }

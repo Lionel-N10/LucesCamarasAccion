@@ -3,6 +3,7 @@ package com.example.aplicacionprueba
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aplicacionprueba.Adapters.MisListasAdapter
+import com.example.aplicacionprueba.JsonObjets.FireBaseData
 import com.example.aplicacionprueba.JsonObjets.Lista
-import com.example.aplicacionprueba.database.DataBase
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DataSnapshot
+
+
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,6 +42,7 @@ class MisListas : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private var listView: RecyclerView? = null
+    //private var fbrecycler:
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,14 +58,26 @@ class MisListas : Fragment() {
 
         listView = view.findViewById(R.id.rv_mislitas)
 
-        val t = Thread{
+        /*val t = Thread{
             listas = DataBase(context!!).DaoList().getLista()
         }
         t.start()
-        t.join()
+        t.join()*/
 
-        listView!!.layoutManager = LinearLayoutManager(activity)
-        listView!!.adapter = MisListasAdapter(context!!, listas, 1)
+        val dbPrediccion = FirebaseDatabase.getInstance().getReference("Usuario1") //Obtenemos las listas por usuario
+
+        dbPrediccion.addValueEventListener( object: ValueEventListener {
+             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                 val lista = dataSnapshot.getValue(FireBaseData::class.java)
+
+                 listView!!.layoutManager = LinearLayoutManager(activity)
+                 listView!!.adapter = MisListasAdapter(context!!, lista!!.ListFB, 1)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d("Error!", databaseError.toException().toString())
+            }
+        })
     }
 
     override fun onCreateView(

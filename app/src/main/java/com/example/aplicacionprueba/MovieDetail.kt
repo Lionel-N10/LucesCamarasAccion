@@ -42,6 +42,11 @@ class MovieDetail : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
+    private var progressBar_moviedetails: ProgressBar? = null
+    private var spinner: Spinner? = null
+    private var opcion: TextView? = null
+    private var moviedetail_layout: ScrollView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -49,11 +54,6 @@ class MovieDetail : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
-
-    private var progressBar_moviedetails: ProgressBar? = null
-    private var spinner: Spinner? = null
-    private var opcion: TextView? = null
-    private var moviedetail_layout: ScrollView? = null
 
     fun showTrailers(view: View, id: Int) {
         val client = ServiceGenerator.createService(MoviesClient::class.java)
@@ -136,8 +136,6 @@ class MovieDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Toast.makeText(context!!, "MovieDetail", Toast.LENGTH_SHORT).show()
-
         moviedetail_layout = view.findViewById(R.id.scrollView2)
         progressBar_moviedetails = view.findViewById(R.id.progressBar_moviedetails)
         spinner = view.findViewById(R.id.spinner)
@@ -147,7 +145,7 @@ class MovieDetail : Fragment() {
         moviedetail_layout!!.visibility = View.GONE
 
         showMovieDetails(view, arguments!!.getInt("movie_id", 0))
-        /*showTrailers(view, arguments!!.getInt("movie_id", 0))*/
+        //showTrailers(view, arguments!!.getInt("movie_id", 0))
 
         lateinit var opciones: List<String>
 
@@ -161,6 +159,7 @@ class MovieDetail : Fragment() {
         spinner!!.adapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, opciones)
         spinner!!.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                //opcion!!.text = "Seleccione una lista"
                 opcion!!.text = opciones[position]
             }
 

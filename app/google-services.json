@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "500911541274",
+    "firebase_url": "https://lucescamarasaccion-b6962.firebaseio.com",
+    "project_id": "lucescamarasaccion-b6962",
+    "storage_bucket": "lucescamarasaccion-b6962.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500911541274:android:70f868067b149334",
+        "android_client_info": {
+          "package_name": "com.example.aplicacionprueba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500911541274-56v28oja4go22rfap7hsl5mjc8pqp5nn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aplicacionprueba",
+            "certificate_hash": "0489e0a95367666ce579bbc840d9f531baf6d607"
+          }
+        },
+        {
+          "client_id": "500911541274-uikaclt0b5fv8spob375n1uhos09v3eu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5N-3vYWcFF7V0ZJcTMzzhYS_an5EwyMo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500911541274-uikaclt0b5fv8spob375n1uhos09v3eu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -15,6 +15,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.example.aplicacionprueba.JsonObjets.ListMovies
+import com.example.aplicacionprueba.JsonObjets.Lista
+import com.example.aplicacionprueba.JsonObjets.Users
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -94,6 +98,18 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
 
         setSupportActionBar(toolbar)
 
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.reference
+
+       /* myRef.setValue("Usuario1")
+        myRef.child("Usuario1").setValue(Users(1, "Usuario","Usuario"))
+        myRef.child("Usuario1").child("Lista1").setValue(Lista(1,1, "Lista 1"))
+        myRef.child("Usuario1").child("Lista2").setValue(Lista(1,1, "Lista 2"))
+        myRef.child("Usuario1").child("Lista3").setValue(Lista(1,1, "Lista 3"))
+        myRef.child("Usuario1").child("Lista1").child("Movie 1").setValue(ListMovies(1,98))*/
+
+        //val myRefLista = myRef.child(1).child()
+
         val bPopular = R.id.app_bar_popular
         val bTop_Rated = R.id.app_bar_toprated
         val bListas = R.id.app_bar_settings
@@ -104,7 +120,6 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
 
         bar.setOnMenuItemClickListener { MenuItem ->
             when(MenuItem.itemId){
-
                 bHome -> NavHostFragment.findNavController(host_fragment).navigate(R.id.home_fragment)
                 bPopular -> NavHostFragment.findNavController(host_fragment).navigate(R.id.popularMovies)
                 bTop_Rated -> NavHostFragment.findNavController(host_fragment).navigate(R.id.list_TopRated)
