@@ -1,8 +1,10 @@
 package com.example.aplicacionprueba
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +13,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.example.aplicacionprueba.JsonObjets.Users
-import com.example.aplicacionprueba.database.DataBase
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -47,29 +50,41 @@ class Registro : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val usuario: EditText = view.findViewById(R.id.signup_name)
-        val pass: EditText = view.findViewById(R.id.signup_pass)
+        var mAuth = FirebaseAuth.getInstance()
+
+        val textEmail: EditText = view.findViewById(R.id.signup_name)
+        val textPass: EditText = view.findViewById(R.id.signup_pass)
         val bRegistrarme: Button = view.findViewById(R.id.signup_button)
 
-        if (usuario.text != null && pass.text != null) {
-            if (pass.text.length >= 6) {
-                bRegistrarme.setOnClickListener {
-                    val t = Thread {
+        var email = ""
+        var pass = ""
+
+        bRegistrarme.setOnClickListener {
+
+            email = textEmail.text.toString()
+            pass = textPass.text.toString()
+                    mAuth.createUserWithEmailAndPassword(email, pass)
+                        .addOnCompleteListener(this.activity!!, OnCompleteListener<AuthResult> { task ->
+                            if (task.isSuccessful) {
+                                Navigation.findNavController(view).navigate(RegistroDirections.actionRegistroToLogin())
+                                Log.d(TAG, "createUserWithEmail:success")
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                                Toast.makeText(
+                                    context!!, "Authentication failed.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        })
+
+                    /*val t = Thread {
                         val user: Users? = Users(0, usuario.text.toString(), pass.text.toString())
                         DataBase(context!!).DaoUser().insertUser(user!!)
                     }
                     t.start()
                     t.join()
-                    Toast.makeText(context!!, "Usuario creado", Toast.LENGTH_SHORT).show()
-
-                    Navigation.findNavController(view).navigate(RegistroDirections.actionRegistroToLogin())
-                }
-            } else {
-                Toast.makeText(context!!, "La contraseña tiene que tener 6 caracteres mínimo", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        } else {
-            Toast.makeText(context!!, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context!!, "Usuario creado", Toast.LENGTH_SHORT).show()*/
         }
     }
 

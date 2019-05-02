@@ -11,6 +11,7 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -18,8 +19,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.aplicacionprueba.JsonObjets.ListMovies
 import com.example.aplicacionprueba.JsonObjets.Lista
 import com.example.aplicacionprueba.JsonObjets.Users
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.firebase.auth.FirebaseUser
+
+
 
 
 class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionListener,
@@ -92,9 +97,22 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        var mAuth = FirebaseAuth.getInstance()
+        var currentUser = mAuth.currentUser
+
+        if(currentUser != null){
+            NavHostFragment.findNavController(host_fragment).navigate(R.id.home_fragment)
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         setSupportActionBar(toolbar)
 

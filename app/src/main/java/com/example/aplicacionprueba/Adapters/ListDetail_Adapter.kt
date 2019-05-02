@@ -31,7 +31,6 @@ class ListDetail_Adapter(val context: Context, var values: ArrayList<Int>, var i
 
     var viewHolder: ViewHolder? = null
 
-
     override fun getItemCount(): Int {
         return values.size
     }

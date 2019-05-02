@@ -17,8 +17,15 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
-
-
+import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.google.firebase.database.DatabaseReference
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import android.provider.ContactsContract.CommonDataKinds.Note
+import android.widget.TextView
+import com.example.aplicacionprueba.Adapters.FirebaseAdapter
+import com.example.aplicacionprueba.JsonObjets.ListFB
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -56,6 +63,8 @@ class MisListas : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var listas : List<Lista>? = null
 
+        //val adapter = FirebaseAdapter()
+
         listView = view.findViewById(R.id.rv_mislitas)
 
         /*val t = Thread{
@@ -64,21 +73,61 @@ class MisListas : Fragment() {
         t.start()
         t.join()*/
 
-        val dbPrediccion = FirebaseDatabase.getInstance().getReference("Usuario1") //Obtenemos las listas por usuario
+        val database = FirebaseDatabase.getInstance().getReference("Usuario1") //Obtenemos las listas
 
-        dbPrediccion.addValueEventListener( object: ValueEventListener {
+
+        database.addValueEventListener( object: ValueEventListener {
              override fun onDataChange(dataSnapshot: DataSnapshot) {
-                 val lista = dataSnapshot.getValue(FireBaseData::class.java)
+
+                 val options = FirebaseRecyclerOptions.Builder<FireBaseData>().setQuery(com.example.aplicacionprueba.Adapters.database, FireBaseData::class.java).build()
+
+                 class FirebaseAdapter: FirebaseRecyclerAdapter<FireBaseData, FirebaseAdapter.ViewHolder>(options){
+
+                     override fun onBindViewHolder(holder: ViewHolder, position: Int, values: FireBaseData) {
+
+                         val item = values.ListFB
+                         println("prueba")
+
+                         Log.d("FirebaseAdapter: ", item!![position].listName)
+
+                         holder.titleView.text = item[position].listName
+                         holder.posicionView.text = (position+1).toString()
+                         holder.countView.text = item.size.toString()
+                     }
+
+                     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+                         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_lista, parent, false)
+                         return ViewHolder(view)
+                     }
+
+                     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+                         var titleView: TextView
+                         var posicionView: TextView
+                         var countView: TextView
+
+                         init {
+                             titleView = itemView.findViewById(R.id.lista_titulo)
+                             posicionView = itemView.findViewById(R.id.lista_position)
+                             countView = itemView.findViewById(R.id.lista_movie_count)
+                         }
+                     }
+                 }
 
                  listView!!.layoutManager = LinearLayoutManager(activity)
-                 listView!!.adapter = MisListasAdapter(context!!, lista!!.ListFB, 1)
+                 listView!!.adapter = FirebaseAdapter()
+                 FirebaseAdapter().startListening()
+
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 Log.d("Error!", databaseError.toException().toString())
             }
         })
+
+
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

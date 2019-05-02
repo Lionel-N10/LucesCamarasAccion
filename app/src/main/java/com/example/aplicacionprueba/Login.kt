@@ -1,16 +1,23 @@
 package com.example.aplicacionprueba
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -40,6 +47,8 @@ class Login : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,16 +59,47 @@ class Login : Fragment() {
         bottomBar.visibility = View.GONE
         (activity as AppCompatActivity).supportActionBar!!.hide()
 
-        //val Textusuario: EditText = view.findViewById(R.id.login_user)
-        //val Textpass: EditText = view.findViewById(R.id.login_pass)
+        val emailText = view.findViewById<EditText>(R.id.login_user)
+        val passText = view.findViewById<EditText>(R.id.login_pass)
+
+
+        val mAuth = FirebaseAuth.getInstance()
+
+
+
+
+        val textusuario: EditText = view.findViewById(R.id.login_user)
+        val textpass: EditText = view.findViewById(R.id.login_pass)
         val Blogin: Button = view.findViewById(R.id.bLogIn)
         val Bsingup: Button = view.findViewById(R.id.bSingUp)
 
-        /*val usuario = Textusuario.text
+        /*val email = Textusuario.text
         val pass = Textpass.text*/
 
         Blogin.setOnClickListener {
-            NavHostFragment.findNavController(host_fragment).navigate(LoginDirections.actionLoginToHomeFragment())
+            try {
+
+                mAuth.signInWithEmailAndPassword(emailText.text.toString(), passText.text.toString())
+                    .addOnCompleteListener(this.activity!!, OnCompleteListener<AuthResult> { task ->
+                        if (task.isSuccessful) {
+                            NavHostFragment.findNavController(host_fragment)
+                                .navigate(LoginDirections.actionLoginToHomeFragment())
+                            Log.d(TAG, "signInWithEmail:success")
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.exception)
+                            Toast.makeText(
+                                context!!, "Authentication failed.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    })
+            }catch (iae : java.lang.IllegalArgumentException){
+                Log.d("Error", iae.message.toString())
+
+                Toast.makeText(context!!, "Ningún campo debe estar vacio", Toast.LENGTH_SHORT).show()
+            }
+
         }
         Bsingup.setOnClickListener {
             NavHostFragment.findNavController(host_fragment).navigate(LoginDirections.actionLoginToRegistro())
