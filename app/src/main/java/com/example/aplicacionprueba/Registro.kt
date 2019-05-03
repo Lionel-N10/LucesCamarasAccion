@@ -16,6 +16,7 @@ import androidx.navigation.Navigation
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import java.lang.IllegalArgumentException
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,12 +47,10 @@ class Registro : Fragment() {
         }
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var mAuth = FirebaseAuth.getInstance()
-
+        val mAuth = FirebaseAuth.getInstance()
         val textEmail: EditText = view.findViewById(R.id.signup_name)
         val textPass: EditText = view.findViewById(R.id.signup_pass)
         val bRegistrarme: Button = view.findViewById(R.id.signup_button)
@@ -60,31 +59,31 @@ class Registro : Fragment() {
         var pass = ""
 
         bRegistrarme.setOnClickListener {
-
-            email = textEmail.text.toString()
-            pass = textPass.text.toString()
-                    mAuth.createUserWithEmailAndPassword(email, pass)
-                        .addOnCompleteListener(this.activity!!, OnCompleteListener<AuthResult> { task ->
-                            if (task.isSuccessful) {
-                                Navigation.findNavController(view).navigate(RegistroDirections.actionRegistroToLogin())
-                                Log.d(TAG, "createUserWithEmail:success")
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                                Toast.makeText(
-                                    context!!, "Authentication failed.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        })
-
-                    /*val t = Thread {
+            try {
+                email = textEmail.text.toString()
+                pass = textPass.text.toString()
+                mAuth.createUserWithEmailAndPassword(email, pass)
+                    .addOnCompleteListener(this.activity!!, OnCompleteListener<AuthResult> { task ->
+                        if (task.isSuccessful) {
+                            Navigation.findNavController(view).navigate(RegistroDirections.actionRegistroToLogin())
+                            Log.d(TAG, "createUserWithEmail:success")
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                            Toast.makeText(context!!, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                /*val t = Thread {
                         val user: Users? = Users(0, usuario.text.toString(), pass.text.toString())
                         DataBase(context!!).DaoUser().insertUser(user!!)
                     }
                     t.start()
                     t.join()
                     Toast.makeText(context!!, "Usuario creado", Toast.LENGTH_SHORT).show()*/
+            }catch (iae : IllegalArgumentException){
+                Log.d("ERROR" ,iae.message)
+                Toast.makeText(context, "Rellene todos los campos", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

@@ -39,7 +39,8 @@
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.0"
                     android:layout_marginBottom="24dp"
-                    app:layout_constraintBottom_toTopOf="@+id/login_pass" android:hint="@string/Email"
+                    app:layout_constraintBottom_toTopOf="@+id/login_pass"
+                    android:hint="@string/Email"
                     android:textAlignment="center" android:autofillHints=""/>
             <EditText
                     android:layout_width="232dp"
@@ -61,7 +62,6 @@
                     app:layout_constraintHorizontal_bias="1.0" android:hint="@string/Password"
                     android:textAlignment="center" android:autofillHints=""/>
             <TextView
-                    android:text="@string/User"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView9"
@@ -73,7 +73,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/login_user"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.0"
-                    android:layout_marginStart="8dp"/>
+                    android:layout_marginStart="8dp" android:text="@string/User"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

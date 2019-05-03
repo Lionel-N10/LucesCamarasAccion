@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
         val searchItem = menu!!.findItem(R.id.app_bar_search)
         val listasItem = R.id.toolbar_listas
         val login = R.id.toolbar_login
+        val mAuth = FirebaseAuth.getInstance()
 
         val vari = findNavController(R.id.host_fragment)
         vari.setGraph(R.navigation.navigation_menu)
@@ -55,7 +56,10 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
             when (MenuItem.itemId) {
                 listasItem -> NavHostFragment.findNavController(host_fragment).navigate(R.id.misListas)
 
-                login -> NavHostFragment.findNavController(host_fragment).navigate(R.id.login)
+                login -> {
+                    mAuth.signOut()
+                    NavHostFragment.findNavController(host_fragment).navigate(R.id.login)
+                }
             }
             true
 
@@ -99,12 +103,8 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
 
     override fun onStart() {
         super.onStart()
-        var mAuth = FirebaseAuth.getInstance()
-        var currentUser = mAuth.currentUser
-
-        if(currentUser != null){
-            NavHostFragment.findNavController(host_fragment).navigate(R.id.home_fragment)
-        }
+        val mAuth = FirebaseAuth.getInstance()
+        val currentUser = mAuth.currentUser
     }
 
 

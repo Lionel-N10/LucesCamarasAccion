@@ -1,24 +1,24 @@
 <resources>
-    <string name="app_name">aplicacionprueba</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="_8_0">8.0</string>
-    <string name="accion_comedia">Accion, Comedia</string>
-    <string name="_2018">2018</string>
-    <string name="action_favorite"/>
-    <string name="action_search"/>
-    <string name="action_settings"/>
+    <string name="action_favorite" translatable="false"/>
+    <string name="action_search" translatable="false"/>
+    <string name="action_settings" translatable="false"/>
+    <string name="item" translatable="false">Item</string>
+    <string name="mejor_valoradas">Best rate</string>
+    <string name="pelicula">Movie</string>
+    <string name="generos">Genres</string>
+    <string name="fecha_de_estreno">Release date</string>
+    <string name="sipnosis">Overview</string>
+    <string name="imdb_puntuaci_n">IMDb rate</string>
+    <string name="titulo">Title</string>
+    <string name="lista_1" translatable="false">Lista 1</string>
+    <string name="n_de_pel_culas">Nº Movies</string>
+    <string name="signout">Sign Out</string>
+    <string name="mylists">My lists</string>
     <string name="search">Search</string>
-    <string name="item">Item</string>
-    <string name="mejor_valoradas">Mejor Valoradas</string>
-    <string name="pelicula">Pelicula</string>
-    <string name="gladiator">Gladiator</string>
-    <string name="generos">Generos:</string>
-    <string name="fecha_de_estreno">Fecha de Estreno:</string>
-    <string name="sipnosis">Sipnosis:</string>
-    <string name="imdb_puntuaci_n">IMDb puntuación:</string>
-    <string name="titulo">Titulo</string>
-    <string name="lista_1">Lista 1</string>
-    <string name="_0">0</string>
-    <string name="_1">1</string>
-    <string name="n_de_pel_culas">Nº de Películas:</string>
+    <string name="app_name">Ligths, Cameras, Action!</string>
+    <string name="Login">Log In</string>
+    <string name="SingUp">Sing Up</string>
+    <string name="Password">Password</string>
+    <string name="User">User</string>
+    <string name="Email">Email</string>
 </resources>

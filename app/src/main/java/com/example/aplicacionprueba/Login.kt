@@ -61,17 +61,17 @@ class Login : Fragment() {
 
         val emailText = view.findViewById<EditText>(R.id.login_user)
         val passText = view.findViewById<EditText>(R.id.login_pass)
-
-
-        val mAuth = FirebaseAuth.getInstance()
-
-
-
-
         val textusuario: EditText = view.findViewById(R.id.login_user)
         val textpass: EditText = view.findViewById(R.id.login_pass)
         val Blogin: Button = view.findViewById(R.id.bLogIn)
         val Bsingup: Button = view.findViewById(R.id.bSingUp)
+
+
+        val mAuth = FirebaseAuth.getInstance()
+
+        if (mAuth.currentUser != null){
+            NavHostFragment.findNavController(host_fragment).navigate(LoginDirections.actionLoginToHomeFragment())
+        }
 
         /*val email = Textusuario.text
         val pass = Textpass.text*/
@@ -82,8 +82,7 @@ class Login : Fragment() {
                 mAuth.signInWithEmailAndPassword(emailText.text.toString(), passText.text.toString())
                     .addOnCompleteListener(this.activity!!, OnCompleteListener<AuthResult> { task ->
                         if (task.isSuccessful) {
-                            NavHostFragment.findNavController(host_fragment)
-                                .navigate(LoginDirections.actionLoginToHomeFragment())
+                            NavHostFragment.findNavController(host_fragment).navigate(LoginDirections.actionLoginToHomeFragment())
                             Log.d(TAG, "signInWithEmail:success")
                         } else {
                             // If sign in fails, display a message to the user.

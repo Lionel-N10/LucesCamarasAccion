@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ligths, Cameras, Action!</string>
+    <string name="fecha_de_estreno">Fecha de estreno</string>
+    <string name="generos">Generos</string>
+    <string name="imdb_puntuaci_n">IMDb puntuación:</string>
+    <string name="mejor_valoradas">Mejor valoradas</string>
+    <string name="mylists">Mis listas</string>
+    <string name="Email">Email</string>
+    <string name="Login">Iniciar Sesión</string>
+    <string name="Password">Contraseña</string>
+    <string name="SingUp">Rregistrarse</string>
+    <string name="User">Usuario</string>
+    <string name="search">Buscar</string>
+    <string name="signout">Cerrar Sesion</string>
+    <string name="sipnosis">Sipnosis</string>
+    <string name="titulo">Titulo</string>
+    <string name="pelicula">Peliculas</string>
+    <string name="n_de_pel_culas">Nº de peliculas</string>
+</resources>

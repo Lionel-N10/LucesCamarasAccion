@@ -7,25 +7,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aplicacionprueba.Adapters.MisListasAdapter
 import com.example.aplicacionprueba.JsonObjets.FireBaseData
 import com.example.aplicacionprueba.JsonObjets.Lista
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DataSnapshot
-import android.widget.Toast
-import com.bumptech.glide.Glide
-import com.google.firebase.database.DatabaseReference
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import android.provider.ContactsContract.CommonDataKinds.Note
-import android.widget.TextView
-import com.example.aplicacionprueba.Adapters.FirebaseAdapter
-import com.example.aplicacionprueba.JsonObjets.ListFB
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -63,8 +57,6 @@ class MisListas : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var listas : List<Lista>? = null
 
-        //val adapter = FirebaseAdapter()
-
         listView = view.findViewById(R.id.rv_mislitas)
 
         /*val t = Thread{
@@ -73,10 +65,9 @@ class MisListas : Fragment() {
         t.start()
         t.join()*/
 
-        val database = FirebaseDatabase.getInstance().getReference("Usuario1") //Obtenemos las listas
+        val database = FirebaseDatabase.getInstance().getReference("Usuario1")//Obtenemos las listas
 
-
-        database.addValueEventListener( object: ValueEventListener {
+       database.addValueEventListener( object: ValueEventListener {
              override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                  val options = FirebaseRecyclerOptions.Builder<FireBaseData>().setQuery(com.example.aplicacionprueba.Adapters.database, FireBaseData::class.java).build()
@@ -101,7 +92,6 @@ class MisListas : Fragment() {
                      }
 
                      inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
                          var titleView: TextView
                          var posicionView: TextView
                          var countView: TextView

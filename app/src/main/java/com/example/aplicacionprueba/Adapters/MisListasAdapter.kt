@@ -9,18 +9,19 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.example.aplicacionprueba.JsonObjets.ListFB
+import com.example.aplicacionprueba.JsonObjets.FireBaseData
 import com.example.aplicacionprueba.MisListasDirections
 import com.example.aplicacionprueba.R
+import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.item_lista.view.*
 
-class MisListasAdapter(val context: Context, var values: List<ListFB>?, var id_fragment: Int) :
+class MisListasAdapter(val context: Context, var values: FireBaseData, var id_fragment: Int) :
     RecyclerView.Adapter<MisListasAdapter.ViewHolder>() {
 
     var viewHolder: ViewHolder? = null
 
     override fun getItemCount(): Int {
-        return values!!.size
+        return values.ListFB!!.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -50,7 +51,7 @@ class MisListasAdapter(val context: Context, var values: List<ListFB>?, var id_f
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values?.get(position)
+        /*val item =
         val listaId = item!!.listId
 
         holder.tituloView!!.text = item.listName
@@ -60,6 +61,6 @@ class MisListasAdapter(val context: Context, var values: List<ListFB>?, var id_f
             when (id_fragment) {
                 1 -> Navigation.findNavController(it).navigate(MisListasDirections.actionMisListasToListDetail(listaId!!))
             }
-        }
+        }*/
     }
 }
