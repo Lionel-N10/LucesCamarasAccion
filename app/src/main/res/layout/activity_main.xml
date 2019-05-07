@@ -16,23 +16,14 @@
     <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/otrocolor"
+            android:background="@color/colorBarras"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:minHeight="?attr/actionBarSize" android:id="@+id/toolbar" android:nestedScrollingEnabled="true"/>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:clickable="true" app:srcCompat="@drawable/ic_movie"
-            android:id="@+id/floatingActionButton" app:layout_anchorGravity="top|center"
-            android:focusable="true" app:layout_anchor="@+id/bar"
-            app:backgroundTint="@color/floatingBoton" android:nestedScrollingEnabled="true" android:visibility="gone"/>
-    <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bar"
+            android:minHeight="?attr/actionBarSize" android:id="@+id/toolbar" android:nestedScrollingEnabled="false"
+            android:visibility="gone"/>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
-            android:layout_height="53dp"
-            android:layout_gravity="bottom"
-            app:fabAlignmentMode="center"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:backgroundTint="@color/otrocolor" android:nestedScrollingEnabled="true"/>
+            android:layout_height="56dp" android:layout_gravity="bottom" android:visibility="gone"
+            android:id="@+id/bottom_navigation"
+            app:menu="@menu/menu_bottombar_home" android:background="@color/colorBarras"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -38,7 +38,11 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        setToolbar(menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
+    fun setToolbar(menu: Menu?){
         toolbar.inflateMenu(R.menu.menu_toolbar)
         val searchItem = menu!!.findItem(R.id.app_bar_search)
         val listasItem = R.id.toolbar_listas
@@ -62,7 +66,6 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
                 }
             }
             true
-
         }
 
         if (searchItem != null){
@@ -86,8 +89,6 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
                 }
             })
         }
-
-        return super.onCreateOptionsMenu(menu)
     }
 
     /* override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -112,36 +113,18 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         setSupportActionBar(toolbar)
 
         val database = FirebaseDatabase.getInstance()
-        val myRef = database.reference
+        val bPopular = R.id.action_popular
+        val bTop_Rated = R.id.action_top
+        val bHome = R.id.action_home
 
-       /* myRef.setValue("Usuario1")
-        myRef.child("Usuario1").setValue(Users(1, "Usuario","Usuario"))
-        myRef.child("Usuario1").child("Lista1").setValue(Lista(1,1, "Lista 1"))
-        myRef.child("Usuario1").child("Lista2").setValue(Lista(1,1, "Lista 2"))
-        myRef.child("Usuario1").child("Lista3").setValue(Lista(1,1, "Lista 3"))
-        myRef.child("Usuario1").child("Lista1").child("Movie 1").setValue(ListMovies(1,98))*/
-
-        //val myRefLista = myRef.child(1).child()
-
-        val bPopular = R.id.app_bar_popular
-        val bTop_Rated = R.id.app_bar_toprated
-        val bListas = R.id.app_bar_settings
-        //val bUser = R.id.app_bar_user
-        val bHome = R.id.app_bar_home
-
-        bar.replaceMenu(R.menu.menu_bottombar_home)
-
-        bar.setOnMenuItemClickListener { MenuItem ->
+        bottom_navigation.setOnNavigationItemSelectedListener { MenuItem ->
             when(MenuItem.itemId){
                 bHome -> NavHostFragment.findNavController(host_fragment).navigate(R.id.home_fragment)
                 bPopular -> NavHostFragment.findNavController(host_fragment).navigate(R.id.popularMovies)
                 bTop_Rated -> NavHostFragment.findNavController(host_fragment).navigate(R.id.list_TopRated)
-                bListas -> NavHostFragment.findNavController(host_fragment).navigate(R.id.misListas)
             }
             true
         }

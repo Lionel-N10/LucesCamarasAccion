@@ -21,4 +21,6 @@
     <string name="Password">Password</string>
     <string name="User">User</string>
     <string name="Email">Email</string>
+    <string name="MostPopular">Most popular</string>
+    <string name="Home">Home</string>
 </resources>

@@ -10,8 +10,10 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aplicacionprueba.Adapters.MovieAdapter
+import com.example.aplicacionprueba.Adapters.PaginationScrollListener
 import com.example.lucescamarasaccion.Movies
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
@@ -42,6 +44,14 @@ class List_TopRated : Fragment() {
 
     private var listView: RecyclerView? = null
     private var pbCargando: ProgressBar? = null
+    var visibleItemCount: Int = 0
+    var pastVisibleItemCount: Int = 0
+    var totalItemCount: Int = 0
+    var loading: Boolean = false
+    var pageId: Int = 1
+    var layoutManager = LinearLayoutManager(context)
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,7 +60,9 @@ class List_TopRated : Fragment() {
         listView = view.findViewById(R.id.lista) as RecyclerView
 
         val client = ServiceGenerator.createService(MoviesClient::class.java)
+
         val call = client.GetTopRatedMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
+        call.request().url().host()
 
         call.enqueue(object : Callback<Movies> {
             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
@@ -58,7 +70,28 @@ class List_TopRated : Fragment() {
 
                 listView!!.layoutManager = GridLayoutManager(activity, 2)
                 listView!!.adapter = MovieAdapter(context!!, repos!!.results, 1)
+                listView!!.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        if (dy > 0){
+                            visibleItemCount = layoutManager.childCount
+                            totalItemCount = layoutManager.itemCount
+                            pastVisibleItemCount = (listView!!.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                            if(loading){
+                                if((visibleItemCount + pastVisibleItemCount) >= totalItemCount) {
+                                    loading = false
+                                    pageId++
+                                    client.GetTopRatedMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", pageId)
+                                }
+                            }
+                        }
+                    }
 
+                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                        super.onScrollStateChanged(recyclerView, newState)
+                    }
+
+
+                })
 
                 //Toast.makeText(context!!, "MejorValoradas, cargado", Toast.LENGTH_SHORT).show()
 

@@ -17,4 +17,6 @@
     <string name="titulo">Titulo</string>
     <string name="pelicula">Peliculas</string>
     <string name="n_de_pel_culas">Nº de peliculas</string>
+    <string name="MostPopular">Most popular</string>
+    <string name="Home">Home</string>
 </resources>

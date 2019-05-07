@@ -20,6 +20,7 @@ import com.example.lucescamarasaccion.Movies
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,7 +57,7 @@ class Home_Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bottomBar: BottomAppBar = activity!!.findViewById(R.id.bar)
+        val bottomBar: BottomNavigationView = activity!!.findViewById(R.id.bottom_navigation)
         bottomBar.visibility = View.VISIBLE
 
         progresBar = view.findViewById(R.id.home_PB)

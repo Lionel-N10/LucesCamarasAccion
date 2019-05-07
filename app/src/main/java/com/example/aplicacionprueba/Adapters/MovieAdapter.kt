@@ -18,10 +18,14 @@ import com.example.lucescamarasaccion.Result
 import kotlinx.android.synthetic.main.list_item_pagination.view.*
 
 
+
 class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragment: Int) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
+    private val ITEM = 0
+    private val LOADING = 1
     var viewHolder: ViewHolder? = null
+    private val isLoadingAdded = false
 
     override fun getItemCount(): Int {
         return values!!.size
@@ -34,7 +38,6 @@ class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragm
         return viewHolder!!
     }
 
-
     class ViewHolder(vista: View): RecyclerView.ViewHolder(vista){
 
         var card: CardView? = null
@@ -42,7 +45,6 @@ class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragm
         var notaView: TextView? = null
         var estrenoView: TextView? = null
         var posterView: ImageView? = null
-
         init {
             tituloView = vista.movie_title
             notaView = vista.movie_rating
@@ -51,7 +53,6 @@ class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragm
             card = vista.cardView
         }
     }
-
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values?.get(position)
@@ -65,19 +66,13 @@ class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragm
             val movieId = item.id
             when (id_fragment) {
                 1 -> Navigation.findNavController(it).navigate(
-                    List_TopRatedDirections.actionListTopRatedToMovieDetail(
-                        movieId!!
-                    )
+                    List_TopRatedDirections.actionListTopRatedToMovieDetail(movieId!!)
                 )
                 2 -> Navigation.findNavController(it).navigate(
-                    search_moviesDirections.actionSearchMoviesToMovieDetail(
-                        movieId!!
-                    )
+                    search_moviesDirections.actionSearchMoviesToMovieDetail(movieId!!)
                 )
                 3 -> Navigation.findNavController(it).navigate(
-                    PopularMoviesDirections.actionPopularMoviesToMovieDetail(
-                        movieId!!
-                    )
+                    PopularMoviesDirections.actionPopularMoviesToMovieDetail(movieId!!)
                 )
             }
         }
