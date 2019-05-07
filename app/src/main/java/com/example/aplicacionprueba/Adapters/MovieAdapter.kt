@@ -57,8 +57,8 @@ class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragm
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values?.get(position)
         holder.tituloView?.text = item?.title
-        holder.estrenoView?.text = item?.releaseDate
-        holder.notaView?.text = item?.voteAverage.toString()
+        holder.estrenoView?.text = "Fecha de estreno: "+ item?.releaseDate
+        holder.notaView?.text = "Nota IMDb: ${item?.voteAverage.toString()}"
         holder.itemView.setOnClickListener { }
         Glide.with(context).load("https://image.tmdb.org/t/p/w500${item!!.posterPath}").centerCrop().thumbnail(0.5f)
             .into(holder.posterView!!)

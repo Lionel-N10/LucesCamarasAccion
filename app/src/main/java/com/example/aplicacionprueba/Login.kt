@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -57,7 +56,6 @@ class Login : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Asignamos y ocultamos la toolbar y la bottombar para crear una pantalla de Login más limpia
         val bottomBar: BottomNavigationView = activity!!.findViewById(R.id.bottom_navigation)
         bottomBar.visibility = View.GONE
         (activity as AppCompatActivity).supportActionBar!!.hide()
@@ -68,7 +66,6 @@ class Login : Fragment() {
         val textpass: EditText = view.findViewById(R.id.login_pass)
         val Blogin: Button = view.findViewById(R.id.bLogIn)
         val Bsingup: Button = view.findViewById(R.id.bSingUp)
-
 
         val mAuth = FirebaseAuth.getInstance()
 
