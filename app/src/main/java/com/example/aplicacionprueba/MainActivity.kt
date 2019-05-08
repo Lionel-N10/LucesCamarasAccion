@@ -132,9 +132,7 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         val view = currentFocus
-        if (view != null && (ev.action == MotionEvent.ACTION_UP || ev.action == MotionEvent.ACTION_MOVE) && view is EditText && !view.javaClass.name.startsWith(
-                "android.webkit."
-            )
+        if (view != null && (ev.action == MotionEvent.ACTION_UP || ev.action == MotionEvent.ACTION_MOVE) && view is EditText && !view.javaClass.name.startsWith("android.webkit.")
         ) {
             val scrcoords = IntArray(2)
             view.getLocationOnScreen(scrcoords)

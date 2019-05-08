@@ -1,5 +1,6 @@
 package com.example.aplicacionprueba
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -72,7 +73,7 @@ class MovieDetail : Fragment() {
         })
     }
 
-    fun showMovieDetails(view: View, id: Int){
+    fun showMovieDetails(view: View, id: Int) {
         moviedetail_layout = view.findViewById(R.id.scrollView2)
         progressBar_moviedetails = view.findViewById(R.id.progressBar_moviedetails)
 
@@ -81,11 +82,12 @@ class MovieDetail : Fragment() {
 
 
         call.enqueue(object : Callback<MovieDetails_Object> {
+            @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<MovieDetails_Object>, response: Response<MovieDetails_Object>) {
                 val repos = response.body()
                 var generos = ""
 
-                if(repos != null) {
+                if (repos != null) {
                     val tituloView: TextView = view.findViewById(R.id.movie_title)
                     val originalTitleView: TextView = view.findViewById(R.id.movie_orgininal_title)
                     val notaView: TextView = view.findViewById(R.id.movie_rating)
@@ -98,8 +100,8 @@ class MovieDetail : Fragment() {
                     try {
                         tituloView.text = repos.title
                         originalTitleView.text = repos.originalTitle
-                        notaView.text = repos.voteAverage.toString()
-                        estrenoView.text = repos.releaseDate
+                        notaView.text = "${getString(R.string.imdbrating)}: ${repos.voteAverage.toString()}"
+                        estrenoView.text = "${getString(R.string.releasedate)}: ${repos.releaseDate}"
                         sipnosisView.text = repos.overview
                         for (i in 0..repos.genres!!.lastIndex) {
                             generos += " ${repos.genres!![i].name}"
@@ -117,13 +119,13 @@ class MovieDetail : Fragment() {
 
                     progressBar_moviedetails!!.visibility = View.GONE
                     moviedetail_layout!!.visibility = View.VISIBLE
-                }
-                else{
+                } else {
                     progressBar_moviedetails!!.visibility = View.GONE
                     //Toast.makeText(context!!, "No se ha podido encontrar la película", Toast.LENGTH_SHORT).show()
                     Navigation.findNavController(view).navigate(MovieDetailDirections.actionMovieDetailToHomeFragment())
                 }
             }
+
             override fun onFailure(call: Call<MovieDetails_Object>, t: Throwable) {
                 Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
                 t.printStackTrace()

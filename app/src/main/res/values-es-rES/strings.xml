@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Ligths, Cameras, Action!</string>
-    <string name="fecha_de_estreno">Fecha de estreno</string>
-    <string name="generos">Generos</string>
-    <string name="imdb_puntuaci_n">IMDb puntuación:</string>
-    <string name="mejor_valoradas">Mejor valoradas</string>
+    <string name="releasedate">Fecha de estreno</string>
+    <string name="genres">Generos</string>
+    <string name="imdbrating">IMDb puntuación</string>
+    <string name="bestrate">Mejor valoradas</string>
     <string name="mylists">Mis listas</string>
-    <string name="Email">Email</string>
-    <string name="Login">Iniciar Sesión</string>
-    <string name="Password">Contraseña</string>
-    <string name="SingUp">Rregistrarse</string>
-    <string name="User">Usuario</string>
+    <string name="email">Email</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="password">Contraseña</string>
+    <string name="signup">Rregistrarse</string>
+    <string name="user">Usuario</string>
     <string name="search">Buscar</string>
     <string name="signout">Cerrar Sesion</string>
-    <string name="sipnosis">Sipnosis</string>
-    <string name="titulo">Titulo</string>
-    <string name="pelicula">Peliculas</string>
-    <string name="n_de_pel_culas">Nº de peliculas</string>
-    <string name="MostPopular">Most popular</string>
-    <string name="Home">Home</string>
+    <string name="overview">Sipnosis</string>
+    <string name="title">Titulo</string>
+    <string name="movie">Peliculas</string>
+    <string name="countmovies">Nº de peliculas</string>
+    <string name="mostpopular">Most popular</string>
+    <string name="home">Home</string>
 </resources>

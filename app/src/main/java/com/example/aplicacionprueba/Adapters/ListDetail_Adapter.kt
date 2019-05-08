@@ -79,8 +79,8 @@ class ListDetail_Adapter(val context: Context, var values: ArrayList<Int>, var i
                 holder.card!!.visibility = View.INVISIBLE
 
                 holder.tituloView?.text = repos!!.title
-                holder.rateView?.text = repos.voteAverage.toString()
-                holder.releaseView?.text = repos.releaseDate
+                holder.rateView?.text = R.string.imdbrating.toString() + repos.voteAverage.toString()
+                holder.releaseView?.text = "${R.string.releasedate}${repos.releaseDate.toString()}"
                 holder.originalView?.text = repos.originalTitle
                 Glide.with(context).load("https://image.tmdb.org/t/p/w500${repos.posterPath}")
                     .centerCrop()

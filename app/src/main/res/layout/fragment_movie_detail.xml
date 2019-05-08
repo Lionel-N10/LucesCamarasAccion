@@ -76,7 +76,7 @@
                             android:layout_height="wrap_content" android:id="@+id/textView11"
                             app:layout_constraintTop_toTopOf="@+id/movie_poster"
                             app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="40dp"
-                            android:visibility="invisible" android:hint="añadir"/>
+                            android:visibility="invisible"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -105,115 +105,89 @@
                             android:layout_marginEnd="16dp" android:layout_marginTop="24dp"
                             app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/movie_rating"
                             app:autoSizeTextType="uniform"
-                            app:autoSizeMaxTextSize="20dp"
-                            app:autoSizeMinTextSize="8dp"
                             android:textStyle="bold" android:textColor="@color/floatingBoton"
                             android:gravity="bottom"
-                            app:layout_constraintStart_toEndOf="@+id/textView3"
-                            android:layout_marginTop="100dp"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            style="@style/Text"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/movie_release_data"
+                            android:layout_marginEnd="8dp" android:layout_marginTop="8dp"/>
                     <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content" android:id="@+id/movie_orgininal_title"
                             android:textSize="12sp"
                             app:autoSizeTextType="uniform"
-                            app:autoSizeMaxTextSize="20dp"
-                            app:autoSizeMinTextSize="8dp"
                             android:gravity="center|left"
                             android:textColor="@color/floatingBoton"
-                            app:layout_constraintStart_toStartOf="@+id/movie_title"
+                            app:layout_constraintStart_toStartOf="parent"
+                            style="@style/Text"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="8dp"
                             app:layout_constraintTop_toBottomOf="@+id/movie_title"/>
                     <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/movie_genre"
                             app:autoSizeTextType="uniform"
-                            app:autoSizeMaxTextSize="20dp"
-                            app:autoSizeMinTextSize="8dp"
                             android:textStyle="bold" android:textColor="@color/floatingBoton"
                             android:gravity="center|left"
-                            android:layout_marginTop="76dp"
-                            app:layout_constraintTop_toBottomOf="@+id/movie_orgininal_title"
-                            app:layout_constraintStart_toEndOf="@+id/textView4"/>
+                            style="@style/Text"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintStart_toEndOf="@+id/textView4" android:layout_marginStart="8dp"
+                            android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/movie_rating"
+                            app:layout_constraintHorizontal_bias="0.0"/>
                     <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:alpha="0.7"
                             android:id="@+id/movie_release_data"
                             app:autoSizeTextType="uniform"
-                            app:autoSizeMaxTextSize="20dp"
-                            app:autoSizeMinTextSize="8dp"
                             android:textStyle="bold" android:textColor="@color/floatingBoton"
-                            android:layout_marginEnd="224dp"
-                            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="13dp"
-                            app:layout_constraintBottom_toTopOf="@+id/movie_rating"/>
+                            style="@style/Text"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/movie_orgininal_title"
+                            android:layout_marginTop="8dp" android:layout_marginStart="8dp"/>
                     <TextView
-                            android:text="@string/imdb_puntuaci_n"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/textView3"
-                            app:autoSizeTextType="uniform"
-                            app:autoSizeMaxTextSize="20dp"
-                            app:autoSizeMinTextSize="8dp"
-                            android:gravity="bottom|right"
-                            android:paddingRight="8dp" android:textColor="@color/floatingBoton"
-                            android:layout_marginTop="100dp"
-                            app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="16dp"
-                            app:layout_constraintStart_toStartOf="parent"/>
-                    <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/movie_title"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textColor="@color/floatingBoton" android:textStyle="italic"
                             app:autoSizeTextType="uniform"
-                            app:autoSizeMaxTextSize="20dp"
-                            app:autoSizeMinTextSize="8dp"
-                            android:textSize="20sp"
-                            android:gravity="center"
-                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginStart="16dp"
-                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.096"
-                            android:layout_marginEnd="8dp" app:layout_constraintEnd_toStartOf="@+id/textView12"
-                            app:layout_constraintHorizontal_bias="0.0"/>
+                            android:textSize="14sp"
+                            style="@style/Titles"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView12" android:layout_marginTop="8dp"/>
                     <TextView
-                            android:text="@string/fecha_de_estreno"
+                            android:text="@string/genres"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/textView2"
-                            app:autoSizeTextType="uniform"
-                            app:autoSizeMaxTextSize="20dp"
-                            app:autoSizeMinTextSize="8dp"
-                            android:gravity="right" android:paddingRight="8dp" android:textColor="@color/floatingBoton"
-                            android:layout_marginTop="68dp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/movie_release_data"
-                            android:layout_marginStart="16dp" app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"/>
-                    <TextView
-                            android:text="@string/generos"
-                            android:layout_width="0dp"
                             android:layout_height="wrap_content" android:id="@+id/textView4"
                             app:autoSizeTextType="uniform"
-                            app:autoSizeMaxTextSize="20dp"
-                            app:autoSizeMinTextSize="8dp"
                             android:paddingRight="8dp"
-                            android:gravity="center|right" android:textColor="@color/floatingBoton"
-                            android:layout_marginTop="76dp"
-                            app:layout_constraintTop_toBottomOf="@+id/movie_orgininal_title"
-                            android:layout_marginStart="16dp" app:layout_constraintStart_toStartOf="parent"/>
+                            android:textColor="@color/floatingBoton"
+                            style="@style/Text"
+                            android:layout_marginStart="8dp"
+                            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="20dp"
+                            app:layout_constraintTop_toBottomOf="@+id/movie_rating"
+                            android:textSize="10sp"/>
                     <TextView
                             android:text="Añadir a: "
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView12"
                             android:textColor="@color/floatingBoton" app:layout_constraintEnd_toStartOf="@+id/spinner"
-                            android:layout_marginTop="24dp" app:layout_constraintTop_toTopOf="parent"
-                            android:layout_marginEnd="4dp"/>
+                            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginEnd="312dp" style="@style/Text" android:layout_marginStart="8dp"
+                            app:layout_constraintStart_toStartOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -226,7 +200,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/movie_card_info1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp">
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -249,9 +223,10 @@
                             app:layout_constraintTop_toBottomOf="@+id/textView5"
                             app:layout_constraintVertical_bias="1.0"
                             android:layout_marginEnd="22dp" app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0" android:textAlignment="textStart"/>
+                            app:layout_constraintHorizontal_bias="0.0" android:textAlignment="textStart"
+                            style="@style/Text"/>
                     <TextView
-                            android:text="@string/sipnosis"
+                            android:text="@string/overview"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView5" android:textColor="@color/floatingBoton"
@@ -260,8 +235,9 @@
                             app:autoSizeMaxTextSize="20dp"
                             app:autoSizeMinTextSize="8dp"
                             android:gravity="center"
-                            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="92dp"
-                            android:layout_marginStart="20dp" app:layout_constraintStart_toStartOf="parent"/>
+                            style="@style/Titles"
+                            android:layout_marginStart="20dp" app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginTop="16dp" app:layout_constraintTop_toTopOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -281,6 +257,7 @@
                             android:layout_height="wrap_content" android:id="@+id/textView8"
                             android:textColor="@color/floatingBoton" android:layout_marginTop="8dp"
                             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            style="@style/Titles"
                             android:layout_marginStart="8dp"/>
                     <androidx.viewpager.widget.ViewPager
                             android:layout_width="380dp"

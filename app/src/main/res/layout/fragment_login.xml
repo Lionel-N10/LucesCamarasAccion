@@ -39,8 +39,8 @@
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.0"
                     android:layout_marginBottom="24dp"
-                    app:layout_constraintBottom_toTopOf="@+id/login_pass" android:hint="@string/Email"
-                    android:textAlignment="center" android:autofillHints=""/>
+                    app:layout_constraintBottom_toTopOf="@+id/login_pass" android:hint="@string/email"
+                    android:textAlignment="center" android:autofillHints="" android:textColorHint="#A0A0A0"/>
             <EditText
                     android:layout_width="232dp"
                     android:layout_height="wrap_content"
@@ -58,10 +58,10 @@
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginBottom="52dp" app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0" android:hint="@string/Password"
-                    android:textAlignment="center" android:autofillHints=""/>
+                    app:layout_constraintHorizontal_bias="1.0" android:hint="@string/password"
+                    android:textAlignment="center" android:autofillHints="" android:textColorHint="#A0A0A0"/>
             <TextView
-                    android:text="@string/User"
+                    android:text="@string/user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView9"
@@ -84,9 +84,9 @@
                     app:autoSizeMaxTextSize="20dp"
                     app:autoSizeMinTextSize="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/login_pass" android:layout_marginStart="8dp"
-                    app:layout_constraintStart_toStartOf="parent" android:text="@string/Password"/>
+                    app:layout_constraintStart_toStartOf="parent" android:text="@string/password"/>
             <Button
-                    android:text="@string/Login"
+                    android:text="@string/login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/bLogIn" android:textColor="@color/floatingBoton"
@@ -96,9 +96,9 @@
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.0"
                     android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/login_pass"
-                    app:layout_constraintVertical_bias="0.666"/>
+                    app:layout_constraintVertical_bias="0.666" style="@style/Widget.AppCompat.Button.Borderless"/>
             <Button
-                    android:text="@string/SingUp"
+                    android:text="@string/signup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/bSingUp"
@@ -108,7 +108,8 @@
                     android:background="@color/otrocolor" android:textSize="12sp" android:layout_marginEnd="16dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/login_pass" app:layout_constraintVertical_bias="0.666"/>
+                    app:layout_constraintTop_toBottomOf="@+id/login_pass" app:layout_constraintVertical_bias="0.666"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

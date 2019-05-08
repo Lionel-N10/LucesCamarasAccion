@@ -3,24 +3,23 @@
     <string name="action_search" translatable="false"/>
     <string name="action_settings" translatable="false"/>
     <string name="item" translatable="false">Item</string>
-    <string name="mejor_valoradas">Best rate</string>
-    <string name="pelicula">Movie</string>
-    <string name="generos">Genres</string>
-    <string name="fecha_de_estreno">Release date</string>
-    <string name="sipnosis">Overview</string>
-    <string name="imdb_puntuaci_n">IMDb rate</string>
-    <string name="titulo">Title</string>
-    <string name="lista_1" translatable="false">Lista 1</string>
-    <string name="n_de_pel_culas">Nº Movies</string>
+    <string name="bestrate">Best rate</string>
+    <string name="movie">Movie</string>
+    <string name="genres">Genres</string>
+    <string name="releasedate">Release date</string>
+    <string name="overview">Overview</string>
+    <string name="imdbrating">IMDb rate</string>
+    <string name="title">Title</string>
+    <string name="countmovies">Nº Movies</string>
     <string name="signout">Sign Out</string>
     <string name="mylists">My lists</string>
     <string name="search">Search</string>
     <string name="app_name">Ligths, Cameras, Action!</string>
-    <string name="Login">Log In</string>
-    <string name="SingUp">Sing Up</string>
-    <string name="Password">Password</string>
-    <string name="User">User</string>
-    <string name="Email">Email</string>
-    <string name="MostPopular">Most popular</string>
-    <string name="Home">Home</string>
+    <string name="login">Log In</string>
+    <string name="signup">Sing Up</string>
+    <string name="password">Password</string>
+    <string name="user">User</string>
+    <string name="email">Email</string>
+    <string name="mostpopular">Most popular</string>
+    <string name="home">Home</string>
 </resources>

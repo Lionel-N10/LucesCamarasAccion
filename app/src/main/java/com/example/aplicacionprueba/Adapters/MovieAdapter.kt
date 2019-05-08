@@ -50,7 +50,7 @@ class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragm
             notaView = vista.movie_rating
             estrenoView = vista.movie_release_data
             posterView = vista.movie_poster
-            card = vista.cardView
+            card = vista.movie_card
         }
     }
 
@@ -60,7 +60,7 @@ class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragm
         holder.estrenoView?.text = "Fecha de estreno: "+ item?.releaseDate
         holder.notaView?.text = "Nota IMDb: ${item?.voteAverage.toString()}"
         holder.itemView.setOnClickListener { }
-        Glide.with(context).load("https://image.tmdb.org/t/p/w500${item!!.posterPath}").centerCrop().thumbnail(0.5f)
+        Glide.with(context).load("https://image.tmdb.org/t/p/w500${item!!.posterPath}").centerCrop().thumbnail(1f)
             .into(holder.posterView!!)
         holder.card!!.setOnClickListener {
             val movieId = item.id

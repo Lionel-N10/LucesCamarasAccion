@@ -3,9 +3,9 @@
     <color name="colorPrimary">#000E5D5D</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="otrocolor">#201F1F</color>
-    <color name="colorAccent">#0A0A0A</color>
+    <color name="colorAccent">#757575</color>
     <color name="floatingBoton">#F4EFEF</color>
     <color name="nota">#000000</color>
     <color name="ProgressBar">#191BA0</color>
-    <color name="colorBarras">#2962FF</color>
+    <color name="colorBarras">#494A4A</color>
 </resources>

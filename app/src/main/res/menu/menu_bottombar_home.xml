@@ -2,8 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="@string/mejor_valoradas" android:id="@+id/action_top" android:icon="@drawable/ic_filmstrip"/>
-    <item android:title="@string/MostPopular" android:id="@+id/action_popular" android:icon="@drawable/ic_movie_roll"/>
-    <item android:title="@string/Home" android:id="@+id/action_home" android:icon="@drawable/popcorns_icon"/>
-
+    <item android:title="@string/home" android:id="@+id/action_home" android:icon="@drawable/popcorns_icon"/>
+    <item android:title="@string/bestrate" android:id="@+id/action_top" android:icon="@drawable/ic_filmstrip"/>
+    <item android:title="@string/mostpopular" android:id="@+id/action_popular" android:icon="@drawable/ic_movie_roll"/>
 </menu>
