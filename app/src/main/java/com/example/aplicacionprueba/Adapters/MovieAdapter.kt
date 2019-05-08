@@ -22,10 +22,7 @@ import kotlinx.android.synthetic.main.list_item_pagination.view.*
 class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragment: Int) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
-    private val ITEM = 0
-    private val LOADING = 1
     var viewHolder: ViewHolder? = null
-    private val isLoadingAdded = false
 
     override fun getItemCount(): Int {
         return values!!.size

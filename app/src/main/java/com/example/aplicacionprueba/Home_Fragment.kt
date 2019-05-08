@@ -152,7 +152,6 @@ class Home_Fragment : Fragment() {
                 t.printStackTrace()
             }
         })
-
         return true
     }
 

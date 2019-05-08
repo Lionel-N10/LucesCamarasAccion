@@ -1,10 +1,12 @@
 package com.example.aplicacionprueba.Adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.widget.LinearLayout
 import android.widget.MediaController
 import android.widget.VideoView
@@ -13,33 +15,31 @@ import com.example.aplicacionprueba.JsonObjets.Video_result
 import com.example.aplicacionprueba.R
 
 
-
-
-
-
-
 class SliderVideoAdapter(var context: Context, videos: List<Video_result>?) : PagerAdapter() {
     private val videos: List<Video_result>?
     lateinit var inflater: LayoutInflater
 
-    lateinit var videoView: VideoView
-    lateinit var mediaController: MediaController
+    lateinit var videoView: WebView
 
     init {
         this.videos = videos!!
     }
 
+    @SuppressLint("NewApi")
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val item = videos!!.get(position)
 
         inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View = inflater.inflate(R.layout.slider_video_item, container, false)
-        videoView = view.findViewById(R.id.videoView2)
+        videoView = view.findViewById(R.id.webView)
 
-        mediaController = MediaController(context)
+        var frameVideo = "<html><iframe width="+320+" height="+230+" src=https://www.youtube.com/embed/${item.key} allowfullscreen></iframe></html>"
 
-        videoView.setVideoPath("https://www.youtube.com/watch?v=${item.key}")
-        videoView.start()
+
+        videoView.webChromeClient
+        videoView.settings.javaScriptEnabled = true
+
+        videoView.loadData(frameVideo, "text/html", "UTF-8")
         container.addView(view)
 
         return view

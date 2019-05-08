@@ -111,7 +111,6 @@ class MovieDetail : Fragment() {
                             .into(posterView)
                         Glide.with(view).load("https://image.tmdb.org/t/p/w500${repos.backdropPath}").centerInside()
                             .into(backdropView)
-
                     } catch (npe: NullPointerException) {
                     }
 
@@ -147,7 +146,7 @@ class MovieDetail : Fragment() {
         moviedetail_layout!!.visibility = View.GONE
 
         showMovieDetails(view, arguments!!.getInt("movie_id", 0))
-        //showTrailers(view, arguments!!.getInt("movie_id", 0))
+        showTrailers(view, arguments!!.getInt("movie_id", 0))
 
         lateinit var opciones: List<String>
 
@@ -161,7 +160,6 @@ class MovieDetail : Fragment() {
         spinner!!.adapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, opciones)
         spinner!!.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                //opcion!!.text = "Seleccione una lista"
                 opcion!!.text = opciones[position]
             }
 
