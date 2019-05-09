@@ -3,11 +3,15 @@ package com.example.aplicacionprueba
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
@@ -48,6 +52,7 @@ class MovieDetail : Fragment() {
     private var opcion: TextView? = null
     private var moviedetail_layout: ScrollView? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -59,12 +64,30 @@ class MovieDetail : Fragment() {
     fun showTrailers(view: View, id: Int) {
         val client = ServiceGenerator.createService(MoviesClient::class.java)
         val call = client.getVideos(id, "39534c06f3f59b461ca70b61f782f06d", "es-ES")
-
+        val videoView = view.findViewById<WebView>(R.id.webView)
+        val card_trailers = view.findViewById<CardView>(R.id.movie_card_trailers)
 
         call.enqueue(object : Callback<MovieVideos_Object> {
             override fun onResponse(call: Call<MovieVideos_Object>, response: Response<MovieVideos_Object>) {
                 val repos = response.body()
-                movie_viewpager.adapter = SliderVideoAdapter(context!!, repos!!.results)
+                //movie_viewpager.adapter = SliderVideoAdapter(context!!, repos!!.results)
+
+                if (repos!!.results!!.isNotEmpty()) { //Si se encuentran trailers cargamos el principal en el webview
+
+                    val frameVideo =
+                        "<!DOCTYPE HTML> <html><body style=\"margin:0 0 0 0; padding:0 0 0 0;\"> <iframe width=\"350\" height=\"220\" src=\"https://www.youtube.com/embed/${repos.results!![0].key}\" frameborder=\"0\"></iframe> </body> </html>"
+
+                    videoView.settings.javaScriptEnabled = true
+
+                    videoView.loadData(frameVideo, "text/html", "UTF-8")
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        videoView.webChromeClient
+                    }
+
+                }else{
+                    card_trailers.visibility = View.GONE
+                }
             }
 
             override fun onFailure(call: Call<MovieVideos_Object>, t: Throwable) {
@@ -102,7 +125,13 @@ class MovieDetail : Fragment() {
                         originalTitleView.text = repos.originalTitle
                         notaView.text = "${getString(R.string.imdbrating)}: ${repos.voteAverage.toString()}"
                         estrenoView.text = "${getString(R.string.releasedate)}: ${repos.releaseDate}"
+                        //Controlamos el scroll de la sipnosis y si esta vacía o no
                         sipnosisView.text = repos.overview
+                        sipnosisView.movementMethod = ScrollingMovementMethod()
+                        if(sipnosisView.text == ""){
+                            movie_card_overview.visibility = View.GONE
+                        }
+
                         for (i in 0..repos.genres!!.lastIndex) {
                             generos += " ${repos.genres!![i].name}"
                         }

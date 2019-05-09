@@ -22,4 +22,7 @@
     <string name="email">Email</string>
     <string name="mostpopular">Most popular</string>
     <string name="home">Home</string>
+    <string name="populares">Populares</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="releases">Releases</string>
 </resources>

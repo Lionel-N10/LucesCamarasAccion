@@ -38,7 +38,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:id="@+id/ConstraintLayout">
                     <TextView
-                            android:text="Estrenos"
+                            android:text="@string/releases"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView7" android:textStyle="bold|italic"
@@ -77,9 +77,9 @@
                         android:orientation="vertical">
 
                     <TextView
-                            android:text="Próximos Estrenos"
+                            android:text="@string/upcoming"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:id="@+id/textView16"
+                            android:layout_height="0dp" android:id="@+id/textView16"
                             android:layout_weight="1" android:textColor="@color/floatingBoton" android:padding="8dp"
                             android:textAllCaps="false" android:textStyle="bold|italic"
                             android:layout_marginStart="8dp"/>
@@ -107,9 +107,9 @@
                         android:orientation="vertical">
 
                     <TextView
-                            android:text="Populares"
+                            android:text="@string/populares"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:id="@+id/textView20"
+                            android:layout_height="wrap_content" android:id="@+id/text_popular"
                             android:textColor="@color/floatingBoton" android:padding="8dp" android:textAllCaps="false"
                             android:textStyle="bold|italic" android:layout_marginStart="8dp"/>
                     <androidx.recyclerview.widget.RecyclerView

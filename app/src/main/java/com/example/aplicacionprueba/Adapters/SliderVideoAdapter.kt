@@ -33,13 +33,13 @@ class SliderVideoAdapter(var context: Context, videos: List<Video_result>?) : Pa
         val view: View = inflater.inflate(R.layout.slider_video_item, container, false)
         videoView = view.findViewById(R.id.webView)
 
-        var frameVideo = "<html><iframe width="+320+" height="+230+" src=https://www.youtube.com/embed/${item.key} allowfullscreen></iframe></html>"
+        var frameVideo = "<html><body><iframe{margin:0;padding:0;} width=350 height=250 src=https://www.youtube.com/embed/${item.key} frameborder="+0+" allowfullscreen></iframe></body></html>"
 
 
         videoView.webChromeClient
         videoView.settings.javaScriptEnabled = true
 
-        videoView.loadData(frameVideo, "text/html", "UTF-8")
+        videoView.loadData("https://www.youtube.com/watch?v=${item.key}", "text/Webm", "UTF-8")
         container.addView(view)
 
         return view

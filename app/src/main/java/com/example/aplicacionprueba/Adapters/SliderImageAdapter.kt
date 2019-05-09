@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.navigation.Navigation
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
-import com.example.aplicacionprueba.R
+import com.example.aplicacionprueba.*
 import com.example.lucescamarasaccion.Result
 
 class SliderImageAdapter(var context: Context, images: List<Result>?) : PagerAdapter() {
@@ -28,6 +29,10 @@ class SliderImageAdapter(var context: Context, images: List<Result>?) : PagerAda
         Glide.with(view).load("https://image.tmdb.org/t/p/w500${item.posterPath}").centerCrop()
             .into(image)
         container.addView(view)
+        image.setOnClickListener{
+            val movieId = item.id
+                    Navigation.findNavController(it).navigate(Home_FragmentDirections.actionHomeFragmentToMovieDetail(movieId!!))
+        }
         return view
     }
 

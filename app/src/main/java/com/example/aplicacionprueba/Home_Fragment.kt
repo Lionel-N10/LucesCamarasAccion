@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.ScrollView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aplicacionprueba.Adapters.MostPopularRV_Adapter
@@ -58,19 +60,27 @@ class Home_Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bottomBar: BottomNavigationView = activity!!.findViewById(R.id.bottom_navigation)
-        bottomBar.visibility = View.VISIBLE
+
+        bottomBar.visibility = View.VISIBLE//Hacemos visible la barra de navegación. Por defecto está invisible hasta que inicias sesion
 
         progresBar = view.findViewById(R.id.home_PB)
         home_layout = view.findViewById(R.id.home_SV)
 
-        val t = Thread {
-            showNowPlaying()
-            showUpComing(view)
-            showPopular(view)
 
+        //Arrancamos los metodos para cargar los expositores del home
+        showNowPlaying()
+        showUpComing(view)
+        showPopular(view)
+
+
+        val textPopular = view.findViewById<TextView>(R.id.text_popular)
+
+
+        //Los click listener para los expositores, cada uno lleva a su pantalla
+        textPopular.setOnClickListener {
+            Navigation.findNavController(it).navigate(Home_FragmentDirections.actionHomeFragmentToPopularMovies())
         }
-        t.start()
-        t.join()
+
 
         if (showNowPlaying() && showUpComing(view) && showPopular(view)) {
             progresBar!!.visibility = View.GONE
@@ -99,7 +109,6 @@ class Home_Fragment : Fragment() {
                 t.printStackTrace()
             }
         })
-
         return true
 
     }
@@ -152,6 +161,7 @@ class Home_Fragment : Fragment() {
                 t.printStackTrace()
             }
         })
+
         return true
     }
 
