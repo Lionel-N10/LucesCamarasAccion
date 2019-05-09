@@ -77,6 +77,14 @@
                             app:layout_constraintTop_toTopOf="@+id/movie_poster"
                             app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="40dp"
                             android:visibility="invisible"/>
+                    <Button
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:id="@+id/movie_like" app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:background="@mipmap/outline_favorite_white_18"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -205,7 +213,7 @@
                     android:layout_marginEnd="8dp">
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="127dp">
+                        android:layout_height="127dp" android:isScrollContainer="true">
 
                     <TextView
                             android:text="@string/overview"
@@ -267,7 +275,7 @@
                             app:layout_constraintVertical_bias="0.0" android:id="@+id/webView"
                             android:layout_marginBottom="8dp" android:background="@color/otrocolor"
                             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                            style="@android:style/Widget.Material.Light.WebView"/>
+                            style="@android:style/Widget.Material.Light.WebView" android:layout_marginTop="8dp"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

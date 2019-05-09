@@ -15,7 +15,6 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
-import com.example.aplicacionprueba.Adapters.SliderVideoAdapter
 import com.example.aplicacionprueba.JsonObjets.MovieDetails_Object
 import com.example.aplicacionprueba.JsonObjets.MovieVideos_Object
 import com.example.aplicacionprueba.database.DataBase
@@ -176,6 +175,14 @@ class MovieDetail : Fragment() {
 
         showMovieDetails(view, arguments!!.getInt("movie_id", 0))
         showTrailers(view, arguments!!.getInt("movie_id", 0))
+
+        val like_button = view.findViewById<Button>(R.id.movie_like)
+
+        like_button.setOnClickListener {
+            //like_button.background = ContextCompat.getDrawable(context!!, R.drawable.)
+            Toast.makeText(context!!, "'${movie_title.text}' ha sido añadida a favoritas", Toast.LENGTH_SHORT).show()
+        }
+
 
         lateinit var opciones: List<String>
 
