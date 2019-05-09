@@ -10,13 +10,12 @@ import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.aplicacionprueba.List_TopRatedDirections
 import com.example.aplicacionprueba.PopularMoviesDirections
 import com.example.aplicacionprueba.R
+import com.example.aplicacionprueba.TopRatedMoviesDirections
 import com.example.aplicacionprueba.search_moviesDirections
 import com.example.lucescamarasaccion.Result
 import kotlinx.android.synthetic.main.list_item_pagination.view.*
-
 
 
 class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragment: Int) :
@@ -63,7 +62,7 @@ class MovieAdapter(val context: Context, var values: List<Result>?, var id_fragm
             val movieId = item.id
             when (id_fragment) {
                 1 -> Navigation.findNavController(it).navigate(
-                    List_TopRatedDirections.actionListTopRatedToMovieDetail(movieId!!)
+                    TopRatedMoviesDirections.actionListTopRatedToMovieDetail(movieId!!)
                 )
                 2 -> Navigation.findNavController(it).navigate(
                     search_moviesDirections.actionSearchMoviesToMovieDetail(movieId!!)

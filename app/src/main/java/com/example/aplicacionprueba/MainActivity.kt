@@ -11,27 +11,21 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.example.aplicacionprueba.JsonObjets.ListMovies
-import com.example.aplicacionprueba.JsonObjets.Lista
-import com.example.aplicacionprueba.JsonObjets.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
-import com.google.firebase.auth.FirebaseUser
-
-
 
 
 class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionListener,
-    List_TopRated.OnFragmentInteractionListener, MovieDetail.OnFragmentInteractionListener,
+    TopRatedMovies.OnFragmentInteractionListener, MovieDetail.OnFragmentInteractionListener,
     search_movies.OnFragmentInteractionListener, PopularMovies.OnFragmentInteractionListener,
     Login.OnFragmentInteractionListener, Registro.OnFragmentInteractionListener,
-    MisListas.OnFragmentInteractionListener, ListDetail.OnFragmentInteractionListener {
+    MisListas.OnFragmentInteractionListener, ListDetail.OnFragmentInteractionListener,
+    UpcomingMovies.OnFragmentInteractionListener, ReleasesMovies.OnFragmentInteractionListener {
 
 
     override fun onFragmentInteraction(uri: Uri) {
@@ -119,12 +113,14 @@ class MainActivity : AppCompatActivity(), Home_Fragment.OnFragmentInteractionLis
         val bPopular = R.id.action_popular
         val bTop_Rated = R.id.action_top
         val bHome = R.id.action_home
+        val bUpcoming = R.id.action_upcoming
 
         bottom_navigation.setOnNavigationItemSelectedListener { MenuItem ->
             when(MenuItem.itemId){
                 bHome -> NavHostFragment.findNavController(host_fragment).navigate(R.id.home_fragment)
                 bPopular -> NavHostFragment.findNavController(host_fragment).navigate(R.id.popularMovies)
-                bTop_Rated -> NavHostFragment.findNavController(host_fragment).navigate(R.id.list_TopRated)
+                bTop_Rated -> NavHostFragment.findNavController(host_fragment).navigate(R.id.topratedMovies)
+                bUpcoming -> NavHostFragment.findNavController(host_fragment).navigate(R.id.upcomingMovies)
             }
             true
         }

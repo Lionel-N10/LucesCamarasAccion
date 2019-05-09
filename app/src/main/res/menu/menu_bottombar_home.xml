@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+>
 
     <item android:title="@string/home" android:id="@+id/action_home" android:icon="@drawable/popcorns_icon"/>
     <item android:title="@string/bestrate" android:id="@+id/action_top" android:icon="@drawable/ic_filmstrip"/>
     <item android:title="@string/mostpopular" android:id="@+id/action_popular" android:icon="@drawable/ic_movie_roll"/>
+    <item android:title="@string/upcoming" android:id="@+id/action_upcoming" android:icon="@drawable/ic_movie_roll"/>
 </menu>

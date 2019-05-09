@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.ScrollView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -21,7 +20,6 @@ import com.example.aplicacionprueba.Adapters.UpcomingRV_Adapter
 import com.example.lucescamarasaccion.Movies
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
@@ -72,13 +70,15 @@ class Home_Fragment : Fragment() {
         showUpComing(view)
         showPopular(view)
 
-
-        val textPopular = view.findViewById<TextView>(R.id.text_popular)
-
-
         //Los click listener para los expositores, cada uno lleva a su pantalla
-        textPopular.setOnClickListener {
+        text_popular.setOnClickListener {
             Navigation.findNavController(it).navigate(Home_FragmentDirections.actionHomeFragmentToPopularMovies())
+        }
+        text_upcoming.setOnClickListener {
+            Navigation.findNavController(it).navigate(Home_FragmentDirections.actionHomeFragmentToUpcomingMovies())
+        }
+        text_releases.setOnClickListener {
+            Navigation.findNavController(it).navigate(Home_FragmentDirections.actionHomeFragmentToReleasesMovies())
         }
 
 

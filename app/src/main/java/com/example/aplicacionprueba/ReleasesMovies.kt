@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aplicacionprueba.Adapters.MovieAdapter
-import com.example.aplicacionprueba.Adapters.PaginationScrollListener
 import com.example.lucescamarasaccion.Movies
 import com.example.lucescamarasaccion.MoviesClient
 import com.example.lucescamarasaccion.ServiceGenerator
@@ -30,80 +29,24 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [List_TopRated.OnFragmentInteractionListener] interface
+ * [ReleasesMovies.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [List_TopRated.newInstance] factory method to
+ * Use the [ReleasesMovies.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class List_TopRated : Fragment() {
+class ReleasesMovies : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    private var listView: RecyclerView? = null
-    private var pbCargando: ProgressBar? = null
     var visibleItemCount: Int = 0
     var pastVisibleItemCount: Int = 0
     var totalItemCount: Int = 0
     var loading: Boolean = false
     var pageId: Int = 1
     var layoutManager = LinearLayoutManager(context)
-
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        pbCargando = view.findViewById(R.id.progress_bar_toprated)
-        listView = view.findViewById(R.id.lista) as RecyclerView
-
-        val client = ServiceGenerator.createService(MoviesClient::class.java)
-
-        val call = client.GetTopRatedMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", 1)
-        call.request().url().host()
-
-        call.enqueue(object : Callback<Movies> {
-            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
-                val repos = response.body()
-
-                listView!!.layoutManager = GridLayoutManager(activity, 2)
-                listView!!.adapter = MovieAdapter(context!!, repos!!.results, 1)
-                listView!!.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                        if (dy > 0){
-                            visibleItemCount = layoutManager.childCount
-                            totalItemCount = layoutManager.itemCount
-                            pastVisibleItemCount = (listView!!.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                            if(loading){
-                                if((visibleItemCount + pastVisibleItemCount) >= totalItemCount) {
-                                    loading = false
-                                    pageId++
-                                    client.GetTopRatedMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", pageId)
-                                }
-                            }
-                        }
-                    }
-
-                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                        super.onScrollStateChanged(recyclerView, newState)
-                    }
-
-
-                })
-
-                //Toast.makeText(context!!, "MejorValoradas, cargado", Toast.LENGTH_SHORT).show()
-
-                pbCargando!!.visibility = View.GONE
-            }
-            override fun onFailure(call: Call<Movies>, t: Throwable) {
-                Toast.makeText(context!!, "Comprueba tu conexión a internet", Toast.LENGTH_SHORT).show()
-                t.printStackTrace()
-                pbCargando!!.visibility = View.GONE
-            }
-        })
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,12 +56,65 @@ class List_TopRated : Fragment() {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        super.onViewCreated(view, savedInstanceState)
+
+        val pbCargando = view.findViewById(R.id.progress_bar_releases) as ProgressBar
+        val rvReleases = view.findViewById(R.id.rv_releases) as RecyclerView
+
+        val client = ServiceGenerator.createService(MoviesClient::class.java)
+
+        val call = client.getNowPlaying("39534c06f3f59b461ca70b61f782f06d", "es-ES", pageId)
+        call.request().url().host()
+
+        call.enqueue(object : Callback<Movies> {
+            override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
+                val repos = response.body()
+
+                rvReleases.layoutManager = GridLayoutManager(activity, 2)
+                rvReleases.adapter = MovieAdapter(context!!, repos!!.results, 1)
+                rvReleases.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        if (dy > 0) {
+                            visibleItemCount = layoutManager.childCount
+                            totalItemCount = layoutManager.itemCount
+                            pastVisibleItemCount =
+                                (rvReleases.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                            if (loading) {
+                                if ((visibleItemCount + pastVisibleItemCount) >= totalItemCount) {
+                                    loading = false
+                                    pageId++
+                                    client.GetTopRatedMovies("39534c06f3f59b461ca70b61f782f06d", "es-ES", pageId)
+                                }
+                            }
+                        }
+                    }
+
+
+                })
+
+
+
+                pbCargando.visibility = View.GONE
+            }
+
+            override fun onFailure(call: Call<Movies>, t: Throwable) {
+                Toast.makeText(context!!, "Error al cargar, comprueba tu conexión a internet", Toast.LENGTH_SHORT)
+                    .show()
+                t.printStackTrace()
+                pbCargando.visibility = View.GONE
+            }
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list__top_rated, container, false)
+        return inflater.inflate(R.layout.fragment_releases_movies, container, false)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -163,12 +159,12 @@ class List_TopRated : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment List_TopRated.
+         * @return A new instance of fragment ReleasesMovies.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            List_TopRated().apply {
+            ReleasesMovies().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

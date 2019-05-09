@@ -49,7 +49,7 @@ class MostPopularRV_Adapter(val context: Context, var values: List<Result>?, var
             val movieId = item.id
             when (id_fragment) {
                 1 -> Navigation.findNavController(it).navigate(
-                    List_TopRatedDirections.actionListTopRatedToMovieDetail(
+                    TopRatedMoviesDirections.actionListTopRatedToMovieDetail(
                         movieId!!
                     )
                 )

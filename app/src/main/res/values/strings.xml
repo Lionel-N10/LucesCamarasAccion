@@ -25,4 +25,7 @@
     <string name="populares">Populares</string>
     <string name="upcoming">Upcoming</string>
     <string name="releases">Releases</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
