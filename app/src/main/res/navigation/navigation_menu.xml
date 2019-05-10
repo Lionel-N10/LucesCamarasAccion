@@ -4,7 +4,7 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_menu"
             app:startDestination="@id/login">
 
-    <fragment android:id="@+id/home_fragment" android:name="com.example.aplicacionprueba.Home_Fragment"
+    <fragment android:id="@+id/home_fragment" android:name="com.example.aplicacionprueba.fragmentclasses.Home_Fragment"
               android:label="Home" tools:layout="@layout/fragment_home">
         <action android:id="@+id/action_home_to_list_TopRated" app:destination="@id/topratedMovies"
                 app:enterAnim="@anim/nav_default_pop_enter_anim" app:exitAnim="@anim/nav_default_pop_exit_anim"
@@ -16,48 +16,52 @@
         <action android:id="@+id/action_home_fragment_to_upcomingMovies" app:destination="@id/upcomingMovies"/>
         <action android:id="@+id/action_home_fragment_to_releasesMovies" app:destination="@id/releasesMovies"/>
     </fragment>
-    <fragment android:id="@+id/topratedMovies" android:name="com.example.aplicacionprueba.TopRatedMovies"
+    <fragment android:id="@+id/topratedMovies"
+              android:name="com.example.aplicacionprueba.fragmentclasses.TopRatedMovies"
               android:label="Mejor Valoradas" tools:layout="@layout/fragment_list__top_rated">
         <action android:id="@+id/action_list_TopRated_to_movieDetail" app:destination="@id/movieDetail"/>
     </fragment>
-    <fragment android:id="@+id/movieDetail" android:name="com.example.aplicacionprueba.MovieDetail"
+    <fragment android:id="@+id/movieDetail" android:name="com.example.aplicacionprueba.fragmentclasses.MovieDetail"
               tools:layout="@layout/fragment_movie_detail" android:label="Movie">
         <argument android:name="movie_id" app:argType="integer"/>
         <action android:id="@+id/action_movieDetail_to_home_fragment" app:destination="@id/home_fragment"/>
     </fragment>
-    <fragment android:name="com.example.aplicacionprueba.search_movies"
+    <fragment android:name="com.example.aplicacionprueba.fragmentclasses.search_movies"
               tools:layout="@layout/fragment_search_movies"
               android:id="@+id/Search_Movies" android:label="Busqueda">
         <argument android:name="titulo" app:argType="string"/>
         <action android:id="@+id/action_Search_Movies_to_movieDetail" app:destination="@id/movieDetail"/>
     </fragment>
-    <fragment android:id="@+id/popularMovies" android:name="com.example.aplicacionprueba.PopularMovies"
+    <fragment android:id="@+id/popularMovies" android:name="com.example.aplicacionprueba.fragmentclasses.PopularMovies"
               android:label="Más Populares" tools:layout="@layout/fragment_popular_movies">
         <action android:id="@+id/action_popularMovies_to_movieDetail" app:destination="@id/movieDetail"/>
     </fragment>
-    <fragment android:id="@+id/login" android:name="com.example.aplicacionprueba.Login" android:label="Iniciar Sesion"
+    <fragment android:id="@+id/login" android:name="com.example.aplicacionprueba.fragmentclasses.Login"
+              android:label="Iniciar Sesion"
               tools:layout="@layout/fragment_login">
         <action android:id="@+id/action_login_to_registro" app:destination="@id/registro"/>
         <action android:id="@+id/action_login_to_home_fragment" app:destination="@id/home_fragment"/>
     </fragment>
-    <fragment android:id="@+id/registro" android:name="com.example.aplicacionprueba.Registro"
+    <fragment android:id="@+id/registro" android:name="com.example.aplicacionprueba.fragmentclasses.Registro"
               android:label="Registrarse" tools:layout="@layout/fragment_registro">
         <action android:id="@+id/action_registro_to_login" app:destination="@id/login"/>
     </fragment>
-    <fragment android:id="@+id/misListas" android:name="com.example.aplicacionprueba.MisListas"
+    <fragment android:id="@+id/misListas" android:name="com.example.aplicacionprueba.fragmentclasses.MisListas"
               android:label="Mis Listas" tools:layout="@layout/fragment_mis_listas">
         <action android:id="@+id/action_misListas_to_listDetail" app:destination="@id/listDetail"/>
     </fragment>
-    <fragment android:id="@+id/listDetail" android:name="com.example.aplicacionprueba.ListDetail"
+    <fragment android:id="@+id/listDetail" android:name="com.example.aplicacionprueba.fragmentclasses.ListDetail"
               android:label="fragment_list_detail" tools:layout="@layout/fragment_list_detail">
         <argument android:name="listID" app:argType="integer"/>
         <action android:id="@+id/action_listDetail_to_movieDetail" app:destination="@id/movieDetail"/>
     </fragment>
-    <fragment android:id="@+id/upcomingMovies" android:name="com.example.aplicacionprueba.UpcomingMovies"
+    <fragment android:id="@+id/upcomingMovies"
+              android:name="com.example.aplicacionprueba.fragmentclasses.UpcomingMovies"
               android:label="Proximamente" tools:layout="@layout/fragment_upcoming_movies">
         <action android:id="@+id/action_upcomingMovies_to_movieDetail" app:destination="@id/movieDetail"/>
     </fragment>
-    <fragment android:id="@+id/releasesMovies" android:name="com.example.aplicacionprueba.ReleasesMovies"
+    <fragment android:id="@+id/releasesMovies"
+              android:name="com.example.aplicacionprueba.fragmentclasses.ReleasesMovies"
               android:label="Estrenos" tools:layout="@layout/fragment_releases_movies">
         <action android:id="@+id/action_releasesMovies_to_movieDetail" app:destination="@id/movieDetail"/>
     </fragment>

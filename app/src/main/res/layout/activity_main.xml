@@ -5,12 +5,22 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity" android:id="@+id/constrintLayout" android:focusableInTouchMode="true"
-        android:focusable="true">
+        tools:context=".fragmentclasses.MainActivity" android:id="@+id/constrintLayout"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_gravity="bottom" android:visibility="gone"
+            android:id="@+id/bottom_navigation"
+            app:menu="@menu/menu_bottombar_home" android:background="@color/colorBarras"
+            app:layout_behavior="com.example.aplicacionprueba.utilities.BottomNavigationBehavior"
+
+    />
     <fragment
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_height="620dp"
+            android:layout_height="619dp"
             android:id="@+id/host_fragment" android:layout_width="match_parent" android:layout_marginTop="55dp"
             tools:layout="@layout/fragment_home"/>
     <androidx.appcompat.widget.Toolbar
@@ -18,12 +28,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorBarras"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:minHeight="?attr/actionBarSize" android:id="@+id/toolbar" android:nestedScrollingEnabled="false"
+            android:minHeight="?attr/actionBarSize" android:id="@+id/toolbar"
             android:visibility="gone"/>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="match_parent"
-            android:layout_height="56dp" android:layout_gravity="bottom" android:visibility="gone"
-            android:id="@+id/bottom_navigation"
-            app:menu="@menu/menu_bottombar_home" android:background="@color/colorBarras"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
