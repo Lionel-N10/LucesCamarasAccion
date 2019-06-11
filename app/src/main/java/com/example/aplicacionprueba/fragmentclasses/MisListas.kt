@@ -3,14 +3,15 @@ package com.example.aplicacionprueba.fragmentclasses
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aplicacionprueba.R
-import com.example.aplicacionprueba.roomobjects.Lista
+import com.example.aplicacionprueba.firebase.FireBaseData
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -52,71 +53,102 @@ class MisListas : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var listas : List<Lista>? = null
+        var listas: FireBaseData? = null
+        var aniadir: Button
+
+        aniadir = view.findViewById(R.id.buttonAniadir)
 
         recyclerView = view.findViewById(R.id.rv_mislitas)
 
-        /*val t = Thread{
-            listas = DataBase(context!!).DaoList().getLista()
-        }
-        t.start()
-        t.join()*/
 
-        val database = FirebaseDatabase.getInstance().getReference("Usuario1")//Obtenemos las listas
+        val Auth = FirebaseAuth.getInstance()
+        val userActual = Auth.currentUser!!.uid
+        val lista = "Lista1"
+
+        aniadir.setOnClickListener {
+            //val movie_id = arguments!!.getInt("movie_id", 0)
+
+            val database = FirebaseDatabase.getInstance()
+            val i = database.reference
+
+        }
+
+        val database = FirebaseDatabase.getInstance()
+        val ref = database.reference
+
+
+        ref.child(userActual).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val value = dataSnapshot.getValue(FireBaseData::class.java)
+                listas = value
+
+                //println(listas?.ListFB!![0].moviesFB?.get(0))
+                recyclerView!!.adapter!!.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
+
+        //recyclerView!!.layoutManager = LinearLayoutManager(activity)
+        //recyclerView!!.adapter = MisListasAdapter(this.context!!, listas!!, 1)
+
+
 
         /*val database = databaseReference.orderByChild("Usuario1")
             .startAt("Lista1").endAt("Lista3")*/
 
-       database.addValueEventListener( object: ValueEventListener {
-             override fun onDataChange(dataSnapshot: DataSnapshot) {
+        /*database.addValueEventListener( object: ValueEventListener {
+              override fun onDataChange(dataSnapshot: DataSnapshot) {
 
 
-             }
+              }
 
-           /*val options = FirebaseRecyclerOptions.Builder<FireBaseData>().setQuery(com.example.aplicacionprueba.adapters.database, FireBaseData::class.java).build()
+            val options = FirebaseRecyclerOptions.Builder<FireBaseData>().setQuery(com.example.aplicacionprueba.adapters.database, FireBaseData::class.java).build()
 
-           class FirebaseAdapter: FirebaseRecyclerAdapter<FireBaseData, FirebaseAdapter.ViewHolder>(options){
+            class FirebaseAdapter: FirebaseRecyclerAdapter<FireBaseData, FirebaseAdapter.ViewHolder>(options){
 
-               override fun onBindViewHolder(holder: ViewHolder, position: Int, values: FireBaseData) {
+                override fun onBindViewHolder(holder: ViewHolder, position: Int, values: FireBaseData) {
 
-                   val item = values.ListFB
-                   println("prueba")
+                    val item = values.ListFB
+                    println("prueba")
 
-                   Log.d("FirebaseAdapter: ", item!![position].listName)
+                    Log.d("FirebaseAdapter: ", item!![position].listName)
 
-                   holder.titleView.text = item[position].listName
-                   holder.posicionView.text = (position+1).toString()
-                   holder.countView.text = item.size.toString()
-               }
+                    holder.titleView.text = item[position].listName
+                    holder.posicionView.text = (position+1).toString()
+                    holder.countView.text = item.size.toString()
+                }
 
-               override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-                   val view = LayoutInflater.from(parent.context).inflate(R.layout.item_lista, parent, false)
-                   return ViewHolder(view)
-               }
+                override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+                    val view = LayoutInflater.from(parent.context).inflate(R.layout.item_lista, parent, false)
+                    return ViewHolder(view)
+                }
 
-               inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-                   var titleView: TextView
-                   var posicionView: TextView
-                   var countView: TextView
+                inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+                    var titleView: TextView
+                    var posicionView: TextView
+                    var countView: TextView
 
-                   init {
-                       titleView = itemView.findViewById(R.id.lista_titulo)
-                       posicionView = itemView.findViewById(R.id.lista_position)
-                       countView = itemView.findViewById(R.id.lista_movie_count)
-                   }
-               }
-           }
-
-           recyclerView!!.layoutManager = LinearLayoutManager(activity)
-           recyclerView!!.adapter = FirebaseAdapter()
-           FirebaseAdapter().startListening()
-
-      }*/
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                Log.d("Error!", databaseError.toException().toString())
+                    init {
+                        titleView = itemView.findViewById(R.id.lista_titulo)
+                        posicionView = itemView.findViewById(R.id.lista_position)
+                        countView = itemView.findViewById(R.id.lista_movie_count)
+                    }
+                }
             }
-        })
+
+            recyclerView!!.layoutManager = LinearLayoutManager(activity)
+            recyclerView!!.adapter = FirebaseAdapter()
+            FirebaseAdapter().startListening()
+
+       }
+
+             override fun onCancelled(databaseError: DatabaseError) {
+                 Log.d("Error!", databaseError.toException().toString())
+             }
+         })*/
 
 
     }

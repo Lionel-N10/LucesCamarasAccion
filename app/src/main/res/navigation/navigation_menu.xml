@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_menu"
-            app:startDestination="@id/login">
+            app:startDestination="@id/login" tools:ignore="UnusedNavigation">
 
     <fragment android:id="@+id/home_fragment" android:name="com.example.aplicacionprueba.fragmentclasses.Home_Fragment"
               android:label="Home" tools:layout="@layout/fragment_home">
@@ -46,13 +46,10 @@
               android:label="Registrarse" tools:layout="@layout/fragment_registro">
         <action android:id="@+id/action_registro_to_login" app:destination="@id/login"/>
     </fragment>
-    <fragment android:id="@+id/misListas" android:name="com.example.aplicacionprueba.fragmentclasses.MisListas"
-              android:label="Mis Listas" tools:layout="@layout/fragment_mis_listas">
-        <action android:id="@+id/action_misListas_to_listDetail" app:destination="@id/listDetail"/>
-    </fragment>
     <fragment android:id="@+id/listDetail" android:name="com.example.aplicacionprueba.fragmentclasses.ListDetail"
-              android:label="fragment_list_detail" tools:layout="@layout/fragment_list_detail">
-        <argument android:name="listID" app:argType="integer"/>
+              android:label="Me gusta" tools:layout="@layout/fragment_list_detail">
+        <action android:id="@+id/action_listDetail_to_home_fragment" app:destination="@id/home_fragment"/>
+        <argument android:name="movie_id" app:argType="integer"/>
         <action android:id="@+id/action_listDetail_to_movieDetail" app:destination="@id/movieDetail"/>
     </fragment>
     <fragment android:id="@+id/upcomingMovies"

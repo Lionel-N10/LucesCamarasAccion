@@ -12,27 +12,24 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.aplicacionprueba.R
-import com.example.aplicacionprueba.database.DataBase
+import com.example.aplicacionprueba.firebase.moviesFB
 import com.example.aplicacionprueba.fragmentclasses.ListDetailDirections
 import com.example.aplicacionprueba.jsonobjects.MovieDetails_Object
 import com.example.aplicacionprueba.retrofit.MoviesClient
 import com.example.aplicacionprueba.retrofit.ServiceGenerator
-import com.example.aplicacionprueba.roomobjects.ListMovies
 import kotlinx.android.synthetic.main.item_listadetail.view.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class ListDetailAdapter(val context: Context, var values: ArrayList<Int>, var idLista: Int, var id_fragment: Int) :
+class ListDetailAdapter(val context: Context, var values: ArrayList<moviesFB>?, var id_fragment: Int) :
     RecyclerView.Adapter<ListDetailAdapter.ViewHolder>() {
 
     var viewHolder: ViewHolder? = null
 
     override fun getItemCount(): Int {
-        return values.size
+        return values!!.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -54,7 +51,6 @@ class ListDetailAdapter(val context: Context, var values: ArrayList<Int>, var id
         var posterView: ImageView? = null
 
         init {
-            deleteButton = vista.itemdetail_delete
             progressBar = vista.adapterList_PB
             card = vista.itemdetail_card
             tituloView = vista.itemdetail_title
@@ -66,13 +62,13 @@ class ListDetailAdapter(val context: Context, var values: ArrayList<Int>, var id
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) { //
-        val item = values.get(position)
+        val item = values!!.get(position)
 
         Log.d("id Lista: ", item.toString())
 
         //Realizamos una consulta a la api para obtener los datos de las peliculas usando el 1d que hemos sacado de la base de datos
         val client = ServiceGenerator.createService(MoviesClient::class.java)
-        val call = client.getMovieById(item, "39534c06f3f59b461ca70b61f782f06d", "es-ES")
+        val call = client.getMovieById(item.pelicula_id!!.toInt(), "39534c06f3f59b461ca70b61f782f06d", "es-ES")
 
 
         call.enqueue(object : Callback<MovieDetails_Object> {
@@ -86,24 +82,24 @@ class ListDetailAdapter(val context: Context, var values: ArrayList<Int>, var id
 
                 //Asignamos a cada componente la informacion que va a mostrar
                 holder.tituloView?.text = repos!!.title
-                holder.rateView?.text = R.string.imdbrating.toString() + repos.voteAverage.toString()
-                holder.releaseView?.text = "${R.string.releasedate}${repos.releaseDate.toString()}"
+                holder.rateView?.text = "Puntuacion IMDb: " + repos.voteAverage.toString()
+                holder.releaseView?.text = "Fecha de estreno: " + repos.releaseDate.toString()
                 holder.originalView?.text = repos.originalTitle
                 Glide.with(context).load("https://image.tmdb.org/t/p/w500${repos.posterPath}")
                     .centerCrop()
                     .thumbnail(0.5f)
                     .into(holder.posterView!!)
+                holder.progressBar!!.visibility = View.GONE
+                holder.card!!.visibility = View.VISIBLE
                 holder.card!!.setOnClickListener {
+                    val movieId = item.pelicula_id.toInt()
                     when (id_fragment) {
                         1 -> Navigation.findNavController(it).navigate(
-                            ListDetailDirections.actionListDetailToMovieDetail(
-                                repos.id!!
-                            )
+                            ListDetailDirections.actionListDetailToMovieDetail(movieId)
                         )
                     }
                 }
-                holder.progressBar!!.visibility = View.GONE
-                holder.card!!.visibility = View.VISIBLE
+
             }
 
             override fun onFailure(call: Call<MovieDetails_Object>, t: Throwable) {
@@ -111,19 +107,5 @@ class ListDetailAdapter(val context: Context, var values: ArrayList<Int>, var id
                 t.printStackTrace()
             }
         })
-
-        //Con este metodo eliminamos las listas
-        holder.deleteButton!!.setOnClickListener {
-            GlobalScope.launch {
-                DataBase(context).DaoMovies().deleteLista(
-                    ListMovies(
-                        idLista,
-                        item
-                    )
-                )
-            }
-            values.removeAt(position)
-            notifyDataSetChanged()
-        }
     }
 }

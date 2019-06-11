@@ -11,7 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aplicacionprueba.R
 import com.example.aplicacionprueba.adapters.ListDetailAdapter
-import com.example.aplicacionprueba.database.DataBase
+import com.example.aplicacionprueba.firebase.moviesFB
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,6 +41,7 @@ class ListDetail : Fragment() {
 
     private var RV: RecyclerView? = null
     private var argument: Int? = null
+    private lateinit var item: ArrayList<moviesFB>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,25 +54,34 @@ class ListDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        argument = arguments!!.getInt("listID")
-        var peliculas: List<Int>? = null
-        val arrayPeliculas: ArrayList<Int>
-
-
         RV = view.findViewById(R.id.listdetail_RV)
 
-        val t = Thread {
-            peliculas = DataBase(context!!).DaoMovies().getMovieId(argument!!)
-        }
-        t.start()
-        t.join()
+        item = ArrayList()
 
-        arrayPeliculas = peliculas as ArrayList<Int>
+        val Auth = FirebaseAuth.getInstance()
+        val currentUser = Auth.currentUser
+        val database = FirebaseDatabase.getInstance()
+        val ref = database.reference
+
+        ref.child("Me gusta").child(currentUser!!.uid).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (hijo in dataSnapshot.children) {
+                    val pojo: moviesFB? = hijo.getValue(moviesFB::class.java)
+
+                    item.add(pojo!!)
+
+                    RV!!.adapter!!.notifyDataSetChanged()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        })
 
         RV!!.layoutManager = LinearLayoutManager(activity)
-        RV!!.adapter = ListDetailAdapter(context!!, arrayPeliculas, argument!!, 1)
-    }
+        RV!!.adapter = ListDetailAdapter(context!!, item, 1)
 
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

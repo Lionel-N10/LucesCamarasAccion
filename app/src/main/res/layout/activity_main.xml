@@ -20,7 +20,7 @@
     />
     <fragment
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_height="619dp"
+            android:layout_height="match_parent"
             android:id="@+id/host_fragment" android:layout_width="match_parent" android:layout_marginTop="55dp"
             tools:layout="@layout/fragment_home"/>
     <androidx.appcompat.widget.Toolbar

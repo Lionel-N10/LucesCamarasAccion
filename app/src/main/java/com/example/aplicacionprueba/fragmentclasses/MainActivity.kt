@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(),
         //Definimos el comportamiento de los items en la toolbar
         toolbar.setOnMenuItemClickListener { MenuItem ->
             when (MenuItem.itemId) {
-                listasItem -> NavHostFragment.findNavController(host_fragment).navigate(R.id.misListas)
+                listasItem -> NavHostFragment.findNavController(host_fragment).navigate(R.id.listDetail)
                 login -> {
                     mAuth.signOut()
                     NavHostFragment.findNavController(host_fragment).navigate(R.id.login)

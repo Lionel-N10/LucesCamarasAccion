@@ -12,7 +12,7 @@
     <string name="title">Title</string>
     <string name="countmovies">Nº Movies</string>
     <string name="signout">Sign Out</string>
-    <string name="mylists">My lists</string>
+    <string name="mylists">I like It</string>
     <string name="search">Search</string>
     <string name="app_name">Ligths, Cameras, Action!</string>
     <string name="login">Log In</string>
@@ -22,10 +22,10 @@
     <string name="email">Email</string>
     <string name="mostpopular">Most popular</string>
     <string name="home">Home</string>
-    <string name="populares">Populares</string>
+    <string name="populares">Popular</string>
     <string name="upcoming">Upcoming</string>
     <string name="releases">Releases</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 </resources>

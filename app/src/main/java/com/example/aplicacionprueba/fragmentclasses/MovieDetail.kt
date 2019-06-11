@@ -16,11 +16,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.aplicacionprueba.R
-import com.example.aplicacionprueba.database.DataBase
+import com.example.aplicacionprueba.firebase.moviesFB
 import com.example.aplicacionprueba.jsonobjects.MovieDetails_Object
 import com.example.aplicacionprueba.jsonobjects.MovieVideos_Object
 import com.example.aplicacionprueba.retrofit.MoviesClient
 import com.example.aplicacionprueba.retrofit.ServiceGenerator
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -168,42 +170,33 @@ class MovieDetail : Fragment() {
 
         moviedetail_layout = view.findViewById(R.id.scrollView2)
         progressBar_moviedetails = view.findViewById(R.id.progressBar_moviedetails)
-        spinner = view.findViewById(R.id.spinner)
         opcion = view.findViewById(R.id.textView11)
 
         progressBar_moviedetails!!.visibility = View.VISIBLE
         moviedetail_layout!!.visibility = View.GONE
 
-        showMovieDetails(view, arguments!!.getInt("movie_id", 0))
-        showTrailers(view, arguments!!.getInt("movie_id", 0))
+        val movie_id = arguments!!.getInt("movie_id", 0)
+
+        showMovieDetails(view, movie_id)
+        showTrailers(view, movie_id)
 
         val like_button = view.findViewById<Button>(R.id.movie_like)
 
+        var peliculas: List<Int>? = null
+
+        val Auth = FirebaseAuth.getInstance()
+        val currentUser = Auth.currentUser
+        val database = FirebaseDatabase.getInstance()
+        val ref = database.reference
+
+        val objmovieId = moviesFB(movie_id.toString())
+
         like_button.setOnClickListener {
-            //like_button.background = ContextCompat.getDrawable(context!!, R.drawable.)
+            ref.child("Me gusta").child(currentUser!!.uid).child(movie_id.toString()).setValue(objmovieId)
+
             Toast.makeText(context!!, "'${movie_title.text}' ha sido añadida a favoritas", Toast.LENGTH_SHORT).show()
         }
 
-
-        lateinit var opciones: List<String>
-
-        val t = Thread {
-            opciones = DataBase(context!!).DaoList().getNameList()
-        }
-        t.start()
-        t.join()
-
-
-        spinner!!.adapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, opciones)
-        spinner!!.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                opcion!!.text = opciones[position]
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                opcion!!.text = "Seleccione una lista"
-            }
-        }
     }
 
     override fun onCreateView(

@@ -78,14 +78,6 @@
                             app:layout_constraintTop_toTopOf="@+id/movie_poster"
                             app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="40dp"
                             android:visibility="invisible"/>
-                    <Button
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:id="@+id/movie_like" app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            style="@style/Widget.AppCompat.Button.Borderless"
-                            android:background="@mipmap/outline_favorite_white_18"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -105,14 +97,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                    <Spinner
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/spinner"
-                            android:background="@color/otrocolor"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginEnd="16dp" android:layout_marginTop="24dp"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                    <Button
+                            android:layout_width="21dp"
+                            android:layout_height="22dp"
+                            android:id="@+id/movie_like"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:background="@mipmap/outline_favorite_white_18"
+                            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"/>
                     <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -175,7 +167,7 @@
                             android:layout_marginStart="8dp"
                             app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView12" android:layout_marginTop="8dp"/>
+                            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/movie_like"/>
                     <TextView
                             android:text="@string/genres"
                             android:layout_width="71dp"
@@ -189,15 +181,6 @@
                             app:layout_constraintTop_toBottomOf="@+id/movie_rating"
                             android:textSize="14sp" android:layout_marginBottom="8dp"
                             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.0"/>
-                    <TextView
-                            android:text="Añadir a: "
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/textView12"
-                            android:textColor="@color/floatingBoton" app:layout_constraintEnd_toStartOf="@+id/spinner"
-                            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
-                            android:layout_marginEnd="312dp" style="@style/Text" android:layout_marginStart="8dp"
-                            app:layout_constraintStart_toStartOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -214,7 +197,7 @@
                     android:layout_marginEnd="8dp">
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="127dp" android:isScrollContainer="true">
+                        android:layout_height="wrap_content" android:isScrollContainer="true">
 
                     <TextView
                             android:text="@string/overview"
@@ -232,7 +215,7 @@
                             app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
                             android:layout_width="0dp"
-                            android:layout_height="0dp"
+                            android:layout_height="wrap_content"
                             android:id="@+id/movie_sipnosis" android:textSize="12sp"
                             android:textColor="@color/floatingBoton"
                             android:background="@color/colorPrimary"
